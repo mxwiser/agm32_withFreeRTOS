@@ -26,7 +26,7 @@
 
 /* Hook function related definitions. */
 #define configUSE_IDLE_HOOK                     0
-#define configUSE_TICK_HOOK                     1
+#define configUSE_TICK_HOOK                     0
 #define configCHECK_FOR_STACK_OVERFLOW          0
 #define configUSE_MALLOC_FAILED_HOOK            0
 #define configUSE_DAEMON_TASK_STARTUP_HOOK      0
@@ -37,7 +37,7 @@
 #define configUSE_STATS_FORMATTING_FUNCTIONS    0
 
 /* Software timer related definitions. */
-#define configUSE_TIMERS                        1
+#define configUSE_TIMERS                        0
 #define configTIMER_TASK_PRIORITY               3
 #define configTIMER_QUEUE_LENGTH                8
 #define configTIMER_TASK_STACK_DEPTH            configMINIMAL_STACK_SIZE
@@ -61,7 +61,7 @@
 #define INCLUDE_xTaskGetIdleTaskHandle          1
 #define INCLUDE_eTaskGetState                   1
 #define INCLUDE_xEventGroupSetBitFromISR        1
-#define INCLUDE_xTimerPendFunctionCall          1
+#define INCLUDE_xTimerPendFunctionCall          0
 #define INCLUDE_xTaskAbortDelay                 1
 #define INCLUDE_xTaskGetHandle                  1
 #define INCLUDE_xTaskResumeFromISR              1
