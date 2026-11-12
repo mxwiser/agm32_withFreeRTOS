@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "util.h": "c",
+        "stdlib.h": "c",
+        "encoding.h": "c",
+        "freertos.h": "c",
+        "ringbuff.h": "c",
+        "string.h": "c"
+    }
+}
