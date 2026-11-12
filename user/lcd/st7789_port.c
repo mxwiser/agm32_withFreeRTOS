@@ -162,12 +162,20 @@ ST7789_Status ST7789_PortWriteDMA(const uint32_t *data, size_t length)
 // only, switch the same SCK/SDA pins to GPIO and perform slow half-duplex SPI.
 static uint8_t read_bit(void)
 {
+#if LCD_READ_MODE3
+  GPIO_SetLow(LCD_SCK_GPIO, LCD_SCK_BIT);
+  UTIL_IdleUs(1);
+  GPIO_SetHigh(LCD_SCK_GPIO, LCD_SCK_BIT);
+  UTIL_IdleUs(1);
+  return GPIO_GetValue(LCD_SDA_GPIO, LCD_SDA_BIT) != 0;
+#else
   GPIO_SetHigh(LCD_SCK_GPIO, LCD_SCK_BIT);
   UTIL_IdleUs(1);
   uint8_t bit = GPIO_GetValue(LCD_SDA_GPIO, LCD_SDA_BIT) != 0;
   GPIO_SetLow(LCD_SCK_GPIO, LCD_SCK_BIT);
   UTIL_IdleUs(1);
   return bit;
+#endif
 }
 #endif
 
@@ -179,20 +187,29 @@ ST7789_Status ST7789_PortRead(uint8_t cmd, uint8_t dummy_bits,
   GPIO_AF_DISABLE(SPI0_SCK);
   GPIO_AF_DISABLE(SPI0_SI_IO0);
   GPIO_SetOutput(LCD_SCK_GPIO, LCD_SCK_BIT);
+#if LCD_READ_MODE3
+  GPIO_SetHigh(LCD_SCK_GPIO, LCD_SCK_BIT);
+#else
   GPIO_SetLow(LCD_SCK_GPIO, LCD_SCK_BIT);
+#endif
   GPIO_SetOutput(LCD_SDA_GPIO, LCD_SDA_BIT);
   ST7789_PortBegin(false);
   for (int bit = 7; bit >= 0; --bit) {
+#if LCD_READ_MODE3
+    GPIO_SetLow(LCD_SCK_GPIO, LCD_SCK_BIT);
+#endif
     GPIO_SetValue(LCD_SDA_GPIO, LCD_SDA_BIT, (cmd & (1U << bit)) ? LCD_SDA_BIT : 0);
     UTIL_IdleUs(1);
     GPIO_SetHigh(LCD_SCK_GPIO, LCD_SCK_BIT);
     UTIL_IdleUs(1);
     if (bit == 0) {
-      // Release SDA BEFORE the command's final falling edge (datasheet 8.4.3).
+      // Release SDA before the next falling edge can make the panel drive it.
       GPIO_SetInput(LCD_SDA_GPIO, LCD_SDA_BIT);
       ST7789_PortDataMode();
     }
+#if !LCD_READ_MODE3
     GPIO_SetLow(LCD_SCK_GPIO, LCD_SCK_BIT);
+#endif
   }
   UTIL_IdleUs(1);
   for (uint8_t i = 0; i < dummy_bits; ++i) {
@@ -207,6 +224,7 @@ ST7789_Status ST7789_PortRead(uint8_t cmd, uint8_t dummy_bits,
   }
   ST7789_PortEnd();
   UTIL_IdleUs(1);
+  GPIO_SetLow(LCD_SCK_GPIO, LCD_SCK_BIT);
   GPIO_AF_ENABLE(SPI0_SCK);
   GPIO_AF_ENABLE(SPI0_SI_IO0);
   return ST7789_OK;

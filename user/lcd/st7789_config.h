@@ -18,7 +18,7 @@
 #define LCD_DC_BIT           GPIO_BIT2 // PIN_31, PA10, J6.6
 // Backlight definitions are shared with board_init() in board.h (J6.8).
 
-// Performance profile: 200 MHz PCLK / 4 = 50 MHz, verified on the actual panel.
+// Limit SPI to 50 MHz. At 240 MHz PCLK, the even divisor is 6 -> 40 MHz.
 // This exceeds the conservative 66 ns ST7789V datasheet write cycle; lower to
 // 25000000 or 12500000 for modules/cabling that cannot sustain this setting.
 // The divisor is calculated from actual PCLK and rounded up to an even value.
@@ -30,6 +30,8 @@
 #ifndef LCD_TRY_SDA_READ
 #define LCD_TRY_SDA_READ     1
 #endif
+// The without-TE reference uses mode 3 for bidirectional SDA reads.
+#define LCD_READ_MODE3       1
 // GSCAN 0x45: discard its dummy read before the two scanline bytes.
 // Some panel variants use different serial dummy timing; this is configurable.
 #ifndef LCD_SCANLINE_DUMMY_BITS

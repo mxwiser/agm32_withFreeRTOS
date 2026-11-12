@@ -1,6 +1,6 @@
 # AGRV2K_303, LQFP48. PIN_n is the physical package pin number.
 # PA/PB names below identify schematic pads, not the SDK's GPIO bank/bit.
-SYSCLK 200 # MCU/PLL at 200 MHz; rebuild and upload both LOGIC and MCU firmware.
+SYSCLK 240 # MCU/PLL at 240 MHz; rebuild and upload both LOGIC and MCU firmware.
 HSECLK 8 # Y1: 8 MHz crystal on OSC_IN/OSC_OUT (pins 5/6)
 
 # J1 debug UART, matching LOGGER_UART=0 and 115200 baud in platformio.ini.
