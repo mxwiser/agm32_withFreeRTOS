@@ -1,0 +1,10 @@
+[GuiMigrateSetupPage]
+design=example_board
+device=AGRV2KL48
+flowInline=force
+
+[GuiMigrateRunPage]
+fitting=1
+fitter=5
+effort=2
+skew=2

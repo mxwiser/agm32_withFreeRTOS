@@ -3,3 +3,9 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+logic/db
+logic/incremental_db
+logic/quartus_logs
+logic/alta_db
+logic/alta_logs
+logic/simulation

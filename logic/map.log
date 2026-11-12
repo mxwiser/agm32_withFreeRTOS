@@ -1,0 +1,1130 @@
+[TCL: yosys -import] Command name collision: found pre-existing command `cd' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `eval' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `exec' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `read' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `trace' -> skip.
+
+1. Executing Verilog-2005 frontend: example_board.v
+Parsing SystemVerilog input from `example_board.v' to AST representation.
+verilog frontend filename example_board.v
+example_board.v:41: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:49: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:57: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:63: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:69: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:75: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:80: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:86: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:92: Warning: Yosys has only limited support for tri-state logic at the moment.
+example_board.v:98: Warning: Yosys has only limited support for tri-state logic at the moment.
+Generating RTLIL representation for module `\example_board'.
+example_board.v:44: Warning: Identifier `\PIN_13_in' is implicitly declared.
+example_board.v:52: Warning: Identifier `\PIN_21_in' is implicitly declared.
+example_board.v:60: Warning: Identifier `\PIN_29_in' is implicitly declared.
+example_board.v:66: Warning: Identifier `\PIN_30_in' is implicitly declared.
+example_board.v:72: Warning: Identifier `\PIN_31_in' is implicitly declared.
+example_board.v:83: Warning: Identifier `\PIN_33_in' is implicitly declared.
+example_board.v:89: Warning: Identifier `\PIN_43_in' is implicitly declared.
+example_board.v:95: Warning: Identifier `\PIN_45_in' is implicitly declared.
+example_board.v:101: Warning: Identifier `\PIN_HSE_in' is implicitly declared.
+example_board.v:104: Warning: Identifier `\PIN_HSI_in' is implicitly declared.
+example_board.v:107: Warning: Identifier `\PIN_OSC_in' is implicitly declared.
+example_board.v:132: Warning: Identifier `\pll_clkfb' is implicitly declared.
+example_board.v:230: Warning: Identifier `\usb0_xcvr_clk' is implicitly declared.
+example_board.v:231: Warning: Identifier `\bus_clk' is implicitly declared.
+example_board.v:242: Warning: Identifier `\sys_clk' is implicitly declared.
+example_board.v:248: Warning: Identifier `\sys_gck0' is implicitly declared.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: user_ip.v
+Parsing SystemVerilog input from `user_ip.v' to AST representation.
+verilog frontend filename user_ip.v
+Generating RTLIL representation for module `\user_ip'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/cells_sim.v
+Parsing SystemVerilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/cells_sim.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/cells_sim.v
+Generating RTLIL representation for module `\VCC'.
+Generating RTLIL representation for module `\GND'.
+Generating RTLIL representation for module `\cycloneive_io_ibuf'.
+Generating RTLIL representation for module `\cycloneive_io_obuf'.
+Generating RTLIL representation for module `\cycloneive_ddio_out'.
+Generating RTLIL representation for module `\cycloneive_lcell_comb'.
+Generating RTLIL representation for module `\dffeas'.
+Generating RTLIL representation for module `\cycloneive_pll'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/m9k_bb.v
+Parsing SystemVerilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/m9k_bb.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/m9k_bb.v
+Generating RTLIL representation for module `\altsyncram'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/altpll_bb.v
+Parsing SystemVerilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/altpll_bb.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/altpll_bb.v
+Generating RTLIL representation for module `\altpll'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v
+Parsing SystemVerilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v
+Generating RTLIL representation for module `\alta_slice'.
+Generating RTLIL representation for module `\alta_clkenctrl_rst'.
+Generating RTLIL representation for module `\alta_clkenctrl'.
+Generating RTLIL representation for module `\alta_asyncctrl'.
+Generating RTLIL representation for module `\alta_syncctrl'.
+Generating RTLIL representation for module `\alta_io_gclk'.
+Generating RTLIL representation for module `\alta_gclksel'.
+Generating RTLIL representation for module `\alta_gclkgen'.
+Generating RTLIL representation for module `\alta_gclkgen0'.
+Generating RTLIL representation for module `\alta_gclkgen2'.
+Generating RTLIL representation for module `\alta_io'.
+Generating RTLIL representation for module `\alta_rio'.
+Generating RTLIL representation for module `\alta_srff'.
+Generating RTLIL representation for module `\alta_dff'.
+Generating RTLIL representation for module `\alta_ufm_gddd'.
+Generating RTLIL representation for module `\alta_dff_stall'.
+Generating RTLIL representation for module `\alta_srlat'.
+Generating RTLIL representation for module `\alta_dio'.
+Generating RTLIL representation for module `\alta_indel'.
+Generating RTLIL representation for module `\alta_dpclkdel'.
+Generating RTLIL representation for module `\alta_ufms'.
+Generating RTLIL representation for module `\alta_ufms_sim'.
+Generating RTLIL representation for module `\alta_pll'.
+Generating RTLIL representation for module `\alta_pllx'.
+Generating RTLIL representation for module `\pll_clk_trim'.
+Generating RTLIL representation for module `\alta_pllv'.
+Generating RTLIL representation for module `\alta_pllve'.
+Generating RTLIL representation for module `\alta_sram'.
+Generating RTLIL representation for module `\alta_dpram16x4'.
+Generating RTLIL representation for module `\alta_spram16x4'.
+Generating RTLIL representation for module `\alta_wram'.
+Generating RTLIL representation for module `\alta_bram_pulse_generator'.
+Generating RTLIL representation for module `\alta_bram'.
+Generating RTLIL representation for module `\alta_boot'.
+Generating RTLIL representation for module `\alta_osc'.
+Generating RTLIL representation for module `\alta_ufml'.
+Generating RTLIL representation for module `\alta_jtag'.
+Generating RTLIL representation for module `\alta_mult'.
+Generating RTLIL representation for module `\alta_dff_en'.
+Generating RTLIL representation for module `\alta_multm_add'.
+Generating RTLIL representation for module `\alta_multm'.
+Generating RTLIL representation for module `\alta_i2c'.
+Generating RTLIL representation for module `\alta_spi'.
+Generating RTLIL representation for module `\alta_irda'.
+Generating RTLIL representation for module `\alta_bram9k'.
+Generating RTLIL representation for module `\alta_mcu'.
+Generating RTLIL representation for module `\alta_mcu_m3'.
+Generating RTLIL representation for module `\alta_remote'.
+Generating RTLIL representation for module `\alta_saradc'.
+Generating RTLIL representation for module `\alta_gclksw'.
+Generating RTLIL representation for module `\alta_rv32'.
+Generating RTLIL representation for module `\alta_mipi_clk'.
+Generating RTLIL representation for module `\alta_adc'.
+Generating RTLIL representation for module `\alta_dac'.
+Generating RTLIL representation for module `\alta_cmp'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v
+Parsing SystemVerilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v
+Generating RTLIL representation for module `\alta_ram4k'.
+Generating RTLIL representation for module `\alta_ram9k'.
+Generating RTLIL representation for module `\alta_fifo'.
+Generating RTLIL representation for module `\alta_lram'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/alta_bb.v
+Parsing SystemVerilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/alta_bb.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/alta_bb.v
+Successfully finished Verilog frontend.
+
+9. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1. Analyzing design hierarchy..
+Top module:  \example_board
+Used module:     \user_ip
+
+9.2. Analyzing design hierarchy..
+Top module:  \example_board
+Used module:     \user_ip
+Removing unused module `\alta_lram'.
+Removing unused module `\alta_fifo'.
+Removing unused module `\alta_ram9k'.
+Removing unused module `\alta_ram4k'.
+Removed 4 unused modules.
+
+10. Executing FLATTEN pass (flatten design).
+Deleting now unused module user_ip.
+
+11. Executing TRIBUF pass.
+
+12. Executing DEMINOUT pass (demote inout ports to input or output).
+
+13. Executing SYNTH pass.
+
+13.1. Executing PROC pass (convert processes to netlists).
+
+13.1.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+13.1.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+13.1.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+13.1.4. Executing PROC_INIT pass (extract init attributes).
+
+13.1.5. Executing PROC_ARST pass (detect async resets in processes).
+
+13.1.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+13.1.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+13.1.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+13.1.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+13.1.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+13.1.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+13.1.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.2. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+Removed 0 unused cells and 11 unused wires.
+
+13.4. Executing CHECK pass (checking for obvious problems).
+Checking module example_board...
+Warning: Wire example_board.\slave_ahb_hwrite is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [31] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [30] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [29] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [28] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [27] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [26] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [25] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [24] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [23] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [22] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [21] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [20] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [19] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [18] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [17] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [16] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [15] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [14] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [13] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [12] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [11] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [10] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [9] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [8] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [7] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [6] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [5] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [4] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [3] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [2] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [1] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hwdata [0] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_htrans [1] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_htrans [0] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hsize [2] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hsize [1] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hsize [0] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hsel is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hburst [2] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hburst [1] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_hburst [0] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [31] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [30] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [29] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [28] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [27] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [26] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [25] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [24] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [23] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [22] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [21] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [20] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [19] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [18] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [17] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [16] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [15] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [14] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [13] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [12] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [11] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [10] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [9] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [8] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [7] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [6] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [5] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [4] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [3] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [2] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [1] is used but has no driver.
+Warning: Wire example_board.\slave_ahb_haddr [0] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hresp is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [31] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [30] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [29] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [28] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [27] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [26] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [25] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [24] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [23] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [22] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [21] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [20] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [19] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [18] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [17] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [16] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [15] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [14] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [13] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [12] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [11] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [10] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [9] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [8] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [7] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [6] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [5] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [4] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [3] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [2] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [1] is used but has no driver.
+Warning: Wire example_board.\mem_ahb_hrdata [0] is used but has no driver.
+Warning: Wire example_board.\local_int [3] is used but has no driver.
+Warning: Wire example_board.\local_int [2] is used but has no driver.
+Warning: Wire example_board.\local_int [1] is used but has no driver.
+Warning: Wire example_board.\local_int [0] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACSREQ [3] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACSREQ [2] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACSREQ [1] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACSREQ [0] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLSREQ [3] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLSREQ [2] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLSREQ [1] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLSREQ [0] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLBREQ [3] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLBREQ [2] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLBREQ [1] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACLBREQ [0] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACBREQ [3] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACBREQ [2] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACBREQ [1] is used but has no driver.
+Warning: Wire example_board.\ext_dma_DMACBREQ [0] is used but has no driver.
+Found and reported 127 problems.
+
+13.5. Executing OPT pass (performing simple optimizations).
+
+13.5.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.5.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+13.5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \example_board..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+13.5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \example_board.
+Performed a total of 0 changes.
+
+13.5.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+13.5.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+13.5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+13.5.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.5.9. Finished fast OPT passes. (There is nothing left to do.)
+
+13.6. Executing FSM pass (extract and optimize FSM).
+
+13.6.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+13.6.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+13.6.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+13.6.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+13.6.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+13.6.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+13.6.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+13.6.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+13.7. Executing OPT pass (performing simple optimizations).
+
+13.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+13.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \example_board..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+13.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \example_board.
+Performed a total of 0 changes.
+
+13.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+13.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+13.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+13.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.7.9. Finished fast OPT passes. (There is nothing left to do.)
+
+13.8. Executing WREDUCE pass (reducing word size of cells).
+
+13.9. Executing PEEPOPT pass (run peephole optimizers).
+
+13.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+13.11. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module example_board:
+  created 0 $alu and 0 $macc cells.
+
+13.12. Executing SHARE pass (SAT-based resource sharing).
+Terminal cells by cell
+  Module \example_board, cell $ternary$example_board.v:63$4, terminal cells: \rv32
+  Module \example_board, cell $ternary$example_board.v:92$9, terminal cells: \rv32
+  Module \example_board, cell $ternary$example_board.v:98$10, terminal cells: \rv32
+  Module \example_board, cell $ternary$example_board.v:69$5, terminal cells: \rv32
+  Module \example_board, cell $ternary$example_board.v:75$6, terminal cells: \rv32
+  Module \example_board, cell $ternary$example_board.v:86$8, terminal cells: \rv32
+  Module \example_board, cell \rv32, terminal cells: \rv32
+  Module \example_board, cell \pll_inst, terminal cells: \pll_inst
+  Module \example_board, cell \gclksw_inst, terminal cells: \gclksw_inst
+  Module \example_board, cell \gclksw_gen, terminal cells: \gclksw_gen
+  Module \example_board, cell \gclksw_gclk, terminal cells: \gclksw_gclk
+
+13.13. Executing OPT pass (performing simple optimizations).
+
+13.13.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.13.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+13.13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \example_board..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+13.13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \example_board.
+Performed a total of 0 changes.
+
+13.13.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+13.13.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+13.13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+13.13.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+13.13.9. Finished fast OPT passes. (There is nothing left to do.)
+
+13.14. Executing MEMORY pass.
+
+13.14.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+13.14.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+13.14.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+13.14.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+13.14.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+13.14.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+13.14.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+13.14.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+13.14.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+13.14.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+13.15. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+14. Executing PROC_DFF pass (convert process syncs to FFs).
+
+15. Executing PROC_DFF pass (convert process syncs to FFs).
+
+16. Executing PROC_DFF pass (convert process syncs to FFs).
+
+17. Executing PROC_DFF pass (convert process syncs to FFs).
+
+18. Executing PROC_DFF pass (convert process syncs to FFs).
+
+19. Executing PROC_DFF pass (convert process syncs to FFs).
+
+20. Executing PROC_DFF pass (convert process syncs to FFs).
+
+21. Executing PROC_DFF pass (convert process syncs to FFs).
+
+22. Executing PROC_DFF pass (convert process syncs to FFs).
+
+23. Executing PROC_DFF pass (convert process syncs to FFs).
+
+24. Executing MEMORY_LIBMAP pass (mapping memories to cells).
+
+25. Executing TECHMAP pass (map to technology primitives).
+
+25.1. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/brams_map_m9k.v
+Parsing Verilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/brams_map_m9k.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/brams_map_m9k.v
+Generating RTLIL representation for module `\$__BRAM9K_TDP_'.
+Generating RTLIL representation for module `\$__BRAM9K_PDP_'.
+Successfully finished Verilog frontend.
+
+25.2. Continuing TECHMAP pass.
+No more expansions possible.
+
+26. Executing PROC pass (convert processes to netlists).
+
+26.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+26.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+26.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+26.4. Executing PROC_INIT pass (extract init attributes).
+
+26.5. Executing PROC_ARST pass (detect async resets in processes).
+
+26.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+26.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+26.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+26.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+26.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+26.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+26.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+27. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v
+Parsing SystemVerilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/alta_sim.v
+Generating RTLIL representation for module `\alta_ram4k'.
+Generating RTLIL representation for module `\alta_ram9k'.
+Generating RTLIL representation for module `\alta_fifo'.
+Generating RTLIL representation for module `\alta_lram'.
+Successfully finished Verilog frontend.
+
+28. Executing HIERARCHY pass (managing design hierarchy).
+
+28.1. Analyzing design hierarchy..
+Top module:  \example_board
+
+28.2. Analyzing design hierarchy..
+Top module:  \example_board
+Removing unused module `\alta_lram'.
+Removing unused module `\alta_fifo'.
+Removing unused module `\alta_ram9k'.
+Removing unused module `\alta_ram4k'.
+Removed 4 unused modules.
+
+29. Executing FLATTEN pass (flatten design).
+
+30. Executing OPT pass (performing simple optimizations).
+
+30.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+30.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+30.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+30.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+30.5. Finished fast OPT passes.
+
+31. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+32. Executing OPT pass (performing simple optimizations).
+
+32.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+32.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+32.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \example_board..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+32.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \example_board.
+Performed a total of 0 changes.
+
+32.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+32.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+32.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+32.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+32.9. Finished fast OPT passes. (There is nothing left to do.)
+
+33. Executing TECHMAP pass (map to technology primitives).
+
+33.1. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/arith_map.v
+Parsing Verilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/arith_map.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/arith_map.v
+Generating RTLIL representation for module `\_80_rodina_alu'.
+Successfully finished Verilog frontend.
+
+33.2. Continuing TECHMAP pass.
+No more expansions possible.
+
+34. Executing TECHMAP pass (map to technology primitives).
+
+34.1. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/techmap.v
+Parsing Verilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/techmap.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/techmap.v
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `\$connect'.
+Generating RTLIL representation for module `\$input_port'.
+Successfully finished Verilog frontend.
+
+34.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $tribuf.
+Using extmapper simplemap for cells of type $logic_not.
+No more expansions possible.
+
+35. Executing PROC pass (convert processes to netlists).
+
+35.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+35.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+35.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+35.4. Executing PROC_INIT pass (extract init attributes).
+
+35.5. Executing PROC_ARST pass (detect async resets in processes).
+
+35.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+35.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+35.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+35.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+35.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+35.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+35.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+36. Executing OPT pass (performing simple optimizations).
+
+36.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+36.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+36.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \example_board..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+36.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \example_board.
+Performed a total of 0 changes.
+
+36.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+36.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+36.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+36.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+36.9. Finished fast OPT passes. (There is nothing left to do.)
+Removed 0 unused cells and 85 unused wires.
+
+37. Executing SETUNDEF pass (replace undef values with defined constants).
+
+38. Executing ABC pass (technology mapping using ABC).
+
+38.1. Summary of detected clock domains:
+  17 cells in clk={ }, en={ }, arst={ }, srst={ }
+
+38.2. Extracting gate netlist of module `\example_board' to `<abc-temp-dir>/input.blif'..
+No matching clock domain found. Not extracting any FF cells.
+
+38.2.1. Executed ABC.
+Extracted 1 gates and 2 wires to a netlist network with 1 inputs and 1 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library C:\Users\neowa\AppData\Local\Temp\/yosys-abc-4mcyRF/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + retime -o -D 100 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf -D 100 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+38.2.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        1
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+Removing global temp directory.
+
+39. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+
+40. Executing TECHMAP pass (map to technology primitives).
+
+40.1. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/ff_map.v
+Parsing Verilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/ff_map.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/common/ff_map.v
+Generating RTLIL representation for module `\$_DFFE_PN0P_'.
+Generating RTLIL representation for module `\$_DFFE_NN0P_'.
+Generating RTLIL representation for module `\$_DFFE_PP0P_'.
+Generating RTLIL representation for module `\$_DFFE_NP0P_'.
+Generating RTLIL representation for module `\$_DFFE_PN0N_'.
+Generating RTLIL representation for module `\$_DFFE_NN0N_'.
+Generating RTLIL representation for module `\$_DFFE_PP0N_'.
+Generating RTLIL representation for module `\$_DFFE_NP0N_'.
+Generating RTLIL representation for module `\$_DFFE_PN1P_'.
+Generating RTLIL representation for module `\$_DFFE_NN1P_'.
+Generating RTLIL representation for module `\$_DFFE_PP1P_'.
+Generating RTLIL representation for module `\$_DFFE_NP1P_'.
+Generating RTLIL representation for module `\$_DFFE_PN1N_'.
+Generating RTLIL representation for module `\$_DFFE_NN1N_'.
+Generating RTLIL representation for module `\$_DFFE_PP1N_'.
+Generating RTLIL representation for module `\$_DFFE_NP1N_'.
+Generating RTLIL representation for module `\$_SDFFCE_PP0P_'.
+Generating RTLIL representation for module `\$_SDFFCE_NP0P_'.
+Generating RTLIL representation for module `\$_SDFFCE_PN0P_'.
+Generating RTLIL representation for module `\$_SDFFCE_NN0P_'.
+Generating RTLIL representation for module `\$_SDFFCE_PP0N_'.
+Generating RTLIL representation for module `\$_SDFFCE_NP0N_'.
+Generating RTLIL representation for module `\$_SDFFCE_PN0N_'.
+Generating RTLIL representation for module `\$_SDFFCE_NN0N_'.
+Generating RTLIL representation for module `\$_SDFFCE_PP1P_'.
+Generating RTLIL representation for module `\$_SDFFCE_NP1P_'.
+Generating RTLIL representation for module `\$_SDFFCE_PN1P_'.
+Generating RTLIL representation for module `\$_SDFFCE_NN1P_'.
+Generating RTLIL representation for module `\$_SDFFCE_PP1N_'.
+Generating RTLIL representation for module `\$_SDFFCE_NP1N_'.
+Generating RTLIL representation for module `\$_SDFFCE_PN1N_'.
+Generating RTLIL representation for module `\$_SDFFCE_NN1N_'.
+Generating RTLIL representation for module `\$_ALDFFE_PNP_'.
+Generating RTLIL representation for module `\$_ALDFFE_NNP_'.
+Generating RTLIL representation for module `\$_ALDFFE_PPP_'.
+Generating RTLIL representation for module `\$_ALDFFE_NPP_'.
+Generating RTLIL representation for module `\$_ALDFFE_PNN_'.
+Generating RTLIL representation for module `\$_ALDFFE_NNN_'.
+Generating RTLIL representation for module `\$_ALDFFE_PPN_'.
+Generating RTLIL representation for module `\$_ALDFFE_NPN_'.
+Generating RTLIL representation for module `\$_DLATCH_N_'.
+Generating RTLIL representation for module `\$_DLATCH_P_'.
+Successfully finished Verilog frontend.
+
+40.2. Continuing TECHMAP pass.
+No more expansions possible.
+
+41. Executing PROC pass (convert processes to netlists).
+
+41.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+41.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+41.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+41.4. Executing PROC_INIT pass (extract init attributes).
+
+41.5. Executing PROC_ARST pass (detect async resets in processes).
+
+41.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+41.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+41.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+41.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+41.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+41.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+41.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+42. Executing OPT pass (performing simple optimizations).
+
+42.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+42.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+42.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \example_board..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+42.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \example_board.
+Performed a total of 0 changes.
+
+42.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+42.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+42.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+Removed 0 unused cells and 2 unused wires.
+
+42.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+42.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+42.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \example_board..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+42.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \example_board.
+Performed a total of 0 changes.
+
+42.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+42.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+42.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+
+42.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+42.16. Finished fast OPT passes. (There is nothing left to do.)
+
+43. Executing SETUNDEF pass (replace undef values with defined constants).
+
+44. Executing ABC pass (technology mapping using ABC).
+
+44.1. Summary of detected clock domains:
+  17 cells in clk={ }, en={ }, arst={ }, srst={ }
+
+44.2. Extracting gate netlist of module `\example_board' to `<abc-temp-dir>/input.blif'..
+No matching clock domain found. Not extracting any FF cells.
+
+44.2.1. Executed ABC.
+Extracted 1 gates and 2 wires to a netlist network with 1 inputs and 1 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library C:\Users\neowa\AppData\Local\Temp\/yosys-abc-WEyXmg/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + retime -o -D 1 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf -D 1 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+44.2.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        1
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+Removing global temp directory.
+
+45. Executing agm_dffeas pass (optimize sclr/sload).
+
+46. Executing OPT_EXPR pass (perform const folding).
+Optimizing module example_board.
+
+47. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\example_board'.
+Removed a total of 0 cells.
+
+48. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \example_board..
+Removed 0 unused cells and 2 unused wires.
+
+49. Executing AUTONAME pass.
+Renamed 11 objects in module example_board (3 iterations).
+
+50. Executing ABC pass (technology mapping using ABC).
+
+50.1. Extracting gate netlist of module `\example_board' to `<abc-temp-dir>/input.blif'..
+
+50.1.1. Executed ABC.
+Extracted 1 gates and 2 wires to a netlist network with 1 inputs and 1 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut C:\Users\neowa\AppData\Local\Temp\/yosys-abc-qPjwmu/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+50.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:        1
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        1
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+Removing global temp directory.
+Removed 0 unused cells and 2 unused wires.
+
+51. Executing IOPADMAP pass (mapping inputs/outputs to IO-PAD cells).
+Mapping port example_board.CAN0_TX0[0] using $__toutpad.
+Mapping port example_board.GPIO4_4[0] using $__tinoutpad.
+Mapping port example_board.GPIO5_0[0] using $__tinoutpad.
+Mapping port example_board.GPIO5_1[0] using $__tinoutpad.
+Mapping port example_board.GPIO5_2[0] using $__tinoutpad.
+Mapping port example_board.GPIO5_3[0] using $__tinoutpad.
+Mapping port example_board.SPI0_CSN[0] using $__toutpad.
+Mapping port example_board.SPI0_SCK[0] using $__toutpad.
+Mapping port example_board.SPI0_SI_IO0[0] using $__tinoutpad.
+Mapping port example_board.UART0_UARTTXD[0] using $__toutpad.
+Mapping port example_board.CAN0_RX0 using $__inpad.
+Mapping port example_board.PIN_HSE using $__inpad.
+Mapping port example_board.PIN_HSI using $__inpad.
+Mapping port example_board.PIN_OSC using $__inpad.
+Mapping port example_board.UART0_UARTRXD using $__inpad.
+
+52. Executing TECHMAP pass (map to technology primitives).
+
+52.1. Executing Verilog-2005 frontend: D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/cells_map.v
+Parsing Verilog input from `D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/cells_map.v' to AST representation.
+verilog frontend filename D:\Projects\MCU\agm32_withFreeRTOS\.pio\validation_logic_tool\map\bin\../share/agm/rodina/cells_map.v
+Generating RTLIL representation for module `\$__inpad'.
+Generating RTLIL representation for module `\$__outpad'.
+Generating RTLIL representation for module `\$__toutpad'.
+Generating RTLIL representation for module `\$__tinoutpad'.
+Generating RTLIL representation for module `\$lut'.
+Successfully finished Verilog frontend.
+
+52.2. Continuing TECHMAP pass.
+Using template $paramod\$lut\WIDTH=32'00000000000000000000000000000001\LUT=2'01 for cells of type $lut.
+Using template \$__inpad for cells of type $__inpad.
+Using template \$__tinoutpad for cells of type $__tinoutpad.
+Using template \$__toutpad for cells of type $__toutpad.
+No more expansions possible.
+Removed 0 unused cells and 61 unused wires.
+
+53. Executing AUTONAME pass.
+Renamed 25 objects in module example_board (4 iterations).
+
+54. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `example_board'. Setting top module to example_board.
+
+54.1. Analyzing design hierarchy..
+Top module:  \example_board
+
+54.2. Analyzing design hierarchy..
+Top module:  \example_board
+Removed 0 unused modules.
+
+55. Printing statistics.
+
+=== example_board ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       66 wires
+      350 wire bits
+       66 public wires
+      350 public wire bits
+       15 ports
+       15 port bits
+       28 cells
+        1   $not
+        1   $scopeinfo
+        1   alta_gclkgen
+        1   alta_gclksw
+        1   alta_io_gclk
+        1   alta_pllve
+        1   alta_rv32
+       11   cycloneive_io_ibuf
+       10   cycloneive_io_obuf
+
+56. Executing CHECK pass (checking for obvious problems).
+Checking module example_board...
+Found and reported 0 problems.
+
+57. Executing Verilog backend.
+
+57.1. Executing BMUXMAP pass.
+
+57.2. Executing DEMUXMAP pass.
+Dumping module `\example_board'.
