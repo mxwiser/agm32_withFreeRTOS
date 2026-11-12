@@ -1,8 +1,18 @@
 #include "example.h"
 
-#define FLASH_RD_START 0x80030000
-#define FLASH_WR_START 0x80010000
-#define FLASH_TEST_LEN 0x10000
+#define FLASH_TEST_LEN (FLASH_SECTOR_SIZE * 2U)
+
+// The linker allocates these test objects inside the configured program region.
+// Whole, aligned sectors keep erase operations away from code and FPGA LOGIC.
+__attribute__((section(".flash.readonly")))
+static uint8_t ro_data[64] = { 0x5a, 0xa5 };
+
+__attribute__((section(".flash.readwrite")))
+__attribute__((aligned(FLASH_SECTOR_SIZE)))
+static uint8_t rw_data[FLASH_TEST_LEN] = { 0xef, 0xbe };
+
+#define FLASH_RD_START ((uint32_t)(uintptr_t)rw_data)
+#define FLASH_WR_START ((uint32_t)(uintptr_t)rw_data)
 
 static uint32_t flash_buf[FLASH_TEST_LEN/4];
 
@@ -14,7 +24,12 @@ void TestFlashAddress(void)
 {
   uint32_t tick = UTIL_GetTick();
   // Flash read can be done by directly reading the address.
-  memcpy(flash_buf, (uint32_t *)FLASH_RD_START, FLASH_TEST_LEN);
+  // Read the actual flash contents, even after the test has reprogrammed them.
+  const volatile uint8_t *flash_source = rw_data;
+  uint8_t *buffer_bytes = (uint8_t *)flash_buf;
+  for (size_t i = 0; i < FLASH_TEST_LEN; ++i) {
+    buffer_bytes[i] = flash_source[i];
+  }
   printf("Flash read from 0x%x to 0x%x (%d bytes) is done in %d ms\n",
          FLASH_RD_START, FLASH_RD_START + FLASH_TEST_LEN - 1, FLASH_TEST_LEN, UTIL_GetTick() - tick);
 
@@ -39,6 +54,7 @@ void TestFlashAddress(void)
     uint32_t data = RD_REG(FLASH_WR_START + offset);
     if (data != 0xffffffff) {
       printf("Error flash data read at address 0x%x, value: 0x%x\n", FLASH_WR_START + offset, data);
+      FLASH_Lock();
       return;
     }
   }
@@ -86,17 +102,6 @@ void TestFlashAddress(void)
 }
 
 
-// By default data are allocated in SRAM. Any data assigned to ".flash.*" sections will be automatically allocated to 
-// flash by linker script. For read only data, assigning the section is all that is needed.
-__attribute__((section(".flash.readonly")))
-static uint8_t ro_data[64] = { 0x5a, 0xa5 };
-
-// For any read write data on flash, align it to flash sectors (4KB) and make its size a multiple of sector size so that 
-// a flash erase won't overwrite other data.
-__attribute__((section(".flash.readwrite")))
-__attribute__((aligned(SPI_FLASH_SECTOR_SIZE)))
-static uint8_t rw_data[SPI_FLASH_SECTOR_SIZE * 2] = { 0xef, 0xbe };
-
 __attribute__((section(".text.sram")))
 void TestFlashSymbol(void)
 {
@@ -116,7 +121,7 @@ void TestFlashSymbol(void)
 
 void TestFlash(void)
 {
-  // Flash read/write example with the given address
+  // Flash read/write example using the linker-allocated test sectors
   TestFlashAddress();
   // Flash read/write example with symbols
   TestFlashSymbol();
