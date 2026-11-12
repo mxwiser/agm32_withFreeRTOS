@@ -72,7 +72,7 @@ if { [file exists [file join . ${DESIGN}.pre_map.asf]] } {
 }
 
 if { [ llength $verilogs ] == 0 } {
-  set verilogs { "example_board.v" "user_ip.v" }
+  set verilogs { {example_board.v} {user_ip.v} {ahb2apb.v} }
 }
 if { [ llength $verilogs ] == 0 } {
   set verilogs [list ./${DESIGN}.v]
@@ -89,7 +89,7 @@ foreach verilog $verilogs {
     read_verilog -DALTA_LIB -sv -lib +/agm/rodina/alta_sim.v
     read_verilog -DALTA_SYN -sv +/agm/rodina/alta_sim.v
     read_verilog -DALTA_SYN -sv +/agm/common/alta_bb.v
-    hierarchy -check -top $TOP_MODULE -DALTA_SYN -libdir "user_ip" -libdir .
+    hierarchy -check -top $TOP_MODULE -DALTA_SYN -libdir "." -libdir .
 
 #flatten:
    #yosys proc

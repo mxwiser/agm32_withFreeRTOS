@@ -23,6 +23,10 @@
 #define LED_GPIO_MASK APB_MASK_GPIO4
 #define LED_GPIO_BITS (1 << 4) // D1: GPIO4_4 -> L48 pin 43 (PB7), active high
 
+#define LCD_BLK_GPIO GPIO5
+#define LCD_BLK_GPIO_MASK APB_MASK_GPIO5
+#define LCD_BLK_GPIO_BITS GPIO_BIT3 // J6 BLK -> L48 pin 33 (PA12), active high
+
 #define BUT_GPIO GPIO6
 #define BUT_GPIO_MASK APB_MASK_GPIO6
 #define BUT_GPIO_BITS (0x14) // Bits 2 & 4

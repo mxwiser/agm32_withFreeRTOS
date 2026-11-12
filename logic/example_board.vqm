@@ -215,51 +215,51 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   wire sys_resetn;
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
   cycloneive_io_obuf CAN0_TX0_o (
     .i(gpio8_io_out_data[7]),
     .o(CAN0_TX0),
     .oe(PIN_12_out_en)
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
   cycloneive_io_obuf GPIO4_4_o (
     .i(gpio4_io_out_data[4]),
     .o(GPIO4_4),
     .oe(gpio4_io_out_en[4])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
   cycloneive_io_obuf GPIO5_0_o (
     .i(gpio5_io_out_data[0]),
     .o(GPIO5_0),
     .oe(gpio5_io_out_en[0])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
   cycloneive_io_obuf GPIO5_1_o (
     .i(gpio5_io_out_data[1]),
     .o(GPIO5_1),
     .oe(gpio5_io_out_en[1])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
   cycloneive_io_obuf GPIO5_2_o (
     .i(gpio5_io_out_data[2]),
     .o(GPIO5_2),
     .oe(gpio5_io_out_en[2])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
   cycloneive_io_obuf GPIO5_3_o (
     .i(gpio5_io_out_data[3]),
     .o(GPIO5_3),
     .oe(gpio5_io_out_en[3])
   );
-  assign PIN_12_out_en = ~ /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:60.17-60.22" */ gpio8_io_out_en[7];
+  assign PIN_12_out_en = ~ /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:60.17-60.22" */ gpio8_io_out_en[7];
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
   cycloneive_io_ibuf PIN_HSE_i (
     .i(PIN_HSE),
     .ibar(1'h0),
@@ -267,7 +267,7 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
   cycloneive_io_ibuf PIN_HSI_i (
     .i(PIN_HSI),
     .ibar(1'h0),
@@ -275,7 +275,7 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
   cycloneive_io_ibuf PIN_OSC_i (
     .i(PIN_OSC),
     .ibar(1'h0),
@@ -283,7 +283,7 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
   cycloneive_io_obuf SPI0_CSN_o (
     .i(gpio4_io_out_data[6]),
     .o(SPI0_CSN),
@@ -291,14 +291,14 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
   cycloneive_io_obuf SPI0_SCK_o (
     .i(gpio4_io_out_data[5]),
     .o(SPI0_SCK),
     .oe(gpio4_io_out_en[5])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
   cycloneive_io_obuf SPI0_SI_IO0_o (
     .i(gpio0_io_out_data[0]),
     .o(SPI0_SI_IO0),
@@ -306,7 +306,7 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
   cycloneive_io_obuf UART0_UARTTXD_o (
     .i(gpio7_io_out_data[6]),
     .o(UART0_UARTTXD),
@@ -339,42 +339,42 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
     .select(sys_ctrl_clkSource)
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
   cycloneive_io_ibuf gpio0_io_in_o_0 (
     .i(SPI0_SI_IO0),
     .ibar(1'h0),
     .o(gpio0_io_in[0])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
   cycloneive_io_ibuf gpio4_io_in_o_4 (
     .i(GPIO4_4),
     .ibar(1'h0),
     .o(gpio4_io_in[4])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
   cycloneive_io_ibuf gpio5_io_in_o_0 (
     .i(GPIO5_0),
     .ibar(1'h0),
     .o(gpio5_io_in[0])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
   cycloneive_io_ibuf gpio5_io_in_o_1 (
     .i(GPIO5_1),
     .ibar(1'h0),
     .o(gpio5_io_in[1])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
   cycloneive_io_ibuf gpio5_io_in_o_2 (
     .i(GPIO5_2),
     .ibar(1'h0),
     .o(gpio5_io_in[2])
   );
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
   cycloneive_io_ibuf gpio5_io_in_o_3 (
     .i(GPIO5_3),
     .ibar(1'h0),
@@ -382,7 +382,7 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
   cycloneive_io_ibuf gpio6_io_in_o_1 (
     .i(UART0_UARTRXD),
     .ibar(1'h0),
@@ -390,7 +390,7 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* keep = 1 */
   /* module_not_derived = 1 */
-  /* src = "D:\\Projects\\MCU\\agm32_withFreeRTOS\\.pio\\validation_logic_tool\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:25.23-25.68" */
   cycloneive_io_ibuf gpio7_io_in_o_3 (
     .i(CAN0_RX0),
     .ibar(1'h0),

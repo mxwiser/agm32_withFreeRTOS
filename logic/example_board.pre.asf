@@ -5,3 +5,17 @@ set ip_pll_vco_lowpower true
 set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION "OFF"
 # pio_end    <<<<<< DO NOT MODIFY THIS SECTION! <<<<<<
 
+# AGM_QUARTUS_NETLIST_GUARD_BEGIN
+if {[info exists MODE] && $MODE == "QUARTUS"} {
+  set agm_report [file join quartus_logs ${DESIGN}.flow.rpt]
+  if {![file exists $agm_report]} {
+    error "Quartus flow report missing. Run af_quartus.tcl, or use build_logic.bat."
+  }
+  set agm_fp [open $agm_report r]
+  set agm_text [read $agm_fp]
+  close $agm_fp
+  if {![regexp {Total PLLs\s*;\s*([0-9]+)} $agm_text -> agm_plls] || $agm_plls < 1} {
+    error "Quartus removed the AG32 PLL. This netlist cannot boot the MCU. Use a supported licensed Quartus edition, or build_logic.bat."
+  }
+}
+# AGM_QUARTUS_NETLIST_GUARD_END

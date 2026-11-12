@@ -1,3 +1,8 @@
+# AGM_QUARTUS_GUARD: added by build_logic.bat after project generation.
+set agm_version [exec [file join $::quartus(binpath) quartus_sh] --version 2>@1]
+if {[regexp -nocase {Lite Edition} $agm_version]} {
+  error "AG32 requires preserved MCU design partitions. Quartus Lite removes them (138067). Use a supported licensed edition, or run build_logic.bat for Native synthesis."
+}
 set AGM_SUPRA true
 set RETRY 0
 set DESIGN "example_board"
@@ -48,3 +53,18 @@ if { $is_compatible } {
 }
 
 
+
+# AGM_QUARTUS_RESULT_GUARD
+if {!$is_compatible && $code != 0} {
+  error "Quartus compilation failed: $msg"
+}
+set agm_report [file join quartus_logs ${DESIGN}.flow.rpt]
+if {![file exists $agm_report]} {
+  error "Quartus flow report is missing; no verified netlist was generated."
+}
+set agm_fp [open $agm_report r]
+set agm_text [read $agm_fp]
+close $agm_fp
+if {![regexp {Total PLLs\s*;\s*([0-9]+)} $agm_text -> agm_plls] || $agm_plls < 1} {
+  error "AG32 PLL was removed during synthesis. Do not compile or upload this Quartus netlist."
+}
