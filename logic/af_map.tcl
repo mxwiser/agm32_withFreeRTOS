@@ -89,7 +89,7 @@ foreach verilog $verilogs {
     read_verilog -DALTA_LIB -sv -lib +/agm/rodina/alta_sim.v
     read_verilog -DALTA_SYN -sv +/agm/rodina/alta_sim.v
     read_verilog -DALTA_SYN -sv +/agm/common/alta_bb.v
-    hierarchy -check -top $TOP_MODULE -DALTA_SYN -libdir "." -libdir .
+    hierarchy -check -top $TOP_MODULE -DALTA_SYN -libdir "user_ip" -libdir .
 
 #flatten:
    #yosys proc

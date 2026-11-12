@@ -21,7 +21,7 @@
 
 #define LED_GPIO GPIO4
 #define LED_GPIO_MASK APB_MASK_GPIO4
-#define LED_GPIO_BITS (1 << 4) // LED 4
+#define LED_GPIO_BITS (1 << 4) // D1: GPIO4_4 -> L48 pin 43 (PB7), active high
 
 #define BUT_GPIO GPIO6
 #define BUT_GPIO_MASK APB_MASK_GPIO6
@@ -45,8 +45,4 @@ int board_uart_write(void const *buf, int len);
 uint32_t board_millis(void);
 static inline void HardFault_Handler(void) { asm("ebreak"); }
 
-MAC_MediaInterfaceTypeDef board_mac_media(void);
-uint8_t board_mac_phy_addr(void);
-void board_init_mac(void);
-void board_init_phy(MAC_HandleTypeDef *hmac);
 #endif

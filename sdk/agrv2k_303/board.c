@@ -38,54 +38,6 @@ uint32_t board_pll_clkin_freq(void)
 #endif
 }
 
-MAC_MediaInterfaceTypeDef board_mac_media(void)
-{
-#ifdef BOARD_MAC_MEDIA_INTERFACE
-  return BOARD_MAC_MEDIA_INTERFACE;
-#else
-  return MAC_MEDIA_INTERFACE_RMII;
-#endif
-}
-
-uint8_t board_mac_phy_addr(void)
-{
-  // PHY address depends on how it is physically configured on board
-  return 3;
-}
-
-#define RMII_CLK_DIR 0 // REF_CLK direction in RMII mode, 0: PHY to MAC, 1: MAC to PHY
-void board_init_mac(void)
-{
-}
-
-void board_init_phy(MAC_HandleTypeDef *hmac)
-{
-  // RMII mode setting and clk direction. This can override the mode decided by RX_DV at power on
-  MAC_MdioWrite(hmac, MAC_PHY_REG_PAGE, 7);
-  uint16_t mdio = MAC_MdioRead(hmac, MAC_PHY_REG_RMSR);
-  MODIFY_REG(mdio, MAC_PHY_RMSR_RMII_MODE, (hmac->Init.MediaInterface == MAC_MEDIA_INTERFACE_RMII) << MAC_PHY_RMSR_RMII_OFFSET);
-  MODIFY_REG(mdio, MAC_PHY_RMSR_RMII_CLKDIR, RMII_CLK_DIR == 0 ? MAC_PHY_RMSR_RMII_CLK_OUT : MAC_PHY_RMSR_RMII_CLK_IN);
-  MAC_MdioWrite(hmac, MAC_PHY_REG_RMSR, mdio);
-  // Enable INTB for link change
-  mdio = MAC_MdioRead(hmac, MAC_PHY_REG_IWL);
-  MAC_MdioWrite(hmac, MAC_PHY_REG_IWL, mdio | MAC_PHY_IWL_INT_LINKCHG);
-  MAC_MdioWrite(hmac, MAC_PHY_REG_PAGE, 0);
-
-  dbg_printf("Mac media:     %s\n",         hmac->Init.MediaInterface == MAC_MEDIA_INTERFACE_MII ? "MII" : "RMII");
-  dbg_printf("Mac macaddr:   0x%02x%04x\n", MAC0->MACMSB, MAC0->MACLSB);
-  dbg_printf("Mac phyaddr:   0x%x\n",       hmac->Init.PhyAddress);
-  dbg_printf("Mac autoneg:   0x%x\n",       hmac->Init.AutoNegotiation);
-  dbg_printf("Mac interface: 0x%x\n",       hmac->Init.MediaInterface);
-  dbg_printf("Mac loopback:  0x%x\n",       hmac->Init.LoopbackMode);
-  dbg_printf("Mac mdcscaler: 0x%x\n",       hmac->Init.MdcScaler);
-  dbg_printf("Mac duplex:    0x%x\n",       hmac->Init.DuplexMode);
-  dbg_printf("Mac speed:     0x%x\n",       hmac->Init.Speed);
-  uint16_t mac_phy_stat = MAC_MdioRead(hmac, MAC_PHY_REG_STAT);
-  dbg_printf("Mac phy autoneg done: %s, link status: %s\n",
-              mac_phy_stat & MAC_PHY_STAT_AUTONEG_DONE ? "yes" : "no",
-              mac_phy_stat & MAC_PHY_STAT_LINK_STATUS  ? "yes" : "no");
-}
-
 __attribute__((weak)) uint32_t FCB_GetPLLFreq(uint32_t clkin_freq);
 __attribute__((weak)) void board_init(void)
 {
@@ -132,7 +84,6 @@ __attribute__((weak)) void board_init(void)
   UART_Init(UARTx(LOGGER_UART), BAUD_RATE, UART_LCR_DATABITS_8, UART_LCR_STOPBITS_1, UART_LCR_PARITY_NONE, UART_LCR_FIFO_16);
 #endif
 
-  board_init_mac();
   dbg_printf("\nInit done. CLK: %.3fMHz, RTC: %dHz\n", SYS_GetSysClkFreq()/(double)1e6, BOARD_RTC_FREQUENCY);
 }
 

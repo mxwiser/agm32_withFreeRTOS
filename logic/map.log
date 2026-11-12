@@ -783,7 +783,7 @@ Running ABC script: <abc-temp-dir>/abc.script
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
 ABC: 
 ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library C:\Users\neowa\AppData\Local\Temp\/yosys-abc-4mcyRF/stdcells.genlib 
+ABC: + read_library C:\Users\neowa\AppData\Local\Temp\/yosys-abc-07DVD3/stdcells.genlib 
 ABC: + strash 
 ABC: + &get -n 
 ABC: + &fraig -x 
@@ -969,7 +969,7 @@ Running ABC script: <abc-temp-dir>/abc.script
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
 ABC: 
 ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library C:\Users\neowa\AppData\Local\Temp\/yosys-abc-WEyXmg/stdcells.genlib 
+ABC: + read_library C:\Users\neowa\AppData\Local\Temp\/yosys-abc-X1kC4V/stdcells.genlib 
 ABC: + strash 
 ABC: + &get -n 
 ABC: + &fraig -x 
@@ -1020,7 +1020,7 @@ Running ABC script: <abc-temp-dir>/abc.script
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
 ABC: 
 ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_lut C:\Users\neowa\AppData\Local\Temp\/yosys-abc-qPjwmu/lutdefs.txt 
+ABC: + read_lut C:\Users\neowa\AppData\Local\Temp\/yosys-abc-TjZOXP/lutdefs.txt 
 ABC: + strash 
 ABC: + &get -n 
 ABC: + &fraig -x 
