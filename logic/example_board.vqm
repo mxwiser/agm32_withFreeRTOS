@@ -435,8 +435,8 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   defparam pll_inst.CLKIN_TRIM = 1'h0;
   defparam pll_inst.CLKOUT0_BYPASS = 1'h0;
   defparam pll_inst.CLKOUT0_DEL = 8'h00;
-  defparam pll_inst.CLKOUT0_HIGH = 8'h01;
-  defparam pll_inst.CLKOUT0_LOW = 8'h01;
+  defparam pll_inst.CLKOUT0_HIGH = 8'h00;
+  defparam pll_inst.CLKOUT0_LOW = 8'h00;
   defparam pll_inst.CLKOUT0_PHASE = 3'h0;
   defparam pll_inst.CLKOUT0_TRIM = 1'h0;
   defparam pll_inst.CLKOUT1_BYPASS = 1'h0;

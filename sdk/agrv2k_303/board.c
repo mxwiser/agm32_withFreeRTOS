@@ -65,11 +65,11 @@ __attribute__((weak)) void board_init(void)
   GPIO_SetOutput(LED_GPIO, LED_GPIO_BITS);
   GPIO_SetHigh(LED_GPIO, LED_GPIO_BITS);
 
-  // J6 display backlight: set the level before enabling the output.
+  // J6 display backlight: enable GPIO output before driving BLK high.
   SYS_EnableAPBClock(LCD_BLK_GPIO_MASK);
   GPIO_SetSoftwareMode(LCD_BLK_GPIO, LCD_BLK_GPIO_BITS);
-  GPIO_SetHigh(LCD_BLK_GPIO, LCD_BLK_GPIO_BITS);
   GPIO_SetOutput(LCD_BLK_GPIO, LCD_BLK_GPIO_BITS);
+  GPIO_SetHigh(LCD_BLK_GPIO, LCD_BLK_GPIO_BITS);
 
   SYS_EnableAPBClock(EXT_GPIO_MASK);
   GPIO_SetOutput(EXT_GPIO, EXT_GPIO_BITS);

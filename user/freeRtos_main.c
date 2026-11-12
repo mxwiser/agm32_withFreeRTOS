@@ -1,6 +1,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "board.h"
+#include "lcd_demo.h"
 
 #define LED_TOGGLE_INTERVAL_MS 500
 
@@ -24,6 +25,12 @@ int main(void)
   if (xTaskCreate(prvLedTask,
                   "LED",
                   configMINIMAL_STACK_SIZE,
+                  NULL,
+                  tskIDLE_PRIORITY + 1,
+                  NULL) == pdPASS &&
+      xTaskCreate(LCD_ColorTestTask,
+                  "LCD",
+                  512,
                   NULL,
                   tskIDLE_PRIORITY + 1,
                   NULL) == pdPASS) {
