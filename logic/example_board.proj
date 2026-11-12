@@ -2,6 +2,10 @@
 design=example_board
 device=AGRV2KL48
 flowInline=force
+modeGroup=false
+modeQuartus=false
+modeSynplicity=false
+modeNative=true
 
 [GuiMigrateRunPage]
 fitting=1
@@ -36,3 +40,6 @@ probe3From=
 probe3Pad=
 probe4From=
 probe4Pad=
+
+[MainWindow]
+recentFile.0=
