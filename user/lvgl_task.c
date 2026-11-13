@@ -7,6 +7,8 @@
 #include "st7789.h"
 #include "lvgl.h"
 
+LV_FONT_DECLARE(lv_font_bike_48);
+
 /* RGB565, ten lines; uint32_t provides suitable alignment for the renderer. */
 static uint32_t draw_buffer[ST7789_NATIVE_HEIGHT * 10U * 2U / sizeof(uint32_t)];
 volatile ST7789_Status lvgl_lcd_status = ST7789_NOT_INITIALIZED;
@@ -52,8 +54,11 @@ void LVGL_Task(void *argument)
   lv_obj_set_style_bg_opa(lv_screen_active(), LV_OPA_COVER, 0);
   lv_obj_t *label = lv_label_create(lv_screen_active());
   if (label != NULL) {
-    lv_label_set_text(label, "LVGL + FreeRTOS + Hello world");
+    lv_label_set_text(label, "123456");
+    lv_obj_set_style_text_font(label, &lv_font_bike_48, 0);
     lv_obj_set_style_text_color(label, lv_color_hex(0xff0000), 0);
+    lv_obj_set_width(label, ST7789_Width());
+    lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
     lv_obj_center(label);
   }
 

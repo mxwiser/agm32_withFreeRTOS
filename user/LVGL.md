@@ -12,12 +12,26 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 调试器可观察 `lvgl_lcd_status` 和 `lvgl_flush_errors`；刷新错误会计数，
 但当前不会自动重新绘制失败的区域。
 
-`user/lv_conf.h` 使用 32 KiB LVGL 内存池和简单主题。受 156 KiB 程序 Flash 区域限制，
+`user/lv_conf.h` 使用 32 KiB LVGL 内存池和简单主题。受 208 KiB 程序 Flash 区域限制，
 当前只启用标签等基础功能，关闭了多数控件和非 RGB565 软件渲染格式。
 添加界面时可按需启用控件，并重新检查链接结果是否仍处于程序区内。
-字体默认仅包含 Montserrat 18，中文需要另外配置字体并检查空间。
+默认字体和示例标签使用由内置 Montserrat 48 精简出的 ASCII
+字体（空格至 `~`），不含中文、度数符号或图标。字体位图直接放在 Flash，节省 RAM。
+更改字体时可用 `python tools/make_font_ascii48.py` 重新生成该文件。
 当前关闭 Flex、Grid 自动布局和 Observer 数据绑定；如界面需要，可以在
 `user/lv_conf.h` 中重新启用。圆弧、圆角等复杂软件绘制能力仍然保留。
+
+## Flash 分区及烧录
+
+程序区为 `0x80000000..0x80033fff`（208 KiB），压缩 LOGIC 和解压程序使用
+`0x80034000..0x8003ffff`（48 KiB）。第一次从旧的未压缩分区升级时，必须一起
+烧录新的 MCU 固件、压缩 LOGIC 和启动配置；仅烧录 MCU 程序可能覆盖旧 LOGIC，
+无法完成迁移。使用 Release 的 PlatformIO `batch_upload`（Upload Batch）目标，
+它会生成并烧录包含以上三项的 batch 文件。启动时间可能增加约 30–50 ms。
+旧的未压缩 LOGIC 已备份在 `.pio/logic_uncompressed_backup/`。
+
+由于自定义字体的位图位于 `.flash` 节，当前 PlatformIO 的 RAM 统计会低估，
+请以 ELF 的 `.data`、`.sdata`、`.bss` 和 `.sbss` 大小及链接器检查为准。
 
 示例界面可在 `lvgl_task.c` 中修改。若恢复 LCD 纯色测试，应在 `main` 中以
 `LCD_ColorTestTask` 替换 LVGL 任务，避免同时操作屏幕。

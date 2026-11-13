@@ -5,6 +5,7 @@ import configparser
 import os
 from pathlib import Path
 import re
+import runpy
 import shutil
 import subprocess
 import sys
@@ -167,7 +168,14 @@ def build(tool_home):
     if not re.search(r"\balta_rv32\s+\S+\s*\(", routed):
         raise RuntimeError("MCU interface missing from Native result; bitstream was not published.")
     binary = result_dir / f"{design}.bin"
-    if not binary.is_file() or not 0 < binary.stat().st_size <= 100 * 1024:
+    compressed = settings.getboolean("board_logic.compress", fallback=False)
+    if compressed:
+        # The batch generator stores a decompressor in the same 48 KiB region.
+        algo_size = runpy.run_path(str(sdk / "gen_batch"))["LOGIC_ALGO_SIZE"]
+        size_limit = 48 * 1024 - algo_size - 1
+    else:
+        size_limit = 100 * 1024
+    if not binary.is_file() or not 0 < binary.stat().st_size <= size_limit:
         raise RuntimeError("Missing or oversized LOGIC bitstream; result was not published.")
     for suffix in (".bin", ".inc", "_routed.v"):
         shutil.copy2(result_dir / f"{design}{suffix}", logic_dir / f"{design}{suffix}")
