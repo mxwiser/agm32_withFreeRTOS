@@ -15,7 +15,7 @@ LV_FONT_DECLARE(font_title_cn_14);
 #define COLOR_SPEED_ARC 0x711C96
 #define COLOR_BIKE_LOGO 0x000000
 #define COLOR_VOLTAGE  0xF50057  /* Voltage card accent. */
-#define COLOR_THROTTLE 0x64DD17  /* Throttle progress fill. */
+#define COLOR_THROTTLE 0x536DFE  /* Throttle progress fill. */
 #define COLOR_BATTERY  0x64DD17  /* Battery cells at 20% and above. */
 #define COLOR_BATTERY_LOW 0xFF0000 /* Battery warning below 20%. */
 #define COLOR_YELLOW   0x8A4D00
@@ -39,7 +39,8 @@ typedef struct {
   lv_obj_t *throttle_text;
   lv_obj_t *throttle_fill;
   lv_obj_t *ppm_text;
-  lv_obj_t *ppm_fill;
+  lv_obj_t *ppm_brake_fill;
+  lv_obj_t *ppm_drive_fill;
 } DashboardWidgets;
 
 static DashboardWidgets ui;
@@ -112,17 +113,17 @@ static lv_obj_t *metric_card(lv_obj_t *screen, int y, const char *title, uint32_
   return text(card, 12, 16, 124, "0", &font_dashboard_24, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
 }
 
-static bool duty_card(lv_obj_t *screen, int x, const char *title, uint32_t accent,
-                      lv_obj_t **value, lv_obj_t **fill)
+static bool ppm_card(lv_obj_t *screen)
 {
-  lv_obj_t *card = box(screen, x, 191, 151, 43, COLOR_PANEL, COLOR_BORDER, 5);
+  lv_obj_t *card = box(screen, 163, 191, 151, 43, COLOR_PANEL, COLOR_BORDER, 5);
   if (card == NULL) return false;
-  (void)text(card, 8, 4, 83, title, &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
-  *value = text(card, 95, 4, 47, "0%", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_RIGHT);
+  (void)text(card, 8, 4, 83, "PPM THR", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
+  ui.ppm_text = text(card, 95, 4, 47, "0%", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_RIGHT);
   lv_obj_t *track = box(card, 8, 27, 135, 8, COLOR_TRACK, COLOR_TRACK, 4);
   if (track == NULL) return false;
-  *fill = box(track, 0, 0, 1, 8, accent, accent, 4);
-  return *value != NULL && *fill != NULL;
+  ui.ppm_brake_fill = box(track, 66, 0, 1, 8, COLOR_RED, COLOR_RED, 0);
+  ui.ppm_drive_fill = box(track, 68, 0, 1, 8, COLOR_THROTTLE, COLOR_THROTTLE, 0);
+  return ui.ppm_text && ui.ppm_brake_fill && ui.ppm_drive_fill;
 }
 
 static bool combined_duty_card(lv_obj_t *screen)
@@ -197,7 +198,7 @@ bool Dashboard_Create(lv_obj_t *screen)
   ui.current = metric_card(screen, 83, "Current", COLOR_CYAN);
   ui.power = metric_card(screen, 135, "Power", COLOR_YELLOW);
   (void)combined_duty_card(screen);
-  (void)duty_card(screen, 163, "PPM THR", COLOR_THROTTLE, &ui.ppm_text, &ui.ppm_fill);
+  (void)ppm_card(screen);
 
   bool battery_ready = true;
   for (unsigned i = 0; i < BATTERY_SEGMENTS; ++i)
@@ -206,7 +207,7 @@ bool Dashboard_Create(lv_obj_t *screen)
          ui.battery_terminal && battery_ready && ui.controller_temperature &&
          ui.voltage && ui.current && ui.power &&
          ui.brake_text && ui.brake_fill && ui.throttle_text && ui.throttle_fill &&
-         ui.ppm_text && ui.ppm_fill;
+         ui.ppm_text && ui.ppm_brake_fill && ui.ppm_drive_fill;
 }
 
 static void set_bar(lv_obj_t *fill, uint8_t value, int max_width)
@@ -286,9 +287,12 @@ void Dashboard_Refresh(const DashboardData *data)
     }
   }
   if (!previous_valid || data->ppm_throttle_percent != previous.ppm_throttle_percent) {
-    uint8_t value = limit_percent(data->ppm_throttle_percent);
-    lv_label_set_text_fmt(ui.ppm_text, "%u%%", (unsigned)value);
-    set_bar(ui.ppm_fill, value, 135);
+    int32_t value = data->ppm_throttle_percent;
+    if (value < -100) value = -100;
+    if (value > 100) value = 100;
+    lv_label_set_text_fmt(ui.ppm_text, "%d%%", (int)value);
+    set_brake_bar(ui.ppm_brake_fill, value < 0 ? (uint8_t)-value : 0U);
+    set_bar(ui.ppm_drive_fill, value > 0 ? (uint8_t)value : 0U, 67);
   }
   previous = *data;
   previous_valid = true;

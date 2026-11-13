@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 void Ppm_Task(void *argument);
-uint8_t Ppm_GetThrottlePercent(void);
+/* Current No Reverse With Brake: negative = brake, positive = drive. */
+int16_t Ppm_GetThrottlePercent(void);
 
 #endif
