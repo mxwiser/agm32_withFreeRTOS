@@ -7,7 +7,7 @@
 typedef struct {
   float normalized; /* [-1, 1], negative = brake, positive = drive. */
   int16_t percent;  /* Rounded display value, -100..100. */
-  bool valid;       /* Both ADC inputs have completed an initial sample. */
+  bool valid;       /* Locked zero is valid; unlocked requires both ADCs. */
   bool vehicle_locked;
 } PpmValues;
 

@@ -9,12 +9,14 @@
 /* A coherent snapshot for the UI and future PPM output. */
 static volatile PpmValues ppm_values;
 static volatile bool vehicle_locked = true;
+static volatile uint32_t lock_generation;
 
 void VehicleLock_SetLocked(bool locked)
 {
   taskENTER_CRITICAL();
   if (vehicle_locked != locked) {
     vehicle_locked = locked;
+    ++lock_generation;
     /* On unlock, wait for a fresh calculation instead of reusing old input. */
     ppm_values.normalized = 0.0f;
     ppm_values.percent = 0;
@@ -39,6 +41,9 @@ void Ppm_Task(void *argument)
   (void)argument;
   TickType_t last_wake = xTaskGetTickCount();
   for (;;) {
+    taskENTER_CRITICAL();
+    uint32_t generation = lock_generation;
+    taskEXIT_CRITICAL();
     InputValues input;
     Input_GetSnapshot(&input);
     bool valid = (input.adc.valid_mask & 3U) == 3U;
@@ -52,9 +57,15 @@ void Ppm_Task(void *argument)
       percent = (int16_t)(scaled < 0.0f ? scaled - 0.5f : scaled + 0.5f);
     }
     taskENTER_CRITICAL();
-    ppm_values.normalized = vehicle_locked ? 0.0f : normalized;
-    ppm_values.percent = vehicle_locked ? 0 : percent;
-    ppm_values.valid = vehicle_locked || valid;
+    if (vehicle_locked || generation != lock_generation) {
+      ppm_values.normalized = 0.0f;
+      ppm_values.percent = 0;
+      ppm_values.valid = vehicle_locked;
+    } else {
+      ppm_values.normalized = normalized;
+      ppm_values.percent = percent;
+      ppm_values.valid = valid;
+    }
     taskEXIT_CRITICAL();
     vTaskDelayUntil(&last_wake, pdMS_TO_TICKS(PPM_COMPUTE_PERIOD_MS));
   }

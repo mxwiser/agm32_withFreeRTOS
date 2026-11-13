@@ -35,6 +35,7 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 ## 演示数据及后续对接
 
 `lvgl_task.c` 中的演示数据由 `dashboard_demo_timer()` 每 500 ms 更新；ADC 每 1 ms 读取、每 100 ms 更新界面。
+车 Logo 的锁定状态与 PPM 采用同一数据源：锁定红色、解锁黑色；启动默认锁定，状态接口见 `user/CPLD_ADC.md`。
 左侧进度条分别显示 CPLD 的 ADC1 刹车及 ADC2 油门，右侧显示 `ppm_task.c` 中独立任务根据两路 ADC 计算的 PPM 值，其余数据仍为演示值；
 ADC 尚无有效结果时显示 `--`。接口及寄存器说明见 `user/CPLD_ADC.md`。
 `DashboardData` 字段定义在 `dashboard.h`：速度单位 km/h、电池和占空比单位为百分比；
