@@ -7,7 +7,7 @@
 #include "st7789.h"
 #include "lvgl.h"
 
-LV_FONT_DECLARE(lv_font_bike_48);
+LV_FONT_DECLARE(big_numbers);
 
 /* RGB565, ten lines; uint32_t provides suitable alignment for the renderer. */
 static uint32_t draw_buffer[ST7789_NATIVE_HEIGHT * 10U * 2U / sizeof(uint32_t)];
@@ -50,18 +50,18 @@ void LVGL_Task(void *argument)
   lv_display_set_buffers(display, draw_buffer, NULL, sizeof(draw_buffer),
                          LV_DISPLAY_RENDER_MODE_PARTIAL);
 
-  lv_obj_remove_flag(lv_screen_active(), LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollable(lv_screen_active(), false);
   lv_obj_set_scrollbar_mode(lv_screen_active(), LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0xCCCCCC), 0);
   lv_obj_set_style_bg_opa(lv_screen_active(), LV_OPA_COVER, 0);
   lv_obj_t *label = lv_label_create(lv_screen_active());
   if (label != NULL) {
-    lv_label_set_text(label, "123456");
-    lv_obj_set_style_text_font(label, &lv_font_bike_48, 0);
+    lv_label_set_text(label, "99");
+    lv_obj_set_style_text_font(label, &big_numbers, 0);
     lv_obj_set_style_text_color(label, lv_color_hex(0xff0000), 0);
     lv_obj_set_width(label, ST7789_Width());
     lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
-    lv_obj_align(label, LV_ALIGN_CENTER, 30, 0);
+    lv_obj_center(label);
   }
 
   for (;;) {

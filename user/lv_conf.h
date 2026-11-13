@@ -9,7 +9,7 @@
 /* Keep only the 48 px ASCII font used by the interface. */
 #define LV_FONT_MONTSERRAT_14 0
 #define LV_FONT_MONTSERRAT_18 0
-#define LV_FONT_MONTSERRAT_48 0 /* Full 48 px font is replaced by font_bike_48.c. */
+#define LV_FONT_MONTSERRAT_48 0 /* Full 48 px font is replaced by user_fonts/font_bike_48.c. */
 #define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(lv_font_bike_48)
 #define LV_FONT_DEFAULT (&lv_font_bike_48)
 

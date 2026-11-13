@@ -15,8 +15,9 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 `user/lv_conf.h` 使用 32 KiB LVGL 内存池和简单主题。受 208 KiB 程序 Flash 区域限制，
 当前只启用标签等基础功能，关闭了多数控件和非 RGB565 软件渲染格式。
 添加界面时可按需启用控件，并重新检查链接结果是否仍处于程序区内。
-默认字体和示例标签使用由内置 Montserrat 48 精简出的 ASCII
-字体（空格至 `~`），不含中文、度数符号或图标。字体位图直接放在 Flash，节省 RAM。
+默认字体使用由内置 Montserrat 48 精简出的 ASCII 字体（空格至 `~`），
+不含中文、度数符号或图标，位图直接放在 Flash，节省 RAM。
+示例数字使用 `user/user_fonts/big_numbers.c` 中的字体，仅包含数字和小数点。
 更改字体时可用 `python tools/make_font_ascii48.py` 重新生成该文件。
 当前关闭 Flex、Grid 自动布局和 Observer 数据绑定；如界面需要，可以在
 `user/lv_conf.h` 中重新启用。圆弧、圆角等复杂软件绘制能力仍然保留。

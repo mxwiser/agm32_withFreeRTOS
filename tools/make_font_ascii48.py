@@ -4,7 +4,7 @@ import re
 
 root = Path(__file__).resolve().parents[1]
 source = root / "lvgl-v9.6.0-lite/src/font/lv_font_montserrat_48.c"
-target = root / "user/font_bike_48.c"
+target = root / "user/user_fonts/font_bike_48.c"
 text = source.read_text(encoding="utf-8")
 
 # ASCII occupies glyph IDs 1..95; bitmap entries are stored in ID order.
