@@ -32,10 +32,11 @@ static const InitCommand panel_init[] = {
               0x32, 0x32, 0x3b, 0x14, 0x13, 0x28, 0x2f}},
 };
 
-#define TRANSFER_PIXELS 512U
+#define TRANSFER_PIXELS 480U // Diagnostic: move DMA boundaries for comparison.
 #define MAX_SCANLINE    511U
 
-static uint32_t pixel_buffer[TRANSFER_PIXELS / 2U]; // 1024 bytes, DMA aligned
+// One guard word allows the diagnostic DMA source to start at the second word.
+static uint32_t pixel_buffer[TRANSFER_PIXELS / 2U + 1U]; // DMA aligned
 static uint16_t screen_width = ST7789_NATIVE_HEIGHT;
 static uint16_t screen_height = ST7789_NATIVE_WIDTH;
 static uint8_t madctl = DEFAULT_MADCTL;
@@ -182,6 +183,7 @@ ST7789_Status ST7789_FillRect(uint16_t x, uint16_t y, uint16_t width,
   uint32_t remaining = (uint32_t)width * height;
   while (result == ST7789_OK && remaining != 0) {
     uint32_t count = remaining > TRANSFER_PIXELS ? TRANSFER_PIXELS : remaining;
+    pixel_buffer[(count + 1U) / 2U] = 0;
     result = ST7789_PortWriteDMA(pixel_buffer, count * 2U);
     remaining -= count;
   }
@@ -207,6 +209,7 @@ ST7789_Status ST7789_DrawRGB565(uint16_t x, uint16_t y, uint16_t width,
       bytes[i * 2U] = pixels[i] >> 8;
       bytes[i * 2U + 1U] = pixels[i] & 0xffU;
     }
+    pixel_buffer[(count + 1U) / 2U] = 0;
     result = ST7789_PortWriteDMA(pixel_buffer, count * 2U);
     pixels += count;
     remaining -= count;

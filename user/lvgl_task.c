@@ -59,7 +59,7 @@ void LVGL_Task(void *argument)
     lv_obj_set_style_text_color(label, lv_color_hex(0xff0000), 0);
     lv_obj_set_width(label, ST7789_Width());
     lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
-    lv_obj_center(label);
+    lv_obj_align(label, LV_ALIGN_CENTER, 30, 0);
   }
 
   for (;;) {
