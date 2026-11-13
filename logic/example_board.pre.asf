@@ -2,7 +2,7 @@
 set BOARD_PLL_CLKIN PIN_HSE_in
 set db_io_name_priority False
 set ip_pll_vco_lowpower true
-set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION "OFF"
+set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION "ON"
 # pio_end    <<<<<< DO NOT MODIFY THIS SECTION! <<<<<<
 
 # AGM_QUARTUS_NETLIST_GUARD_BEGIN

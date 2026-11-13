@@ -8,6 +8,7 @@
 #include "lvgl.h"
 #include "dashboard.h"
 #include "battery.h"
+#include "cpld_adc.h"
 
 #define DASHBOARD_DEMO_PERIOD_MS 500U
 
@@ -19,8 +20,8 @@ DashboardData dashboard_data = {
   .current_tenths_a = 86,
   .power_w = 451,
   .controller_temperature_c = 35,
-  .brake_percent = 18,
-  .throttle_percent = 63,
+  .brake_percent = 0,
+  .throttle_percent = 0,
 };
 
 /* RGB565, ten lines; uint32_t provides suitable alignment for the renderer. */
@@ -28,12 +29,21 @@ static uint32_t draw_buffer[ST7789_NATIVE_HEIGHT * 10U * 2U / sizeof(uint32_t)];
 volatile ST7789_Status lvgl_lcd_status = ST7789_NOT_INITIALIZED;
 volatile uint32_t lvgl_flush_errors;
 
+static void dashboard_update_adc(void)
+{
+  CpldAdc_Poll();
+  dashboard_data.brake_percent = cpld_adc_values.adc1_percent;
+  dashboard_data.throttle_percent = cpld_adc_values.adc2_percent;
+  dashboard_data.adc_valid_mask = cpld_adc_values.valid_mask;
+}
+
 static void dashboard_demo_timer(lv_timer_t *timer)
 {
   static uint32_t step;
   static int16_t battery_voltage_step = -2;
   (void)timer;
   ++step;
+  dashboard_update_adc();
   dashboard_data.current_speed_kmh = dashboard_data.current_speed_kmh >= 99
                                       ? -99 : dashboard_data.current_speed_kmh + 1;
   int32_t next_voltage = (int32_t)dashboard_data.voltage_tenths_v + battery_voltage_step;
@@ -54,8 +64,6 @@ static void dashboard_demo_timer(lv_timer_t *timer)
                         dashboard_data.current_tenths_a;
   dashboard_data.power_w = (power_centiw + (power_centiw < 0 ? -50 : 50)) / 100;
   dashboard_data.controller_temperature_c = (int16_t)(30U + (step / 4U) % 51U);
-  dashboard_data.brake_percent = (uint8_t)((step * 2U) % 101U);
-  dashboard_data.throttle_percent = (uint8_t)((step * 3U) % 101U);
   Dashboard_Refresh(&dashboard_data);
 }
 
@@ -101,6 +109,7 @@ void LVGL_Task(void *argument)
     vTaskDelete(NULL);
     return;
   }
+  dashboard_update_adc();
   Dashboard_Refresh(&dashboard_data);
   if (lv_timer_create(dashboard_demo_timer, DASHBOARD_DEMO_PERIOD_MS, NULL) == NULL) {
     printf("Dashboard demo timer allocation failed\n");

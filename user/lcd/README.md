@@ -15,8 +15,8 @@
 | 7 | CS | 32 / PA11 | GPIO4 bit 6，软件控制片选 |
 | 8 | BLK | 33 / PA12 | GPIO5 bit 3，高有效 |
 
-MCU 主频在 `example_board.ve` 中设为 240 MHz；改频率需重编并烧录 LOGIC 和 MCU。
-SPI 时钟上限仍为 50 MHz，按实际 PCLK 和偶数分频计算，当前为 40 MHz（240 MHz / 6），模式 0。
+MCU 主频在 `example_board.ve` 中设为 200 MHz；改频率需重编并烧录 LOGIC 和 MCU。
+SPI 时钟上限仍为 50 MHz，按实际 PCLK 和偶数分频计算，当前为 50 MHz（200 MHz / 4），模式 0。
 50 MHz 是本屏的实板性能配置，超过所参考 ST7789V 手册的保守 66 ns 写周期指标；
 更换屏幕或连接线后若不稳定，可将 `st7789_config.h` 的 `LCD_SPI_MAX_HZ` 降为 25 MHz 或 12.5 MHz。
 SCK、SDA 使用硬件复用，CS 使用 GPIO 保持整个像素传输期间有效。
@@ -54,7 +54,7 @@ result = ST7789_FillRect(20, 30, 100, 60, ST7789_RGB565(0, 255, 0));
 颜色保留 1 秒用于观察，这个停留时间与实际刷一帧所花的时间不同。
 
 本板实测：100 MHz MCU / 12.5 MHz SPI 时整屏约 99 ms；200 MHz MCU / 50 MHz SPI 时约 25 ms；
-当前 240 MHz MCU / 40 MHz SPI 时约 31 ms。240 MHz 试跑已验证 PLL 启动、LED 翻转和连续刷屏计数，未做长期稳定性验证。
+之前 240 MHz MCU / 40 MHz SPI 时约 31 ms；当前 200 MHz / 50 MHz 配置的实际刷新时间需重新测量。
 200 MHz / 50 MHz 组合纯整屏传输约 40 帧/秒；当前组合约 32 帧/秒，演示的颜色停留延时不计入这些数值。
 50 MHz 下红、绿、蓝已通过实板显示确认，换色明显加快。
 

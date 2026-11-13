@@ -16,6 +16,7 @@ typedef struct {
   int16_t controller_temperature_c; /* Controller temperature, whole degrees C. */
   uint8_t brake_percent;
   uint8_t throttle_percent;
+  uint8_t adc_valid_mask; /* bit 0: brake / ADC1, bit 1: throttle / ADC2 */
 } DashboardData;
 
 /* Only the LVGL task may modify these values or call the UI functions. */

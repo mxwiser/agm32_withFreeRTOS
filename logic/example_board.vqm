@@ -64,7 +64,6 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   /* src = "example_board.v:112.27-112.35" */
   wire PLL_LOCK;
   /* src = "example_board.v:231.8-231.15" */
-  /* unused_bits = "0" */
   wire bus_clk;
   /* src = "example_board.v:285.13-285.28" */
   /* unused_bits = "0 1 2 3" */
@@ -157,34 +156,230 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   /* src = "example_board.v:381.12-381.27" */
   /* unused_bits = "0 1 2 3 4 5 6 7" */
   wire [7:0] gpio9_io_out_en;
+  /* hdlname = "macro_inst adc1_data" */
+  /* src = "user_ip.v:75.13-75.22" */
+  wire [11:0] \macro_inst|adc1_data ;
+  /* hdlname = "macro_inst adc1_eoc" */
+  /* src = "user_ip.v:76.6-76.14" */
+  wire \macro_inst|adc1_eoc ;
+  /* abcgroup = 1302 */
+  /* src = "user_ip.v:85.1-106.4" */
+  wire \macro_inst|adc1_eoc_A_Y ;
+  /* hdlname = "macro_inst adc1_eoc_d" */
+  /* src = "user_ip.v:77.5-77.15" */
+  reg \macro_inst|adc1_eoc_d ;
+  /* abcgroup = 1302 */
+  /* src = "user_ip.v:97.9-97.33" */
+  wire \macro_inst|adc1_eoc_d_A_Y ;
+  /* hdlname = "macro_inst adc1_latest" */
+  /* src = "user_ip.v:78.12-78.23" */
+  reg [11:0] \macro_inst|adc1_latest ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc1_latest_A_1_Y_A_Y ;
+  /* abcgroup = 1594 */
+  wire \macro_inst|adc1_latest_dataa_0_combout ;
+  /* abcgroup = 1594 */
+  wire \macro_inst|adc1_latest_dataa_1_combout ;
+  /* hdlname = "macro_inst adc1_valid" */
+  /* src = "user_ip.v:79.5-79.15" */
+  reg \macro_inst|adc1_valid ;
+  /* hdlname = "macro_inst adc2_data" */
+  /* src = "user_ip.v:75.24-75.33" */
+  wire [11:0] \macro_inst|adc2_data ;
+  /* hdlname = "macro_inst adc2_eoc" */
+  /* src = "user_ip.v:76.16-76.24" */
+  wire \macro_inst|adc2_eoc ;
+  /* abcgroup = 1286 */
+  /* src = "user_ip.v:85.1-106.4" */
+  wire \macro_inst|adc2_eoc_A_Y ;
+  /* hdlname = "macro_inst adc2_eoc_d" */
+  /* src = "user_ip.v:77.17-77.27" */
+  reg \macro_inst|adc2_eoc_d ;
+  /* abcgroup = 1286 */
+  /* src = "user_ip.v:101.9-101.33" */
+  wire \macro_inst|adc2_eoc_d_A_Y ;
+  /* hdlname = "macro_inst adc2_latest" */
+  /* src = "user_ip.v:78.25-78.36" */
+  reg [11:0] \macro_inst|adc2_latest ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_0_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_10_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_11_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_2_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_3_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_4_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_5_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_6_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_7_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_8_Y_A_Y ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:114.48-114.48|user_ip.v:112.5-117.12|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/techmap.v:583.21-583.22" */
+  wire \macro_inst|adc2_latest_A_9_Y_A_Y ;
+  /* hdlname = "macro_inst adc2_valid" */
+  /* src = "user_ip.v:79.17-79.27" */
+  reg \macro_inst|adc2_valid ;
+  /* hdlname = "macro_inst adc_clk_div" */
+  /* src = "user_ip.v:61.11-61.22" */
+  reg [3:0] \macro_inst|adc_clk_div ;
+  /* abcgroup = 1594 */
+  wire \macro_inst|adc_clk_div_dataa_1_combout ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:38.27-38.28" */
+  wire \macro_inst|adc_clk_div_datab_0_combout ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:63.1-73.4" */
+  wire \macro_inst|adc_clk_div_datab_0_combout_A_Y ;
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:55.22-55.25" */
+  /* unused_bits = "4" */
+  wire [4:0] \macro_inst|adc_clk_div_datab_0_cout ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:38.27-38.28" */
+  wire \macro_inst|adc_clk_div_datab_1_combout ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:63.1-73.4" */
+  wire \macro_inst|adc_clk_div_datab_1_combout_A_Y ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:38.27-38.28" */
+  wire \macro_inst|adc_clk_div_datab_2_combout ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:63.1-73.4" */
+  wire \macro_inst|adc_clk_div_datab_2_combout_A_Y ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:38.27-38.28" */
+  wire \macro_inst|adc_clk_div_datab_3_combout ;
+  /* abcgroup = 1319 */
+  /* src = "user_ip.v:63.1-73.4" */
+  wire \macro_inst|adc_clk_div_datab_3_combout_A_Y ;
+  /* hdlname = "macro_inst adc_sclk" */
+  /* src = "user_ip.v:62.5-62.13" */
+  reg \macro_inst|adc_sclk ;
+  /* abcgroup = 1509 */
+  wire \macro_inst|adc_sclk_A_Y ;
+  /* hdlname = "macro_inst apb_paddr" */
+  /* src = "user_ip.v:40.12-40.21" */
+  wire [3:0] \macro_inst|apb_paddr ;
+  /* hdlname = "macro_inst apb_penable" */
+  /* src = "user_ip.v:39.16-39.27" */
+  reg \macro_inst|apb_penable ;
+  /* abcgroup = 1252 */
+  /* src = "user_ip.v:111.12-111.51" */
+  wire \macro_inst|apb_penable_B_Y ;
+  /* hdlname = "macro_inst apb_prdata" */
+  /* src = "user_ip.v:44.12-44.22" */
+  wire [31:0] \macro_inst|apb_prdata ;
+  /* hdlname = "macro_inst apb_psel" */
+  /* src = "user_ip.v:39.6-39.14" */
+  reg \macro_inst|apb_psel ;
+  /* abcgroup = 1509 */
+  wire \macro_inst|apb_psel_A_Y_B_Y ;
+  /* hdlname = "macro_inst apb_pwdata" */
+  /* src = "user_ip.v:41.13-41.23" */
+  /* unused_bits = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" */
+  wire [31:0] \macro_inst|apb_pwdata ;
+  /* hdlname = "macro_inst apb_pwrite" */
+  /* src = "user_ip.v:39.29-39.39" */
+  reg \macro_inst|apb_pwrite ;
+  /* hdlname = "macro_inst bridge ahb_hburst" */
+  /* src = "ahb2apb.v:14.26-14.36" */
+  /* unused_bits = "0 1 2" */
+  wire [2:0] \macro_inst|bridge|ahb_hburst ;
+  /* hdlname = "macro_inst bridge ahb_hrdata" */
+  /* src = "ahb2apb.v:17.26-17.36" */
+  wire [31:0] \macro_inst|bridge|ahb_hrdata ;
+  /* hdlname = "macro_inst bridge ahb_hready" */
+  /* src = "ahb2apb.v:10.26-10.36" */
+  /* unused_bits = "0" */
+  wire \macro_inst|bridge|ahb_hready ;
+  /* hdlname = "macro_inst bridge ahb_hreadyout" */
+  /* src = "ahb2apb.v:18.26-18.39" */
+  wire \macro_inst|bridge|ahb_hreadyout ;
+  /* abcgroup = 1509 */
+  wire \macro_inst|bridge|ahb_hreadyout_A_Y ;
+  /* src = "ahb2apb.v:73.1-81.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.74-46.76" */
+  wire \macro_inst|bridge|ahb_hreadyout_A_Y_A_Y ;
+  /* hdlname = "macro_inst bridge ahb_hsize" */
+  /* src = "ahb2apb.v:13.26-13.35" */
+  /* unused_bits = "0 1 2" */
+  wire [2:0] \macro_inst|bridge|ahb_hsize ;
+  /* hdlname = "macro_inst bridge ahb_htrans" */
+  /* src = "ahb2apb.v:8.26-8.36" */
+  /* unused_bits = "0" */
+  wire [1:0] \macro_inst|bridge|ahb_htrans ;
+  /* abcgroup = 1509 */
+  wire \macro_inst|bridge|ahb_htrans_B_1_Y ;
+  /* hdlname = "macro_inst bridge ahb_hwrite" */
+  /* src = "ahb2apb.v:11.26-11.36" */
+  wire \macro_inst|bridge|ahb_hwrite ;
+  /* onehot = 1 */
+  wire [2:0] \macro_inst|bridge|apbState ;
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:45.9-45.11" */
+  reg \macro_inst|bridge|apbState[0]_reg_q ;
+  /* abcgroup = 1509 */
+  wire \macro_inst|bridge|apbState_A_1_Y ;
+  /* hdlname = "macro_inst bridge apb_pdone" */
+  /* src = "ahb2apb.v:54.6-54.15" */
+  wire \macro_inst|bridge|apb_pdone ;
+  /* hdlname = "macro_inst bridge haddr" */
+  /* src = "ahb2apb.v:46.21-46.26" */
+  wire [3:0] \macro_inst|bridge|haddr ;
+  /* hdlname = "macro_inst bridge hdone" */
+  /* src = "ahb2apb.v:51.5-51.10" */
+  wire \macro_inst|bridge|hdone ;
+  /* abcgroup = 1248 */
+  /* src = "ahb2apb.v:67.25-67.31" */
+  reg \macro_inst|bridge|hdone_reg_q ;
+  /* abcgroup = 1244 */
+  /* src = "ahb2apb.v:86.16-86.26" */
+  reg \macro_inst|bridge|hreadyout_reg_q ;
+  /* abcgroup = 1319 */
+  /* src = "ahb2apb.v:83.1-91.4" */
+  wire \macro_inst|bridge|hreadyout_reg_q_A_Y ;
+  /* abcgroup = 1509 */
+  wire \macro_inst|bridge|hreadyout_reg_q_S_Y ;
+  /* src = "ahb2apb.v:56.1-71.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.74-46.76" */
+  wire \macro_inst|bridge|hreadyout_reg_q_S_Y_A_Y ;
+  /* hdlname = "macro_inst bridge hwrite" */
+  /* src = "ahb2apb.v:49.5-49.11" */
+  reg \macro_inst|bridge|hwrite ;
+  /* hdlname = "macro_inst bridge pdone" */
+  /* src = "ahb2apb.v:44.5-44.10" */
+  reg \macro_inst|bridge|pdone ;
+  /* abcgroup = 1319 */
+  /* src = "ahb2apb.v:93.1-101.4" */
+  wire \macro_inst|bridge|pdone_B_1_Y ;
+  /* hdlname = "macro_inst bridge pvalid" */
+  /* src = "ahb2apb.v:43.5-43.11" */
+  reg \macro_inst|bridge|pvalid ;
+  /* abcgroup = 1319 */
+  wire \macro_inst|bridge|pvalid_A_1_Y_A_Y ;
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.74-46.76" */
+  wire \macro_inst|bridge|pvalid_A_1_Y_A_Y_A_Y ;
+  /* abcgroup = 1237 */
+  wire \macro_inst|bridge|pvalid_A_Y ;
   /* hdlname = "macro_inst mem_ahb_haddr" */
   /* src = "user_ip.v:9.22-9.35" */
-  /* unused_bits = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" */
+  /* unused_bits = "0 1 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" */
   wire [31:0] \macro_inst|mem_ahb_haddr ;
-  /* hdlname = "macro_inst mem_ahb_hburst" */
-  /* src = "user_ip.v:11.22-11.36" */
-  /* unused_bits = "0 1 2" */
-  wire [2:0] \macro_inst|mem_ahb_hburst ;
-  /* hdlname = "macro_inst mem_ahb_hready" */
-  /* src = "user_ip.v:7.22-7.36" */
-  /* unused_bits = "0" */
-  wire \macro_inst|mem_ahb_hready ;
-  /* hdlname = "macro_inst mem_ahb_hsize" */
-  /* src = "user_ip.v:10.22-10.35" */
-  /* unused_bits = "0 1 2" */
-  wire [2:0] \macro_inst|mem_ahb_hsize ;
-  /* hdlname = "macro_inst mem_ahb_htrans" */
-  /* src = "user_ip.v:6.22-6.36" */
-  /* unused_bits = "0 1" */
-  wire [1:0] \macro_inst|mem_ahb_htrans ;
-  /* hdlname = "macro_inst mem_ahb_hwdata" */
-  /* src = "user_ip.v:12.22-12.36" */
-  /* unused_bits = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" */
-  wire [31:0] \macro_inst|mem_ahb_hwdata ;
-  /* hdlname = "macro_inst mem_ahb_hwrite" */
-  /* src = "user_ip.v:8.22-8.36" */
-  /* unused_bits = "0" */
-  wire \macro_inst|mem_ahb_hwrite ;
   /* hdlname = "macro_inst slave_ahb_hrdata" */
   /* src = "user_ip.v:26.22-26.38" */
   /* unused_bits = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" */
@@ -206,13 +401,15 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   wire [1:0] sys_ctrl_clkSource;
   /* keep = 1 */
   /* src = "example_board.v:114.27-114.40" */
-  /* unused_bits = "0" */
   wire sys_ctrl_stop;
   /* src = "example_board.v:248.13-248.21" */
   wire sys_gck0;
   /* keep = 1 */
   /* src = "example_board.v:113.27-113.37" */
   wire sys_resetn;
+  /* abcgroup = 1282 */
+  /* src = "user_ip.v:80.26-80.33" */
+  wire sys_resetn_A_Y;
   /* keep = 1 */
   /* module_not_derived = 1 */
   /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:35.23-35.63" */
@@ -396,6 +593,1638 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
     .ibar(1'h0),
     .o(gpio7_io_in[3])
   );
+  assign \macro_inst|adc1_eoc_A_Y  = ~ /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:60.17-60.22" */ \macro_inst|adc1_eoc ;
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|adc1_eoc_d_A_Y_combout  (
+    .combout(\macro_inst|adc1_eoc_d_A_Y ),
+    .dataa(\macro_inst|adc1_eoc_d ),
+    .datab(\macro_inst|adc1_eoc ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc1_eoc_d_A_Y_combout .lut_mask = 16'h1111;
+  defparam \macro_inst|adc1_eoc_d_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_eoc_d_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_eoc_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_eoc_d ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_eoc_d_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_eoc_d_reg .power_up = "low";
+  /* hdlname = "macro_inst adc1_inst" */
+  /* keep = 1 */
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:80.10-81.65" */
+  alta_adc \macro_inst|adc1_inst  (
+    .db(\macro_inst|adc1_data ),
+    .enb(sys_resetn_A_Y),
+    .eoc(\macro_inst|adc1_eoc ),
+    .insel(5'h0a),
+    .sclk(\macro_inst|adc_sclk ),
+    .stop(sys_ctrl_stop)
+  );
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[0]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [0]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [0]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[0]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[0]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[10]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [10]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [10]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[10]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[10]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[11]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [11]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [11]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[11]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[11]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[1]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [1]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [1]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[1]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[1]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[2]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [2]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [2]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[2]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[3]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [3]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [3]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[3]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[3]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[4]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [4]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [4]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[4]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[4]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[5]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [5]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [5]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[5]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[5]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[6]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [6]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [6]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[6]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[6]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[7]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [7]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [7]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[7]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[7]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[8]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [8]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [8]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[8]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[8]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_latest[9]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_data [9]),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_latest [9]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_latest[9]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_latest[9]_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc1_latest_A_1_Y_A_Y_combout  (
+    .combout(\macro_inst|adc1_latest_A_1_Y_A_Y ),
+    .dataa(\macro_inst|apb_paddr [3]),
+    .datab(\macro_inst|apb_paddr [2]),
+    .datac(\macro_inst|adc2_valid ),
+    .datad(\macro_inst|adc1_latest_dataa_1_combout )
+  );
+  defparam \macro_inst|adc1_latest_A_1_Y_A_Y_combout .lut_mask = 16'h10ff;
+  defparam \macro_inst|adc1_latest_A_1_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc1_latest_dataa_0  (
+    .combout(\macro_inst|adc1_latest_dataa_0_combout ),
+    .dataa(\macro_inst|adc1_latest [0]),
+    .datab(\macro_inst|adc2_latest [0]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc1_latest_dataa_0 .lut_mask = 16'hf53f;
+  defparam \macro_inst|adc1_latest_dataa_0 .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc1_latest_dataa_1  (
+    .combout(\macro_inst|adc1_latest_dataa_1_combout ),
+    .dataa(\macro_inst|adc1_latest [1]),
+    .datab(\macro_inst|adc2_latest [1]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc1_latest_dataa_1 .lut_mask = 16'hf53f;
+  defparam \macro_inst|adc1_latest_dataa_1 .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc1_valid_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(1'h1),
+    .ena(\macro_inst|adc1_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc1_valid ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc1_valid_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc1_valid_reg .power_up = "low";
+  assign \macro_inst|adc2_eoc_A_Y  = ~ /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:60.17-60.22" */ \macro_inst|adc2_eoc ;
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_eoc_d_A_Y_combout  (
+    .combout(\macro_inst|adc2_eoc_d_A_Y ),
+    .dataa(\macro_inst|adc2_eoc ),
+    .datab(\macro_inst|adc2_eoc_d ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc2_eoc_d_A_Y_combout .lut_mask = 16'h1111;
+  defparam \macro_inst|adc2_eoc_d_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_eoc_d_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_eoc_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_eoc_d ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_eoc_d_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_eoc_d_reg .power_up = "low";
+  /* hdlname = "macro_inst adc2_inst" */
+  /* keep = 1 */
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:82.10-83.65" */
+  alta_adc \macro_inst|adc2_inst  (
+    .db(\macro_inst|adc2_data ),
+    .enb(sys_resetn_A_Y),
+    .eoc(\macro_inst|adc2_eoc ),
+    .insel(5'h09),
+    .sclk(\macro_inst|adc_sclk ),
+    .stop(sys_ctrl_stop)
+  );
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[0]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [0]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [0]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[0]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[0]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[10]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [10]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [10]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[10]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[10]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[11]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [11]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [11]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[11]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[11]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[1]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [1]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [1]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[1]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[1]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[2]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [2]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [2]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[2]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[3]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [3]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [3]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[3]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[3]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[4]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [4]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [4]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[4]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[4]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[5]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [5]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [5]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[5]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[5]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[6]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [6]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [6]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[6]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[6]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[7]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [7]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [7]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[7]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[7]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[8]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [8]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [8]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[8]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[8]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_latest[9]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_data [9]),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_latest [9]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_latest[9]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_latest[9]_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_0_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_0_Y_A_Y ),
+    .dataa(\macro_inst|apb_paddr [3]),
+    .datab(\macro_inst|apb_paddr [2]),
+    .datac(\macro_inst|adc1_valid ),
+    .datad(\macro_inst|adc1_latest_dataa_0_combout )
+  );
+  defparam \macro_inst|adc2_latest_A_0_Y_A_Y_combout .lut_mask = 16'h10ff;
+  defparam \macro_inst|adc2_latest_A_0_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_10_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_10_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [10]),
+    .datab(\macro_inst|adc2_latest [10]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_10_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_10_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_11_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_11_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [11]),
+    .datab(\macro_inst|adc2_latest [11]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_11_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_11_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_2_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_2_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [2]),
+    .datab(\macro_inst|adc2_latest [2]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_2_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_2_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_3_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_3_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [3]),
+    .datab(\macro_inst|adc2_latest [3]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_3_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_3_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_4_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_4_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [4]),
+    .datab(\macro_inst|adc2_latest [4]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_4_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_4_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_5_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_5_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [5]),
+    .datab(\macro_inst|adc2_latest [5]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_5_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_5_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_6_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_6_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [6]),
+    .datab(\macro_inst|adc2_latest [6]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_6_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_6_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_7_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_7_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [7]),
+    .datab(\macro_inst|adc2_latest [7]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_7_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_7_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_8_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_8_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [8]),
+    .datab(\macro_inst|adc2_latest [8]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_8_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_8_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc2_latest_A_9_Y_A_Y_combout  (
+    .combout(\macro_inst|adc2_latest_A_9_Y_A_Y ),
+    .dataa(\macro_inst|adc1_latest [9]),
+    .datab(\macro_inst|adc2_latest [9]),
+    .datac(\macro_inst|apb_paddr [3]),
+    .datad(\macro_inst|apb_paddr [2])
+  );
+  defparam \macro_inst|adc2_latest_A_9_Y_A_Y_combout .lut_mask = 16'h0ac0;
+  defparam \macro_inst|adc2_latest_A_9_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:85.1-106.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc2_valid_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(1'h1),
+    .ena(\macro_inst|adc2_eoc_d_A_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|adc2_valid ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc2_valid_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc2_valid_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:63.1-73.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc_clk_div[0]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc_clk_div_datab_0_combout_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|adc_clk_div [0]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc_clk_div[0]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc_clk_div[0]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:63.1-73.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc_clk_div[1]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc_clk_div_datab_1_combout_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|adc_clk_div [1]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc_clk_div[1]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc_clk_div[1]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:63.1-73.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc_clk_div[2]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc_clk_div_datab_2_combout_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|adc_clk_div [2]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc_clk_div[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc_clk_div[2]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:63.1-73.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc_clk_div[3]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc_clk_div_datab_3_combout_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|adc_clk_div [3]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc_clk_div[3]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc_clk_div[3]_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_dataa_1  (
+    .combout(\macro_inst|adc_clk_div_dataa_1_combout ),
+    .dataa(\macro_inst|adc_clk_div [1]),
+    .datab(\macro_inst|adc_clk_div [2]),
+    .datac(\macro_inst|adc_clk_div [3]),
+    .datad(\macro_inst|adc_clk_div [0])
+  );
+  defparam \macro_inst|adc_clk_div_dataa_1 .lut_mask = 16'h1000;
+  defparam \macro_inst|adc_clk_div_dataa_1 .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:76.105-84.6" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_0  (
+    .cin(1'h0),
+    .combout(\macro_inst|adc_clk_div_datab_0_combout ),
+    .cout(\macro_inst|adc_clk_div_datab_0_cout [1]),
+    .dataa(1'h1),
+    .datab(\macro_inst|adc_clk_div [0]),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_0 .lut_mask = 16'h6688;
+  defparam \macro_inst|adc_clk_div_datab_0 .sum_lutc_input = "cin";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_0_combout_A_Y_combout  (
+    .combout(\macro_inst|adc_clk_div_datab_0_combout_A_Y ),
+    .dataa(\macro_inst|adc_clk_div_dataa_1_combout ),
+    .datab(\macro_inst|adc_clk_div_datab_0_combout ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_0_combout_A_Y_combout .lut_mask = 16'h4444;
+  defparam \macro_inst|adc_clk_div_datab_0_combout_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:76.105-84.6" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_1  (
+    .cin(\macro_inst|adc_clk_div_datab_0_cout [1]),
+    .combout(\macro_inst|adc_clk_div_datab_1_combout ),
+    .cout(\macro_inst|adc_clk_div_datab_0_cout [2]),
+    .dataa(1'h0),
+    .datab(\macro_inst|adc_clk_div [1]),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_1 .lut_mask = 16'h96e8;
+  defparam \macro_inst|adc_clk_div_datab_1 .sum_lutc_input = "cin";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_1_combout_A_Y_combout  (
+    .combout(\macro_inst|adc_clk_div_datab_1_combout_A_Y ),
+    .dataa(\macro_inst|adc_clk_div_dataa_1_combout ),
+    .datab(\macro_inst|adc_clk_div_datab_1_combout ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_1_combout_A_Y_combout .lut_mask = 16'h4444;
+  defparam \macro_inst|adc_clk_div_datab_1_combout_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:76.105-84.6" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_2  (
+    .cin(\macro_inst|adc_clk_div_datab_0_cout [2]),
+    .combout(\macro_inst|adc_clk_div_datab_2_combout ),
+    .cout(\macro_inst|adc_clk_div_datab_0_cout [3]),
+    .dataa(1'h0),
+    .datab(\macro_inst|adc_clk_div [2]),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_2 .lut_mask = 16'h96e8;
+  defparam \macro_inst|adc_clk_div_datab_2 .sum_lutc_input = "cin";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_2_combout_A_Y_combout  (
+    .combout(\macro_inst|adc_clk_div_datab_2_combout_A_Y ),
+    .dataa(\macro_inst|adc_clk_div_dataa_1_combout ),
+    .datab(\macro_inst|adc_clk_div_datab_2_combout ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_2_combout_A_Y_combout .lut_mask = 16'h4444;
+  defparam \macro_inst|adc_clk_div_datab_2_combout_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:71.20-71.38|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/arith_map.v:76.105-84.6" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_3  (
+    .cin(\macro_inst|adc_clk_div_datab_0_cout [3]),
+    .combout(\macro_inst|adc_clk_div_datab_3_combout ),
+    .cout(\macro_inst|adc_clk_div_datab_0_cout [4]),
+    .dataa(1'h0),
+    .datab(\macro_inst|adc_clk_div [3]),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_3 .lut_mask = 16'h96e8;
+  defparam \macro_inst|adc_clk_div_datab_3 .sum_lutc_input = "cin";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|adc_clk_div_datab_3_combout_A_Y_combout  (
+    .combout(\macro_inst|adc_clk_div_datab_3_combout_A_Y ),
+    .dataa(\macro_inst|adc_clk_div_dataa_1_combout ),
+    .datab(\macro_inst|adc_clk_div_datab_3_combout ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_clk_div_datab_3_combout_A_Y_combout .lut_mask = 16'h4444;
+  defparam \macro_inst|adc_clk_div_datab_3_combout_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|adc_sclk_A_Y_combout  (
+    .combout(\macro_inst|adc_sclk_A_Y ),
+    .dataa(\macro_inst|adc_clk_div_dataa_1_combout ),
+    .datab(\macro_inst|adc_sclk ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|adc_sclk_A_Y_combout .lut_mask = 16'h6666;
+  defparam \macro_inst|adc_sclk_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:63.1-73.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|adc_sclk_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc_sclk_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|adc_sclk ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|adc_sclk_reg .is_wysiwyg = "true";
+  defparam \macro_inst|adc_sclk_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:69.77-73.22" */
+  cycloneive_lcell_comb \macro_inst|apb_penable_B_Y_combout  (
+    .combout(\macro_inst|apb_penable_B_Y ),
+    .dataa(\macro_inst|apb_penable ),
+    .datab(\macro_inst|apb_pwrite ),
+    .datac(\macro_inst|apb_psel ),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|apb_penable_B_Y_combout .lut_mask = 16'h1010;
+  defparam \macro_inst|apb_penable_B_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[0]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_0_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [0]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[0]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[0]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[10]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_10_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [10]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[10]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[10]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[11]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_11_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [11]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[11]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[11]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[1]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc1_latest_A_1_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [1]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[1]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[1]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[2]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_2_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [2]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[2]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[3]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_3_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [3]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[3]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[3]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[4]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_4_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [4]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[4]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[4]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[5]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_5_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [5]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[5]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[5]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[6]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_6_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [6]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[6]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[6]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[7]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_7_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [7]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[7]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[7]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[8]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_8_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [8]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[8]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[8]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "user_ip.v:109.1-119.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|apb_prdata[9]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|adc2_latest_A_9_Y_A_Y ),
+    .ena(\macro_inst|apb_penable_B_Y ),
+    .prn(1'h1),
+    .q(\macro_inst|apb_prdata [9]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|apb_prdata[9]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|apb_prdata[9]_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|apb_psel_A_Y_B_Y_combout  (
+    .combout(\macro_inst|apb_psel_A_Y_B_Y ),
+    .dataa(\macro_inst|bridge|pvalid ),
+    .datab(\macro_inst|apb_psel ),
+    .datac(\macro_inst|bridge|apbState [0]),
+    .datad(\macro_inst|bridge|apbState [1])
+  );
+  defparam \macro_inst|apb_psel_A_Y_B_Y_combout .lut_mask = 16'heaec;
+  defparam \macro_inst|apb_psel_A_Y_B_Y_combout .sum_lutc_input = "datac";
+  assign \macro_inst|bridge|ahb_hreadyout_A_Y_A_Y  = ! /* src = "ahb2apb.v:73.1-81.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.74-46.76" */ \macro_inst|bridge|ahb_hreadyout_A_Y ;
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:69.77-73.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|ahb_hreadyout_A_Y_combout  (
+    .combout(\macro_inst|bridge|ahb_hreadyout_A_Y ),
+    .dataa(\macro_inst|bridge|pvalid ),
+    .datab(\macro_inst|bridge|hdone ),
+    .datac(\macro_inst|bridge|ahb_hreadyout ),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|ahb_hreadyout_A_Y_combout .lut_mask = 16'hf4f4;
+  defparam \macro_inst|bridge|ahb_hreadyout_A_Y_combout .sum_lutc_input = "datac";
+  assign \macro_inst|bridge|ahb_hreadyout  = ! /* src = "ahb2apb.v:56.1-71.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:45.24-45.27" */ \macro_inst|bridge|hreadyout_reg_q ;
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|ahb_htrans_B_1_Y_combout  (
+    .combout(\macro_inst|bridge|ahb_htrans_B_1_Y ),
+    .dataa(\macro_inst|bridge|ahb_htrans [1]),
+    .datab(\macro_inst|bridge|ahb_hreadyout ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .lut_mask = 16'h8888;
+  defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.52-46.182" */
+  dffeas \macro_inst|bridge|apbState[0]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|pvalid_A_1_Y_A_Y_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|apbState[0]_reg_q ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|apbState[0]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|apbState[0]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|apbState[1]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|apbState [2]),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|apbState [1]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|apbState[1]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|apbState[1]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|apbState[2]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|pvalid_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|apbState [2]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|apbState[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|apbState[2]_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:69.77-73.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|apbState_A_1_Y_combout  (
+    .combout(\macro_inst|bridge|apbState_A_1_Y ),
+    .dataa(\macro_inst|bridge|apbState [2]),
+    .datab(\macro_inst|apb_penable ),
+    .datac(\macro_inst|bridge|apbState [1]),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|apbState_A_1_Y_combout .lut_mask = 16'h0e0e;
+  defparam \macro_inst|bridge|apbState_A_1_Y_combout .sum_lutc_input = "datac";
+  assign \macro_inst|bridge|apbState [0] = ! /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:45.24-45.27" */ \macro_inst|bridge|apbState[0]_reg_q ;
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|apb_pdone_combout  (
+    .combout(\macro_inst|bridge|apb_pdone ),
+    .dataa(\macro_inst|apb_psel ),
+    .datab(\macro_inst|apb_penable ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|apb_pdone_combout .lut_mask = 16'h8888;
+  defparam \macro_inst|bridge|apb_pdone_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:56.1-71.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|haddr[2]_reg  (
+    .aload(1'h0),
+    .asdata(\macro_inst|mem_ahb_haddr [2]),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|haddr [2]),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|haddr [2]),
+    .sclr(1'h0),
+    .sload(\macro_inst|bridge|ahb_htrans_B_1_Y )
+  );
+  defparam \macro_inst|bridge|haddr[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|haddr[2]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:56.1-71.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|haddr[3]_reg  (
+    .aload(1'h0),
+    .asdata(\macro_inst|mem_ahb_haddr [3]),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|haddr [3]),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|haddr [3]),
+    .sclr(1'h0),
+    .sload(\macro_inst|bridge|ahb_htrans_B_1_Y )
+  );
+  defparam \macro_inst|bridge|haddr[3]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|haddr[3]_reg .power_up = "low";
+  assign \macro_inst|bridge|hdone  = ! /* src = "ahb2apb.v:73.1-81.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:45.24-45.27" */ \macro_inst|bridge|hdone_reg_q ;
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:73.1-81.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.52-46.182" */
+  dffeas \macro_inst|bridge|hdone_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|ahb_hreadyout_A_Y_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|hdone_reg_q ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|hdone_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|hdone_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:56.1-71.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.52-46.182" */
+  dffeas \macro_inst|bridge|hreadyout_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|hreadyout_reg_q_S_Y_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|hreadyout_reg_q ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|hreadyout_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|hreadyout_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:69.77-73.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|hreadyout_reg_q_A_Y_combout  (
+    .combout(\macro_inst|bridge|hreadyout_reg_q_A_Y ),
+    .dataa(\macro_inst|apb_psel ),
+    .datab(\macro_inst|bridge|pdone ),
+    .datac(\macro_inst|bridge|hreadyout_reg_q ),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|hreadyout_reg_q_A_Y_combout .lut_mask = 16'h1010;
+  defparam \macro_inst|bridge|hreadyout_reg_q_A_Y_combout .sum_lutc_input = "datac";
+  assign \macro_inst|bridge|hreadyout_reg_q_S_Y_A_Y  = ! /* src = "ahb2apb.v:56.1-71.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.74-46.76" */ \macro_inst|bridge|hreadyout_reg_q_S_Y ;
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:75.72-79.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|hreadyout_reg_q_S_Y_combout  (
+    .combout(\macro_inst|bridge|hreadyout_reg_q_S_Y ),
+    .dataa(\macro_inst|bridge|pdone ),
+    .datab(\macro_inst|bridge|hdone_reg_q ),
+    .datac(\macro_inst|bridge|ahb_htrans [1]),
+    .datad(\macro_inst|bridge|hreadyout_reg_q )
+  );
+  defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .lut_mask = 16'h880f;
+  defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:56.1-71.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|hwrite_reg  (
+    .aload(1'h0),
+    .asdata(\macro_inst|bridge|ahb_hwrite ),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|hwrite ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|hwrite ),
+    .sclr(1'h0),
+    .sload(\macro_inst|bridge|ahb_htrans_B_1_Y )
+  );
+  defparam \macro_inst|bridge|hwrite_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|hwrite_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:103.1-144.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|paddr[2]_reg  (
+    .aload(1'h0),
+    .asdata(\macro_inst|bridge|haddr [2]),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_paddr [2]),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|apb_paddr [2]),
+    .sclr(1'h0),
+    .sload(\macro_inst|bridge|pvalid_A_Y )
+  );
+  defparam \macro_inst|bridge|paddr[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|paddr[2]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:103.1-144.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|paddr[3]_reg  (
+    .aload(1'h0),
+    .asdata(\macro_inst|bridge|haddr [3]),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_paddr [3]),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|apb_paddr [3]),
+    .sclr(1'h0),
+    .sload(\macro_inst|bridge|pvalid_A_Y )
+  );
+  defparam \macro_inst|bridge|paddr[3]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|paddr[3]_reg .power_up = "low";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:63.78-67.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|pdone_B_1_Y_combout  (
+    .combout(\macro_inst|bridge|pdone_B_1_Y ),
+    .dataa(\macro_inst|bridge|pdone ),
+    .datab(\macro_inst|bridge|apb_pdone ),
+    .datac(1'h1),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|pdone_B_1_Y_combout .lut_mask = 16'h4444;
+  defparam \macro_inst|bridge|pdone_B_1_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:93.1-101.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|pdone_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|pdone_B_1_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|pdone ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|pdone_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|pdone_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:103.1-144.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|penable_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|apbState_A_1_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|apb_penable ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|penable_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|penable_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[0]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [0]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [0]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[0]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[0]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[10]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [10]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [10]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[10]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[10]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[11]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [11]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [11]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[11]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[11]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[1]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [1]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [1]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[1]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[1]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[2]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [2]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [2]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[2]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[2]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[3]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [3]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [3]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[3]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[3]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[4]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [4]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [4]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[4]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[4]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[5]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [5]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [5]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[5]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[5]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[6]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [6]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [6]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[6]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[6]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[7]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [7]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [7]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[7]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[7]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[8]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [8]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [8]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[8]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[8]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:146.1-152.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|prdata[9]_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_prdata [9]),
+    .ena(\macro_inst|bridge|apb_pdone ),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|ahb_hrdata [9]),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|prdata[9]_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|prdata[9]_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:103.1-144.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|psel_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_psel_A_Y_B_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|apb_psel ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|psel_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|psel_reg .power_up = "low";
+  assign \macro_inst|bridge|pvalid_A_1_Y_A_Y_A_Y  = ! /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:46.74-46.76" */ \macro_inst|bridge|pvalid_A_1_Y_A_Y ;
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:69.77-73.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout  (
+    .combout(\macro_inst|bridge|pvalid_A_1_Y_A_Y ),
+    .dataa(\macro_inst|bridge|apbState [0]),
+    .datab(\macro_inst|bridge|apbState [1]),
+    .datac(\macro_inst|bridge|pvalid ),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .lut_mask = 16'h0e0e;
+  defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .sum_lutc_input = "datac";
+  /* abcgroup = 1594 */
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:69.77-73.22" */
+  cycloneive_lcell_comb \macro_inst|bridge|pvalid_A_Y_combout  (
+    .combout(\macro_inst|bridge|pvalid_A_Y ),
+    .dataa(\macro_inst|bridge|apbState [0]),
+    .datab(\macro_inst|bridge|apbState [1]),
+    .datac(\macro_inst|bridge|pvalid ),
+    .datad(1'h1)
+  );
+  defparam \macro_inst|bridge|pvalid_A_Y_combout .lut_mask = 16'he0e0;
+  defparam \macro_inst|bridge|pvalid_A_Y_combout .sum_lutc_input = "datac";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:83.1-91.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|pvalid_reg  (
+    .aload(1'h0),
+    .asdata(1'h1),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|bridge|hreadyout_reg_q_A_Y ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|bridge|pvalid ),
+    .sclr(1'h0),
+    .sload(1'h0)
+  );
+  defparam \macro_inst|bridge|pvalid_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|pvalid_reg .power_up = "low";
+  /* module_not_derived = 1 */
+  /* src = "ahb2apb.v:103.1-144.4|D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/common/ff_map.v:4.52-4.180" */
+  dffeas \macro_inst|bridge|pwrite_reg  (
+    .aload(1'h0),
+    .asdata(\macro_inst|bridge|hwrite ),
+    .clk(bus_clk),
+    .clrn(sys_resetn),
+    .d(\macro_inst|apb_pwrite ),
+    .ena(1'h1),
+    .prn(1'h1),
+    .q(\macro_inst|apb_pwrite ),
+    .sclr(1'h0),
+    .sload(\macro_inst|bridge|pvalid_A_Y )
+  );
+  defparam \macro_inst|bridge|pwrite_reg .is_wysiwyg = "true";
+  defparam \macro_inst|bridge|pwrite_reg .power_up = "low";
   /* keep = 1 */
   /* module_not_derived = 1 */
   /* src = "example_board.v:118.12-139.22" */
@@ -425,8 +2254,8 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   defparam pll_inst.CLKDIV3_EN = 1'h0;
   defparam pll_inst.CLKDIV4_EN = 1'h0;
   defparam pll_inst.CLKFB_BYPASS = 1'h0;
-  defparam pll_inst.CLKFB_HIGH = 8'h3b;
-  defparam pll_inst.CLKFB_LOW = 8'h3b;
+  defparam pll_inst.CLKFB_HIGH = 8'h31;
+  defparam pll_inst.CLKFB_LOW = 8'h31;
   defparam pll_inst.CLKFB_TRIM = 1'h0;
   defparam pll_inst.CLKIN_BYPASS = 1'h0;
   defparam pll_inst.CLKIN_FREQ = "8.0";
@@ -513,15 +2342,15 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
     .gpio9_io_out_en(gpio9_io_out_en),
     .local_int(4'h0),
     .mem_ahb_haddr(\macro_inst|mem_ahb_haddr ),
-    .mem_ahb_hburst(\macro_inst|mem_ahb_hburst ),
-    .mem_ahb_hrdata(0),
-    .mem_ahb_hready(\macro_inst|mem_ahb_hready ),
-    .mem_ahb_hreadyout(1'h1),
+    .mem_ahb_hburst(\macro_inst|bridge|ahb_hburst ),
+    .mem_ahb_hrdata({ 20'h00000, \macro_inst|bridge|ahb_hrdata [11:0] }),
+    .mem_ahb_hready(\macro_inst|bridge|ahb_hready ),
+    .mem_ahb_hreadyout(\macro_inst|bridge|ahb_hreadyout ),
     .mem_ahb_hresp(1'h0),
-    .mem_ahb_hsize(\macro_inst|mem_ahb_hsize ),
-    .mem_ahb_htrans(\macro_inst|mem_ahb_htrans ),
-    .mem_ahb_hwdata(\macro_inst|mem_ahb_hwdata ),
-    .mem_ahb_hwrite(\macro_inst|mem_ahb_hwrite ),
+    .mem_ahb_hsize(\macro_inst|bridge|ahb_hsize ),
+    .mem_ahb_htrans(\macro_inst|bridge|ahb_htrans ),
+    .mem_ahb_hwdata(\macro_inst|apb_pwdata ),
+    .mem_ahb_hwrite(\macro_inst|bridge|ahb_hwrite ),
     .resetn_out(sys_resetn),
     .slave_ahb_haddr(0),
     .slave_ahb_hburst(3'h0),
@@ -543,6 +2372,7 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
     .usb0_id(1'h1),
     .usb0_xcvr_clk(1'h1)
   );
+  assign sys_resetn_A_Y = ~ /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:60.17-60.22" */ sys_resetn;
   assign gpio0_io_in[7:1] = 7'h00;
   assign gpio4_io_in[3:0] = 4'h0;
   assign gpio4_io_in[7:5] = 3'h0;
@@ -551,4 +2381,9 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   assign gpio6_io_in[7:2] = 6'h00;
   assign gpio7_io_in[2:0] = 3'h0;
   assign gpio7_io_in[7:4] = 4'h0;
+  assign \macro_inst|adc_clk_div_datab_0_cout [0] = 1'h0;
+  assign \macro_inst|apb_paddr [1:0] = 2'h0;
+  assign \macro_inst|apb_prdata [31:12] = 20'h00000;
+  assign \macro_inst|bridge|ahb_hrdata [31:12] = 20'h00000;
+  assign \macro_inst|bridge|haddr [1:0] = 2'h0;
 endmodule

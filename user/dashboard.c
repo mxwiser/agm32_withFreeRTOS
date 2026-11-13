@@ -236,15 +236,27 @@ void Dashboard_Refresh(const DashboardData *data)
   }
   if (!previous_valid || data->power_w != previous.power_w)
     lv_label_set_text_fmt(ui.power, "%ld W", (long)data->power_w);
-  if (!previous_valid || data->brake_percent != previous.brake_percent) {
+  if (!previous_valid || data->brake_percent != previous.brake_percent ||
+      ((data->adc_valid_mask ^ previous.adc_valid_mask) & 1U)) {
     uint8_t value = limit_percent(data->brake_percent);
-    lv_label_set_text_fmt(ui.brake_text, "%u%%", (unsigned)value);
-    set_bar(ui.brake_fill, value, 135);
+    if (data->adc_valid_mask & 1U) {
+      lv_label_set_text_fmt(ui.brake_text, "%u%%", (unsigned)value);
+      set_bar(ui.brake_fill, value, 135);
+    } else {
+      lv_label_set_text(ui.brake_text, "--");
+      set_bar(ui.brake_fill, 0, 135);
+    }
   }
-  if (!previous_valid || data->throttle_percent != previous.throttle_percent) {
+  if (!previous_valid || data->throttle_percent != previous.throttle_percent ||
+      ((data->adc_valid_mask ^ previous.adc_valid_mask) & 2U)) {
     uint8_t value = limit_percent(data->throttle_percent);
-    lv_label_set_text_fmt(ui.throttle_text, "%u%%", (unsigned)value);
-    set_bar(ui.throttle_fill, value, 135);
+    if (data->adc_valid_mask & 2U) {
+      lv_label_set_text_fmt(ui.throttle_text, "%u%%", (unsigned)value);
+      set_bar(ui.throttle_fill, value, 135);
+    } else {
+      lv_label_set_text(ui.throttle_text, "--");
+      set_bar(ui.throttle_fill, 0, 135);
+    }
   }
   previous = *data;
   previous_valid = true;

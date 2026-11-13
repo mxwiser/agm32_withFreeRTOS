@@ -18,7 +18,7 @@
 #define LCD_DC_BIT           GPIO_BIT2 // PIN_31, PA10, J6.6
 // Backlight definitions are shared with board_init() in board.h (J6.8).
 
-// Limit SPI to 50 MHz. At 240 MHz PCLK, the even divisor is 6 -> 40 MHz.
+// Limit SPI to 50 MHz. At 200 MHz PCLK, the even divisor is 4 -> 50 MHz.
 // This exceeds the conservative 66 ns ST7789V datasheet write cycle; lower to
 // 25000000 or 12500000 for modules/cabling that cannot sustain this setting.
 // The divisor is calculated from actual PCLK and rounded up to an even value.
