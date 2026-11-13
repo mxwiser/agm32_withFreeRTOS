@@ -9,19 +9,18 @@
 #include "dashboard.h"
 #include "battery.h"
 #include "input_task.h"
-#include "ppm_task.h"
+#include "ppm/ppm_task.h"
+#include "config/task_config.h"
+#include "vesc/vesc_uart.h"
+#include "vesc/vesc_speed.h"
+#include "vesc/vesc_measurements.h"
 
-#define DASHBOARD_DEMO_PERIOD_MS 500U
-#define DASHBOARD_ADC_PERIOD_MS 100U
-
-/* Demo values only; replace the timer with real measurements later. */
+/* 速度、电气数据和 MOS 温度来自 VESC 遥测。 */
 DashboardData dashboard_data = {
-  .current_speed_kmh = 26,
-  .battery_percent = 0, /* Calculated from voltage when the task starts. */
-  .voltage_tenths_v = 524,
-  .current_tenths_a = 86,
-  .power_w = 451,
-  .controller_temperature_c = 35,
+  .current_speed_kmh = 0,
+  .speed_valid = false,
+  .battery_percent = 0,
+  .electrical_valid = false,
   .brake_percent = 0,
   .throttle_percent = 0,
   .ppm_throttle_percent = 0,
@@ -37,8 +36,28 @@ static void dashboard_update_inputs(void)
 {
   InputValues sample;
   PpmValues ppm;
+  VescStatus vesc;
   Input_GetSnapshot(&sample);
   Ppm_GetSnapshot(&ppm);
+  Vesc_GetSnapshot(&vesc);
+  int16_t speed;
+  dashboard_data.speed_valid = vesc.online &&
+      VescSpeed_FromErpm(vesc.telemetry.electrical_rpm,
+                         VESC_MOTOR_POLE_PAIRS, VESC_WHEEL_CIRCUMFERENCE_MM,
+                         VESC_GEAR_MOTOR_TURNS, VESC_GEAR_WHEEL_TURNS, &speed);
+  dashboard_data.current_speed_kmh = dashboard_data.speed_valid ? speed : 0;
+  dashboard_data.electrical_valid = vesc.online;
+  dashboard_data.controller_temperature_valid = vesc.online;
+  if (vesc.online) {
+    VescElectricalValues values;
+    VescElectrical_Convert(&vesc.telemetry, &values);
+    dashboard_data.voltage_tenths_v = values.voltage_tenths_v;
+    dashboard_data.current_tenths_a = values.current_tenths_a;
+    dashboard_data.power_w = values.power_w;
+    dashboard_data.battery_percent = Battery_EstimatePercent(values.voltage_tenths_v);
+    dashboard_data.controller_temperature_c =
+        VescTemperature_WholeCelsius(vesc.telemetry.fet_temp_tenths_c);
+  }
   dashboard_data.brake_percent = sample.adc.adc1_percent;
   dashboard_data.throttle_percent = sample.adc.adc2_percent;
   dashboard_data.adc_valid_mask = sample.adc.valid_mask;
@@ -51,35 +70,6 @@ static void dashboard_adc_timer(lv_timer_t *timer)
 {
   (void)timer;
   dashboard_update_inputs();
-  Dashboard_Refresh(&dashboard_data);
-}
-
-static void dashboard_demo_timer(lv_timer_t *timer)
-{
-  static uint32_t step;
-  static int16_t battery_voltage_step = -2;
-  (void)timer;
-  ++step;
-  dashboard_data.current_speed_kmh = dashboard_data.current_speed_kmh >= 99
-                                      ? -99 : dashboard_data.current_speed_kmh + 1;
-  int32_t next_voltage = (int32_t)dashboard_data.voltage_tenths_v + battery_voltage_step;
-  if (next_voltage <= (int32_t)BATTERY_DEMO_MIN_TENTHS_V) {
-    next_voltage = BATTERY_DEMO_MIN_TENTHS_V;
-    battery_voltage_step = 2;
-  } else if (next_voltage >= (int32_t)BATTERY_DEMO_MAX_TENTHS_V) {
-    next_voltage = BATTERY_DEMO_MAX_TENTHS_V;
-    battery_voltage_step = -2;
-  }
-  dashboard_data.voltage_tenths_v = (uint16_t)next_voltage;
-  dashboard_data.battery_percent = Battery_EstimatePercent(dashboard_data.voltage_tenths_v);
-  dashboard_data.current_tenths_a = (int16_t)(30U + (step * 3U) % 100U);
-  /* Include a charging/regeneration phase in each 20 second demo cycle. */
-  if (step % 40U >= 30U)
-    dashboard_data.current_tenths_a = -(int16_t)(5U + (step * 3U) % 50U);
-  int32_t power_centiw = (int32_t)dashboard_data.voltage_tenths_v *
-                        dashboard_data.current_tenths_a;
-  dashboard_data.power_w = (power_centiw + (power_centiw < 0 ? -50 : 50)) / 100;
-  dashboard_data.controller_temperature_c = (int16_t)(30U + (step / 4U) % 51U);
   Dashboard_Refresh(&dashboard_data);
 }
 
@@ -119,7 +109,6 @@ void LVGL_Task(void *argument)
   lv_display_set_buffers(display, draw_buffer, NULL, sizeof(draw_buffer),
                          LV_DISPLAY_RENDER_MODE_PARTIAL);
 
-  dashboard_data.battery_percent = Battery_EstimatePercent(dashboard_data.voltage_tenths_v);
   if (!Dashboard_Create(lv_screen_active())) {
     printf("Dashboard allocation failed\n");
     vTaskDelete(NULL);
@@ -127,9 +116,6 @@ void LVGL_Task(void *argument)
   }
   dashboard_update_inputs();
   Dashboard_Refresh(&dashboard_data);
-  if (lv_timer_create(dashboard_demo_timer, DASHBOARD_DEMO_PERIOD_MS, NULL) == NULL) {
-    printf("Dashboard demo timer allocation failed\n");
-  }
   if (lv_timer_create(dashboard_adc_timer, DASHBOARD_ADC_PERIOD_MS, NULL) == NULL) {
     printf("Dashboard ADC timer allocation failed\n");
   }

@@ -9,11 +9,14 @@
  * V/A. Positive current/power means discharge; negative means charging/regen. */
 typedef struct {
   int16_t current_speed_kmh;
+  bool speed_valid; /* false: VESC 离线或车速换算参数未配置。 */
   uint8_t battery_percent;
+  bool electrical_valid; /* false：电压、电流、功率和电量均无有效数据。 */
   uint16_t voltage_tenths_v;
   int16_t current_tenths_a;
   int32_t power_w;
   int16_t controller_temperature_c; /* Controller temperature, whole degrees C. */
+  bool controller_temperature_valid; /* false：VESC 未在线。 */
   uint8_t brake_percent;
   uint8_t throttle_percent;
   int16_t ppm_throttle_percent; /* -100..100: negative brake, positive drive. */

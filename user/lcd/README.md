@@ -18,7 +18,7 @@
 MCU 主频在 `example_board.ve` 中设为 200 MHz；改频率需重编并烧录 LOGIC 和 MCU。
 SPI 时钟上限仍为 50 MHz，按实际 PCLK 和偶数分频计算，当前为 50 MHz（200 MHz / 4），模式 0。
 50 MHz 是本屏的实板性能配置，超过所参考 ST7789V 手册的保守 66 ns 写周期指标；
-更换屏幕或连接线后若不稳定，可将 `st7789_config.h` 的 `LCD_SPI_MAX_HZ` 降为 25 MHz 或 12.5 MHz。
+更换屏幕或连接线后若不稳定，可将 `user/config/st7789_config.h` 的 `LCD_SPI_MAX_HZ` 降为 25 MHz 或 12.5 MHz。
 SCK、SDA 使用硬件复用，CS 使用 GPIO 保持整个像素传输期间有效。
 驱动只占用 1 KiB 静态像素缓冲；无需申请 153,600 字节整屏显存。
 DMA 通道 6 和 SPI0 由 LCD 独占，不要同时运行原来的 SPI Flash 测试。
@@ -70,7 +70,7 @@ ST7789 的 `GSCAN (0x45)` 返回当前扫描行，TE 输出也可用于帧同步
 `ST7789_ProbeReadback()` 修改并恢复 MADCTL 的已知值，检查两次结果和 RGB565 格式，
 避免把悬空 SDA 读出的全 0/全 1 当作有效回读。写像素始终使用硬件 SPI；
 因为 MCU 的单线硬件接收固定走 SO_IO1，回读时暂时用 GPIO 实现同一组线的半双工 SPI，完成后恢复硬件复用。
-`st7789_config.h` 中 `LCD_TRY_SDA_READ=0` 可关闭回读尝试。
+`user/config/st7789_config.h` 中 `LCD_TRY_SDA_READ=0` 可关闭回读尝试。
 `LCD_SCANLINE_DUMMY_BITS` 独立配置 GSCAN 的 dummy 时钟，默认按其 dummy read 丢弃 8 位。
 
 ```c

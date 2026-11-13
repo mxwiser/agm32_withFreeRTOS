@@ -1,5 +1,5 @@
 #include "st7789_port.h"
-#include "st7789_config.h"
+#include "config/st7789_config.h"
 #include "FreeRTOS.h"
 #include "task.h"
 

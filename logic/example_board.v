@@ -9,6 +9,7 @@ module example_board (
   GPIO5_1,
   GPIO5_2,
   GPIO5_3,
+  GPTIMER0_CH0,
   GPTIMER4_CH0,
   PIN_HSE,
   PIN_HSI,
@@ -25,6 +26,7 @@ inout         GPIO4_4;
 inout         GPIO5_1;
 inout         GPIO5_2;
 inout         GPIO5_3;
+inout         GPTIMER0_CH0;
 inout         GPTIMER4_CH0;
 input         PIN_HSE;
 input         PIN_HSI;
@@ -42,6 +44,12 @@ assign CAN0_TX0 = PIN_12_out_en ? PIN_12_out_data : 1'bz;
 
 // CAN0_RX0, GPIO7_3
 assign PIN_13_in = CAN0_RX0;
+
+// GPTIMER0_CH0, GPIO1_0
+assign PIN_17_in = GPTIMER0_CH0;
+wire PIN_17_out_en;
+wire PIN_17_out_data;
+assign GPTIMER0_CH0 = PIN_17_out_en ? PIN_17_out_data : 1'bz;
 
 // UART0_UARTTXD, GPIO7_6
 wire PIN_20_out_en;
@@ -327,9 +335,11 @@ assign PIN_29_out_data = gpio0_io_out_data[0];
 assign PIN_29_out_en = gpio0_io_out_en[0];
 (* keep = 1 *) wire [7:0] gpio0_io_in = {1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, PIN_29_in};
 
-wire [7:0] gpio1_io_out_data;
-wire [7:0] gpio1_io_out_en;
-wire [7:0] gpio1_io_in = {1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0};
+(* keep = 1 *) wire [7:0] gpio1_io_out_data;
+(* keep = 1 *) wire [7:0] gpio1_io_out_en;
+assign PIN_17_out_data = gpio1_io_out_data[0];
+assign PIN_17_out_en = gpio1_io_out_en[0];
+(* keep = 1 *) wire [7:0] gpio1_io_in = {1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, PIN_17_in};
 
 wire [7:0] gpio2_io_out_data;
 wire [7:0] gpio2_io_out_en;

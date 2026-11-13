@@ -3,10 +3,11 @@
 #include "board.h"
 #include "lvgl_task.h"
 #include "input_task.h"
-#include "ppm_task.h"
+#include "ppm/ppm_task.h"
+#include "ppm/ppm_output.h"
 #include "buzzer.h"
-
-#define LED_TOGGLE_INTERVAL_MS 500
+#include "vesc/vesc_uart.h"
+#include "config/task_config.h"
 
 static void prvLedTask(void *pvParameters)
 {
@@ -25,7 +26,8 @@ int main(void)
   INT_DisableIntGlobal(); // The FreeRTOS scheduler enables interrupts.
   board_led_write(false);
 
-  if (xTaskCreate(prvLedTask,
+  if (PpmOutput_Init() &&
+      xTaskCreate(prvLedTask,
                   "LED",
                   configMINIMAL_STACK_SIZE,
                   NULL,
@@ -49,7 +51,7 @@ int main(void)
                   NULL,
                   tskIDLE_PRIORITY + 2,
                   NULL) == pdPASS &&
-      Buzzer_Init()) {
+      Buzzer_Init() && VescUart_Init()) {
     vTaskStartScheduler();
   }
 

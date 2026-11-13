@@ -1,4 +1,4 @@
-#include "ppm_mix.h"
+#include "ppm_mix.h" /* PPM input normalization and mixing. */
 
 float Ppm_NormalizeAdc(uint16_t sample, uint16_t min, uint16_t max)
 {

@@ -2,19 +2,9 @@
 #define USER_CPLD_ADC_H
 
 #include <stdint.h>
+#include "config/adc_config.h"
 
-/* Example calibration: adjust each channel to the measured raw endpoints. */
-#define ADC1_RAW_MIN 1000U
-#define ADC1_RAW_MAX 2000U
-#define ADC2_RAW_MIN 1000U
-#define ADC2_RAW_MAX 2000U
 #define CPLD_ADC_RAW_MAX 4095U
-
-/* Variances in ADC-count-squared units. Q >= 0; R > 0. */
-#define ADC1_KALMAN_Q 0.0625f
-#define ADC1_KALMAN_R 25.0f
-#define ADC2_KALMAN_Q 0.0625f
-#define ADC2_KALMAN_R 25.0f
 
 #if ADC1_RAW_MIN < 0 || ADC1_RAW_MIN >= ADC1_RAW_MAX || ADC1_RAW_MAX > CPLD_ADC_RAW_MAX
 #error "ADC1 calibration must satisfy 0 <= MIN < MAX <= 4095"

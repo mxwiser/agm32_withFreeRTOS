@@ -3,9 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-
-#define BUZZER_FREQUENCY_HZ 2700U
-#define BUZZER_STARTUP_MS 120U
+#include "config/buzzer_config.h"
 
 /* Called from main after board_init(), before starting the scheduler. */
 bool Buzzer_Init(void);

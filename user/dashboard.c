@@ -1,26 +1,12 @@
 #include "dashboard.h"
 #include "battery.h"
+#include "config/dashboard_config.h"
 
 LV_FONT_DECLARE(font_speed_58);
 LV_FONT_DECLARE(font_dashboard_14);
 LV_FONT_DECLARE(font_dashboard_24);
 LV_FONT_DECLARE(font_title_cn_14);
 
-#define COLOR_BG       0xE5E7E9
-#define COLOR_PANEL    0xFAFAFA
-#define COLOR_BORDER   0x92999F
-#define COLOR_TRACK    0xB7BEC4
-#define COLOR_TEXT     0x000000
-#define COLOR_CYAN     0x005E73
-#define COLOR_SPEED_ARC 0x711C96
-#define COLOR_BIKE_UNLOCKED 0x000000
-#define COLOR_BIKE_LOCKED 0xFF0000
-#define COLOR_VOLTAGE  0xF50057  /* Voltage card accent. */
-#define COLOR_THROTTLE 0x536DFE  /* Throttle progress fill. */
-#define COLOR_BATTERY  0x64DD17  /* Battery cells at 20% and above. */
-#define COLOR_BATTERY_LOW 0xFF0000 /* Battery warning below 20%. */
-#define COLOR_YELLOW   0x8A4D00
-#define COLOR_RED      0xFF0000
 #define BATTERY_SEGMENTS 5U
 #define BATTERY_SEGMENT_WIDTH 4
 #define BATTERY_SEGMENT_GAP 2
@@ -196,7 +182,7 @@ bool Dashboard_Create(lv_obj_t *screen)
     lv_arc_set_range(ui.gauge, 0, 99);
   } else create_failed = true;
   (void)text(screen, 25, 60, 116, "SPEED", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_CENTER);
-  ui.speed = text(screen, 14, 78, 140, "0", &font_speed_58, COLOR_TEXT, LV_TEXT_ALIGN_CENTER);
+  ui.speed = text(screen, 14, 78, 140, "--", &font_speed_58, COLOR_TEXT, LV_TEXT_ALIGN_CENTER);
   (void)text(screen, 25, 145, 116, "km/h", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_CENTER);
 
   ui.voltage = metric_card(screen, 31, "Voltage", COLOR_VOLTAGE);
@@ -246,17 +232,26 @@ void Dashboard_Refresh(const DashboardData *data)
     lv_obj_set_style_border_color(ui.bike_wheel_right, color, 0);
     lv_obj_set_style_line_color(ui.bike_frame, color, 0);
   }
-  if (!previous_valid || data->current_speed_kmh != previous.current_speed_kmh) {
-    int32_t speed = data->current_speed_kmh;
-    uint32_t magnitude = (uint32_t)(speed < 0 ? -speed : speed);
-    lv_label_set_text_fmt(ui.speed, "%d", (int)speed);
-    lv_arc_set_value(ui.gauge, magnitude > 99U ? 99 : (int32_t)magnitude);
+  if (!previous_valid || data->speed_valid != previous.speed_valid ||
+      data->current_speed_kmh != previous.current_speed_kmh) {
+    if (data->speed_valid) {
+      int32_t speed = data->current_speed_kmh;
+      uint32_t magnitude = (uint32_t)(speed < 0 ? -speed : speed);
+      lv_label_set_text_fmt(ui.speed, "%d", (int)speed);
+      lv_arc_set_value(ui.gauge, magnitude > 99U ? 99 : (int32_t)magnitude);
+    } else {
+      lv_label_set_text(ui.speed, "--");
+      lv_arc_set_value(ui.gauge, 0);
+    }
   }
-  if (!previous_valid || data->battery_percent != previous.battery_percent) {
+  if (!previous_valid || data->electrical_valid != previous.electrical_valid ||
+      data->battery_percent != previous.battery_percent) {
     uint8_t value = limit_percent(data->battery_percent);
     uint32_t indicator = value < BATTERY_LOW_PERCENT ? COLOR_BATTERY_LOW : COLOR_BATTERY;
-    uint32_t outline = value < BATTERY_LOW_PERCENT ? COLOR_BATTERY_LOW : COLOR_TEXT;
-    unsigned active_segments = ((unsigned)value * BATTERY_SEGMENTS + 99U) / 100U;
+    uint32_t outline = !data->electrical_valid ? COLOR_BORDER :
+                       (value < BATTERY_LOW_PERCENT ? COLOR_BATTERY_LOW : COLOR_TEXT);
+    unsigned active_segments = data->electrical_valid ?
+                               ((unsigned)value * BATTERY_SEGMENTS + 99U) / 100U : 0U;
     for (unsigned i = 0; i < BATTERY_SEGMENTS; ++i) {
       uint32_t color = i < active_segments ? indicator : COLOR_TRACK;
       lv_obj_set_style_bg_color(ui.battery_segments[i], lv_color_hex(color), 0);
@@ -264,18 +259,32 @@ void Dashboard_Refresh(const DashboardData *data)
     lv_obj_set_style_border_color(ui.battery_body, lv_color_hex(outline), 0);
     lv_obj_set_style_bg_color(ui.battery_terminal, lv_color_hex(outline), 0);
   }
-  if (!previous_valid || data->controller_temperature_c != previous.controller_temperature_c)
-    lv_label_set_text_fmt(ui.controller_temperature, "%d°C", (int)data->controller_temperature_c);
-  if (!previous_valid || data->voltage_tenths_v != previous.voltage_tenths_v)
-    lv_label_set_text_fmt(ui.voltage, "%u.%u V", (unsigned)(data->voltage_tenths_v / 10U), (unsigned)(data->voltage_tenths_v % 10U));
-  if (!previous_valid || data->current_tenths_a != previous.current_tenths_a) {
-    int32_t current = data->current_tenths_a;
-    uint32_t magnitude = (uint32_t)(current < 0 ? -current : current);
-    lv_label_set_text_fmt(ui.current, "%s%u.%u A", current < 0 ? "-" : "",
-                         (unsigned)(magnitude / 10U), (unsigned)(magnitude % 10U));
+  if (!previous_valid || data->controller_temperature_valid != previous.controller_temperature_valid ||
+      data->controller_temperature_c != previous.controller_temperature_c) {
+    if (data->controller_temperature_valid)
+      lv_label_set_text_fmt(ui.controller_temperature, "%d°C", (int)data->controller_temperature_c);
+    else lv_label_set_text(ui.controller_temperature, "--°C");
   }
-  if (!previous_valid || data->power_w != previous.power_w)
-    lv_label_set_text_fmt(ui.power, "%ld W", (long)data->power_w);
+  if (!previous_valid || data->electrical_valid != previous.electrical_valid ||
+      data->voltage_tenths_v != previous.voltage_tenths_v) {
+    if (data->electrical_valid)
+      lv_label_set_text_fmt(ui.voltage, "%u.%u V", (unsigned)(data->voltage_tenths_v / 10U), (unsigned)(data->voltage_tenths_v % 10U));
+    else lv_label_set_text(ui.voltage, "-- V");
+  }
+  if (!previous_valid || data->electrical_valid != previous.electrical_valid ||
+      data->current_tenths_a != previous.current_tenths_a) {
+    if (data->electrical_valid) {
+      int32_t current = data->current_tenths_a;
+      uint32_t magnitude = (uint32_t)(current < 0 ? -current : current);
+      lv_label_set_text_fmt(ui.current, "%s%u.%u A", current < 0 ? "-" : "",
+                           (unsigned)(magnitude / 10U), (unsigned)(magnitude % 10U));
+    } else lv_label_set_text(ui.current, "-- A");
+  }
+  if (!previous_valid || data->electrical_valid != previous.electrical_valid ||
+      data->power_w != previous.power_w) {
+    if (data->electrical_valid) lv_label_set_text_fmt(ui.power, "%ld W", (long)data->power_w);
+    else lv_label_set_text(ui.power, "-- W");
+  }
   if (!previous_valid || data->brake_percent != previous.brake_percent ||
       ((data->adc_valid_mask ^ previous.adc_valid_mask) & 1U)) {
     uint8_t value = limit_percent(data->brake_percent);

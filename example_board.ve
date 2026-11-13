@@ -3,7 +3,7 @@
 SYSCLK 200 # MCU/PLL at 200 MHz; rebuild and upload both LOGIC and MCU firmware.
 HSECLK 8 # Y1: 8 MHz crystal on OSC_IN/OSC_OUT (pins 5/6)
 
-# J1 debug UART, matching LOGGER_UART=0 and 115200 baud in platformio.ini.
+# J1 UART0 for VESC telemetry at 115200 baud. Debugging uses SWD.
 UART0_UARTTXD PIN_20 # PB2, TX, J1 pin 6
 UART0_UARTRXD PIN_21 # PB10, RX, J1 pin 7
 
@@ -17,6 +17,9 @@ GPIO4_4 PIN_43 # PB7, LED, active high
 # Q1 / BZ1 buzzer control, hardware PWM via GPTIMER4 channel 0.
 GPTIMER4_CH0 PIN_45 # PB8, Buzzerd, active high
 
+# J5 ADC3 net is used as the VESC PPM output, not as an analog input.
+GPTIMER0_CH0 PIN_17 # PA7, J5 ADC3
+
 # J6 display: write-only SPI, with SCL=SCK and SDA=MOSI.
 SPI0_SCK    PIN_28 # PB15, SCL, J6 pin 3
 SPI0_SI_IO0 PIN_29 # PA8, SDA, J6 pin 4
@@ -26,7 +29,7 @@ GPIO5_2     PIN_31 # PA10, DC, J6 pin 6
 GPIO5_3     PIN_33 # PA12, BLK, J6 pin 8
 
 # Fixed analog inputs: reserve these pins; ADC routing is not configured in VE.
-# J3 ADC1: PB1 / PIN_19; J4 ADC2: PB0 / PIN_18; J5 ADC3: PA7 / PIN_17.
+# J3 ADC1: PB1 / PIN_19; J4 ADC2: PB0 / PIN_18.
 # ADC1/ADC2/ADC3 here are schematic net labels, not ADC peripheral numbers.
 
 # Keep debug pins unassigned: PA13 / PIN_34 (SWDIO), PA14 / PIN_37 (SWCLK).

@@ -1,8 +1,7 @@
 #include "input_task.h"
 #include "FreeRTOS.h"
 #include "task.h"
-
-#define INPUT_POLL_PERIOD_MS 1U
+#include "config/task_config.h"
 
 /* Only Input_Task writes this snapshot; readers use Input_GetSnapshot(). */
 static volatile InputValues input_values;

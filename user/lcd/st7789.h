@@ -4,13 +4,11 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include "config/lcd_geometry.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define ST7789_NATIVE_WIDTH  240U
-#define ST7789_NATIVE_HEIGHT 320U
 
 #define ST7789_BLACK   0x0000U
 #define ST7789_WHITE   0xffffU

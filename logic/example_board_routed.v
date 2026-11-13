@@ -7,6 +7,7 @@ module example_board(
 	GPIO5_1,
 	GPIO5_2,
 	GPIO5_3,
+	GPTIMER0_CH0,
 	GPTIMER4_CH0,
 	PIN_HSE,
 	PIN_HSI,
@@ -22,6 +23,7 @@ inout	GPIO4_4;
 inout	GPIO5_1;
 inout	GPIO5_2;
 inout	GPIO5_3;
+inout	GPTIMER0_CH0;
 inout	GPTIMER4_CH0;
 input	PIN_HSE;
 input	PIN_HSI;
@@ -46,26 +48,26 @@ wire	[4:0] PLL_CLKOUT;
 //wire	PLL_CLKOUT[4];
 wire	PLL_ENABLE;
 wire	PLL_LOCK;
-wire	SyncLoad_X10001_Y10001_VCC;
+wire	SyncLoad_X10003_Y10001_VCC;
 wire	SyncLoad_X10004_Y10001_VCC;
-wire	SyncReset_X10001_Y10001_GND;
 wire	SyncReset_X10003_Y10001_GND;
 wire	SyncReset_X10004_Y10001_GND;
-wire	SyncReset_X10005_Y10001_GND;
+wire	SyncReset_X10006_Y10001_GND;
+wire	SyncReset_X10007_Y10001_GND;
 wire	bus_clk;
-wire	bus_clk_X10001_Y10001_SIG_VCC;
+wire	bus_clk_X10002_Y10001_SIG_VCC;
 wire	bus_clk_X10003_Y10001_SIG_VCC;
 wire	bus_clk_X10004_Y10001_SIG_VCC;
-wire	bus_clk_X10005_Y10001_SIG_VCC;
-wire	\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10002_Y10001_SIG_SIG ;
-wire	\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ;
-wire	\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ;
-wire	\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10005_Y10001_SIG_SIG ;
-wire	\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10006_Y10001_SIG_SIG ;
-wire	\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ;
-wire	\bus_clk__macro_inst|apb_penable_B_Y_X10006_Y10001_SIG_SIG ;
+wire	bus_clk_X10006_Y10001_SIG_VCC;
+wire	bus_clk_X10007_Y10001_SIG_VCC;
+wire	\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10001_Y10001_SIG_SIG ;
+wire	\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ;
+wire	\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10002_Y10001_SIG_SIG ;
+wire	\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ;
+wire	\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ;
+wire	\bus_clk__macro_inst|apb_penable_B_Y_X10005_Y10001_SIG_SIG ;
 wire	\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ;
-wire	\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ;
+wire	\bus_clk__macro_inst|bridge|apb_pdone_X10007_Y10001_SIG_SIG ;
 wire	[3:0] ext_dma_DMACCLR;
 //wire	ext_dma_DMACCLR[0];
 //wire	ext_dma_DMACCLR[1];
@@ -103,6 +105,15 @@ wire	[7:0] gpio0_io_out_en;
 //wire	gpio0_io_out_en[5];
 //wire	gpio0_io_out_en[6];
 //wire	gpio0_io_out_en[7];
+wire	[7:0] gpio1_io_in;
+//wire	gpio1_io_in[0];
+//wire	gpio1_io_in[1];
+//wire	gpio1_io_in[2];
+//wire	gpio1_io_in[3];
+//wire	gpio1_io_in[4];
+//wire	gpio1_io_in[5];
+//wire	gpio1_io_in[6];
+//wire	gpio1_io_in[7];
 wire	[7:0] gpio1_io_out_data;
 //wire	gpio1_io_out_data[0];
 //wire	gpio1_io_out_data[1];
@@ -379,18 +390,14 @@ reg	[11:0] \macro_inst|adc2_latest ;
 //reg	\macro_inst|adc2_latest [10];
 //reg	\macro_inst|adc2_latest [11];
 //reg	\macro_inst|adc2_latest [1];
-wire	\macro_inst|adc2_latest[1]_reg__feeder__LutOut ;
 //reg	\macro_inst|adc2_latest [2];
 //reg	\macro_inst|adc2_latest [3];
 //reg	\macro_inst|adc2_latest [4];
-wire	\macro_inst|adc2_latest[4]_reg__feeder__LutOut ;
 //reg	\macro_inst|adc2_latest [5];
 //reg	\macro_inst|adc2_latest [6];
 //reg	\macro_inst|adc2_latest [7];
-wire	\macro_inst|adc2_latest[7]_reg__feeder__LutOut ;
 //reg	\macro_inst|adc2_latest [8];
 //reg	\macro_inst|adc2_latest [9];
-wire	\macro_inst|adc2_latest[9]_reg__feeder__LutOut ;
 wire	\macro_inst|adc2_latest_A_0_Y_A_Y ;
 wire	\macro_inst|adc2_latest_A_10_Y_A_Y ;
 wire	\macro_inst|adc2_latest_A_11_Y_A_Y ;
@@ -550,13 +557,12 @@ wire	[1:0] \macro_inst|bridge|ahb_htrans ;
 //wire	\macro_inst|bridge|ahb_htrans [0];
 //wire	\macro_inst|bridge|ahb_htrans [1];
 wire	\macro_inst|bridge|ahb_htrans_B_1_Y ;
-wire	\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10003_Y10001_SIG ;
+wire	\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10006_Y10001_SIG ;
 wire	\macro_inst|bridge|ahb_hwrite ;
 wire	[2:0] \macro_inst|bridge|apbState ;
 //wire	\macro_inst|bridge|apbState [0];
 reg	\macro_inst|bridge|apbState[0]_reg_q ;
 //wire	\macro_inst|bridge|apbState [1];
-wire	\macro_inst|bridge|apbState[1]_reg__feeder__LutOut ;
 //wire	\macro_inst|bridge|apbState [2];
 wire	\macro_inst|bridge|apbState_A_1_Y ;
 wire	\macro_inst|bridge|apb_pdone ;
@@ -578,17 +584,16 @@ wire	\macro_inst|bridge|paddr[2]_reg__feeder__LutOut ;
 wire	\macro_inst|bridge|paddr[3]_reg__feeder__LutOut ;
 reg	\macro_inst|bridge|pdone ;
 wire	\macro_inst|bridge|pdone_B_1_Y ;
+wire	\macro_inst|bridge|prdata[0]_reg__feeder__LutOut ;
 wire	\macro_inst|bridge|prdata[10]_reg__feeder__LutOut ;
-wire	\macro_inst|bridge|prdata[1]_reg__feeder__LutOut ;
+wire	\macro_inst|bridge|prdata[11]_reg__feeder__LutOut ;
 wire	\macro_inst|bridge|prdata[2]_reg__feeder__LutOut ;
 wire	\macro_inst|bridge|prdata[3]_reg__feeder__LutOut ;
-wire	\macro_inst|bridge|prdata[7]_reg__feeder__LutOut ;
-wire	\macro_inst|bridge|prdata[9]_reg__feeder__LutOut ;
 reg	\macro_inst|bridge|pvalid ;
 wire	\macro_inst|bridge|pvalid_A_1_Y_A_Y ;
 wire	\macro_inst|bridge|pvalid_A_1_Y_A_Y_inv ;
 wire	\macro_inst|bridge|pvalid_A_Y ;
-wire	\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10005_Y10001_SIG ;
+wire	\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10007_Y10001_SIG ;
 wire	\macro_inst|bridge|pwrite_reg__feeder__LutOut ;
 wire	[31:0] \macro_inst|mem_ahb_haddr ;
 //wire	\macro_inst|mem_ahb_haddr [0];
@@ -976,188 +981,188 @@ defparam UART0_UARTTXD_o.IN_REG_DELAY = 3'b000;
 alta_asyncctrl asyncreset_ctrl_X10001_Y10001_N0(
 	.Din(sys_resetn),
 	.Dout(sys_resetn__AsyncReset_X10001_Y10001_INV));
-defparam asyncreset_ctrl_X10001_Y10001_N0.coord_x = 20;
-defparam asyncreset_ctrl_X10001_Y10001_N0.coord_y = 12;
+defparam asyncreset_ctrl_X10001_Y10001_N0.coord_x = 18;
+defparam asyncreset_ctrl_X10001_Y10001_N0.coord_y = 8;
 defparam asyncreset_ctrl_X10001_Y10001_N0.coord_z = 0;
 defparam asyncreset_ctrl_X10001_Y10001_N0.AsyncCtrlMux = 2'b11;
 
 alta_asyncctrl asyncreset_ctrl_X10002_Y10001_N0(
 	.Din(sys_resetn),
 	.Dout(sys_resetn__AsyncReset_X10002_Y10001_INV));
-defparam asyncreset_ctrl_X10002_Y10001_N0.coord_x = 19;
-defparam asyncreset_ctrl_X10002_Y10001_N0.coord_y = 12;
+defparam asyncreset_ctrl_X10002_Y10001_N0.coord_x = 20;
+defparam asyncreset_ctrl_X10002_Y10001_N0.coord_y = 8;
 defparam asyncreset_ctrl_X10002_Y10001_N0.coord_z = 0;
 defparam asyncreset_ctrl_X10002_Y10001_N0.AsyncCtrlMux = 2'b11;
 
-alta_asyncctrl asyncreset_ctrl_X10003_Y10001_N1(
+alta_asyncctrl asyncreset_ctrl_X10003_Y10001_N0(
 	.Din(sys_resetn),
 	.Dout(sys_resetn__AsyncReset_X10003_Y10001_INV));
-defparam asyncreset_ctrl_X10003_Y10001_N1.coord_x = 14;
-defparam asyncreset_ctrl_X10003_Y10001_N1.coord_y = 12;
-defparam asyncreset_ctrl_X10003_Y10001_N1.coord_z = 1;
-defparam asyncreset_ctrl_X10003_Y10001_N1.AsyncCtrlMux = 2'b11;
+defparam asyncreset_ctrl_X10003_Y10001_N0.coord_x = 14;
+defparam asyncreset_ctrl_X10003_Y10001_N0.coord_y = 12;
+defparam asyncreset_ctrl_X10003_Y10001_N0.coord_z = 0;
+defparam asyncreset_ctrl_X10003_Y10001_N0.AsyncCtrlMux = 2'b11;
 
 alta_asyncctrl asyncreset_ctrl_X10004_Y10001_N0(
 	.Din(sys_resetn),
 	.Dout(sys_resetn__AsyncReset_X10004_Y10001_INV));
-defparam asyncreset_ctrl_X10004_Y10001_N0.coord_x = 15;
-defparam asyncreset_ctrl_X10004_Y10001_N0.coord_y = 12;
+defparam asyncreset_ctrl_X10004_Y10001_N0.coord_x = 19;
+defparam asyncreset_ctrl_X10004_Y10001_N0.coord_y = 8;
 defparam asyncreset_ctrl_X10004_Y10001_N0.coord_z = 0;
 defparam asyncreset_ctrl_X10004_Y10001_N0.AsyncCtrlMux = 2'b11;
 
 alta_asyncctrl asyncreset_ctrl_X10005_Y10001_N0(
 	.Din(sys_resetn),
 	.Dout(sys_resetn__AsyncReset_X10005_Y10001_INV));
-defparam asyncreset_ctrl_X10005_Y10001_N0.coord_x = 18;
-defparam asyncreset_ctrl_X10005_Y10001_N0.coord_y = 12;
+defparam asyncreset_ctrl_X10005_Y10001_N0.coord_x = 17;
+defparam asyncreset_ctrl_X10005_Y10001_N0.coord_y = 8;
 defparam asyncreset_ctrl_X10005_Y10001_N0.coord_z = 0;
 defparam asyncreset_ctrl_X10005_Y10001_N0.AsyncCtrlMux = 2'b11;
 
 alta_asyncctrl asyncreset_ctrl_X10006_Y10001_N0(
 	.Din(sys_resetn),
 	.Dout(sys_resetn__AsyncReset_X10006_Y10001_INV));
-defparam asyncreset_ctrl_X10006_Y10001_N0.coord_x = 18;
-defparam asyncreset_ctrl_X10006_Y10001_N0.coord_y = 10;
+defparam asyncreset_ctrl_X10006_Y10001_N0.coord_x = 15;
+defparam asyncreset_ctrl_X10006_Y10001_N0.coord_y = 12;
 defparam asyncreset_ctrl_X10006_Y10001_N0.coord_z = 0;
 defparam asyncreset_ctrl_X10006_Y10001_N0.AsyncCtrlMux = 2'b11;
 
-alta_asyncctrl asyncreset_ctrl_X10007_Y10001_N0(
+alta_asyncctrl asyncreset_ctrl_X10007_Y10001_N1(
 	.Din(sys_resetn),
 	.Dout(sys_resetn__AsyncReset_X10007_Y10001_INV));
-defparam asyncreset_ctrl_X10007_Y10001_N0.coord_x = 19;
-defparam asyncreset_ctrl_X10007_Y10001_N0.coord_y = 10;
-defparam asyncreset_ctrl_X10007_Y10001_N0.coord_z = 0;
-defparam asyncreset_ctrl_X10007_Y10001_N0.AsyncCtrlMux = 2'b11;
+defparam asyncreset_ctrl_X10007_Y10001_N1.coord_x = 17;
+defparam asyncreset_ctrl_X10007_Y10001_N1.coord_y = 12;
+defparam asyncreset_ctrl_X10007_Y10001_N1.coord_z = 1;
+defparam asyncreset_ctrl_X10007_Y10001_N1.AsyncCtrlMux = 2'b11;
 
 alta_clkenctrl clken_ctrl_X10001_Y10001_N0(
 	.ClkIn(bus_clk),
-	.ClkEn(),
-	.ClkOut(bus_clk_X10001_Y10001_SIG_VCC));
-defparam clken_ctrl_X10001_Y10001_N0.coord_x = 20;
-defparam clken_ctrl_X10001_Y10001_N0.coord_y = 12;
+	.ClkEn(\macro_inst|apb_penable_B_Y ),
+	.ClkOut(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ));
+defparam clken_ctrl_X10001_Y10001_N0.coord_x = 18;
+defparam clken_ctrl_X10001_Y10001_N0.coord_y = 8;
 defparam clken_ctrl_X10001_Y10001_N0.coord_z = 0;
 defparam clken_ctrl_X10001_Y10001_N0.ClkMux = 2'b10;
-defparam clken_ctrl_X10001_Y10001_N0.ClkEnMux = 2'b01;
+defparam clken_ctrl_X10001_Y10001_N0.ClkEnMux = 2'b10;
 
 alta_clkenctrl clken_ctrl_X10001_Y10001_N1(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|adc2_eoc_d_A_Y ),
-	.ClkOut(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10001_Y10001_N1.coord_x = 20;
-defparam clken_ctrl_X10001_Y10001_N1.coord_y = 12;
+	.ClkEn(\macro_inst|adc1_eoc_d_A_Y ),
+	.ClkOut(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10001_Y10001_SIG_SIG ));
+defparam clken_ctrl_X10001_Y10001_N1.coord_x = 18;
+defparam clken_ctrl_X10001_Y10001_N1.coord_y = 8;
 defparam clken_ctrl_X10001_Y10001_N1.coord_z = 1;
 defparam clken_ctrl_X10001_Y10001_N1.ClkMux = 2'b10;
 defparam clken_ctrl_X10001_Y10001_N1.ClkEnMux = 2'b10;
 
 alta_clkenctrl clken_ctrl_X10002_Y10001_N0(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|apb_penable_B_Y ),
-	.ClkOut(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10002_Y10001_N0.coord_x = 19;
-defparam clken_ctrl_X10002_Y10001_N0.coord_y = 12;
+	.ClkEn(),
+	.ClkOut(bus_clk_X10002_Y10001_SIG_VCC));
+defparam clken_ctrl_X10002_Y10001_N0.coord_x = 20;
+defparam clken_ctrl_X10002_Y10001_N0.coord_y = 8;
 defparam clken_ctrl_X10002_Y10001_N0.coord_z = 0;
 defparam clken_ctrl_X10002_Y10001_N0.ClkMux = 2'b10;
-defparam clken_ctrl_X10002_Y10001_N0.ClkEnMux = 2'b10;
+defparam clken_ctrl_X10002_Y10001_N0.ClkEnMux = 2'b01;
 
 alta_clkenctrl clken_ctrl_X10002_Y10001_N1(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|adc1_eoc_d_A_Y ),
-	.ClkOut(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10002_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10002_Y10001_N1.coord_x = 19;
-defparam clken_ctrl_X10002_Y10001_N1.coord_y = 12;
+	.ClkEn(\macro_inst|adc2_eoc_d_A_Y ),
+	.ClkOut(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10002_Y10001_SIG_SIG ));
+defparam clken_ctrl_X10002_Y10001_N1.coord_x = 20;
+defparam clken_ctrl_X10002_Y10001_N1.coord_y = 8;
 defparam clken_ctrl_X10002_Y10001_N1.coord_z = 1;
 defparam clken_ctrl_X10002_Y10001_N1.ClkMux = 2'b10;
 defparam clken_ctrl_X10002_Y10001_N1.ClkEnMux = 2'b10;
 
 alta_clkenctrl clken_ctrl_X10003_Y10001_N0(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|bridge|apb_pdone ),
-	.ClkOut(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ));
+	.ClkEn(),
+	.ClkOut(bus_clk_X10003_Y10001_SIG_VCC));
 defparam clken_ctrl_X10003_Y10001_N0.coord_x = 14;
 defparam clken_ctrl_X10003_Y10001_N0.coord_y = 12;
 defparam clken_ctrl_X10003_Y10001_N0.coord_z = 0;
 defparam clken_ctrl_X10003_Y10001_N0.ClkMux = 2'b10;
-defparam clken_ctrl_X10003_Y10001_N0.ClkEnMux = 2'b10;
+defparam clken_ctrl_X10003_Y10001_N0.ClkEnMux = 2'b01;
 
 alta_clkenctrl clken_ctrl_X10003_Y10001_N1(
 	.ClkIn(bus_clk),
-	.ClkEn(),
-	.ClkOut(bus_clk_X10003_Y10001_SIG_VCC));
+	.ClkEn(\macro_inst|bridge|apb_pdone ),
+	.ClkOut(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ));
 defparam clken_ctrl_X10003_Y10001_N1.coord_x = 14;
 defparam clken_ctrl_X10003_Y10001_N1.coord_y = 12;
 defparam clken_ctrl_X10003_Y10001_N1.coord_z = 1;
 defparam clken_ctrl_X10003_Y10001_N1.ClkMux = 2'b10;
-defparam clken_ctrl_X10003_Y10001_N1.ClkEnMux = 2'b01;
+defparam clken_ctrl_X10003_Y10001_N1.ClkEnMux = 2'b10;
 
 alta_clkenctrl clken_ctrl_X10004_Y10001_N0(
 	.ClkIn(bus_clk),
-	.ClkEn(),
-	.ClkOut(bus_clk_X10004_Y10001_SIG_VCC));
-defparam clken_ctrl_X10004_Y10001_N0.coord_x = 15;
-defparam clken_ctrl_X10004_Y10001_N0.coord_y = 12;
+	.ClkEn(\macro_inst|adc2_eoc_d_A_Y ),
+	.ClkOut(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ));
+defparam clken_ctrl_X10004_Y10001_N0.coord_x = 19;
+defparam clken_ctrl_X10004_Y10001_N0.coord_y = 8;
 defparam clken_ctrl_X10004_Y10001_N0.coord_z = 0;
 defparam clken_ctrl_X10004_Y10001_N0.ClkMux = 2'b10;
-defparam clken_ctrl_X10004_Y10001_N0.ClkEnMux = 2'b01;
+defparam clken_ctrl_X10004_Y10001_N0.ClkEnMux = 2'b10;
 
 alta_clkenctrl clken_ctrl_X10004_Y10001_N1(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|bridge|apb_pdone ),
-	.ClkOut(\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10004_Y10001_N1.coord_x = 15;
-defparam clken_ctrl_X10004_Y10001_N1.coord_y = 12;
+	.ClkEn(),
+	.ClkOut(bus_clk_X10004_Y10001_SIG_VCC));
+defparam clken_ctrl_X10004_Y10001_N1.coord_x = 19;
+defparam clken_ctrl_X10004_Y10001_N1.coord_y = 8;
 defparam clken_ctrl_X10004_Y10001_N1.coord_z = 1;
 defparam clken_ctrl_X10004_Y10001_N1.ClkMux = 2'b10;
-defparam clken_ctrl_X10004_Y10001_N1.ClkEnMux = 2'b10;
+defparam clken_ctrl_X10004_Y10001_N1.ClkEnMux = 2'b01;
 
 alta_clkenctrl clken_ctrl_X10005_Y10001_N0(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|adc2_eoc_d_A_Y ),
-	.ClkOut(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10005_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10005_Y10001_N0.coord_x = 18;
-defparam clken_ctrl_X10005_Y10001_N0.coord_y = 12;
+	.ClkEn(\macro_inst|apb_penable_B_Y ),
+	.ClkOut(\bus_clk__macro_inst|apb_penable_B_Y_X10005_Y10001_SIG_SIG ));
+defparam clken_ctrl_X10005_Y10001_N0.coord_x = 17;
+defparam clken_ctrl_X10005_Y10001_N0.coord_y = 8;
 defparam clken_ctrl_X10005_Y10001_N0.coord_z = 0;
 defparam clken_ctrl_X10005_Y10001_N0.ClkMux = 2'b10;
 defparam clken_ctrl_X10005_Y10001_N0.ClkEnMux = 2'b10;
 
 alta_clkenctrl clken_ctrl_X10005_Y10001_N1(
 	.ClkIn(bus_clk),
-	.ClkEn(),
-	.ClkOut(bus_clk_X10005_Y10001_SIG_VCC));
-defparam clken_ctrl_X10005_Y10001_N1.coord_x = 18;
-defparam clken_ctrl_X10005_Y10001_N1.coord_y = 12;
+	.ClkEn(\macro_inst|adc1_eoc_d_A_Y ),
+	.ClkOut(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ));
+defparam clken_ctrl_X10005_Y10001_N1.coord_x = 17;
+defparam clken_ctrl_X10005_Y10001_N1.coord_y = 8;
 defparam clken_ctrl_X10005_Y10001_N1.coord_z = 1;
 defparam clken_ctrl_X10005_Y10001_N1.ClkMux = 2'b10;
-defparam clken_ctrl_X10005_Y10001_N1.ClkEnMux = 2'b01;
+defparam clken_ctrl_X10005_Y10001_N1.ClkEnMux = 2'b10;
 
 alta_clkenctrl clken_ctrl_X10006_Y10001_N0(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|apb_penable_B_Y ),
-	.ClkOut(\bus_clk__macro_inst|apb_penable_B_Y_X10006_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10006_Y10001_N0.coord_x = 18;
-defparam clken_ctrl_X10006_Y10001_N0.coord_y = 10;
+	.ClkEn(),
+	.ClkOut(bus_clk_X10006_Y10001_SIG_VCC));
+defparam clken_ctrl_X10006_Y10001_N0.coord_x = 15;
+defparam clken_ctrl_X10006_Y10001_N0.coord_y = 12;
 defparam clken_ctrl_X10006_Y10001_N0.coord_z = 0;
 defparam clken_ctrl_X10006_Y10001_N0.ClkMux = 2'b10;
-defparam clken_ctrl_X10006_Y10001_N0.ClkEnMux = 2'b10;
-
-alta_clkenctrl clken_ctrl_X10006_Y10001_N1(
-	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|adc2_eoc_d_A_Y ),
-	.ClkOut(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10006_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10006_Y10001_N1.coord_x = 18;
-defparam clken_ctrl_X10006_Y10001_N1.coord_y = 10;
-defparam clken_ctrl_X10006_Y10001_N1.coord_z = 1;
-defparam clken_ctrl_X10006_Y10001_N1.ClkMux = 2'b10;
-defparam clken_ctrl_X10006_Y10001_N1.ClkEnMux = 2'b10;
+defparam clken_ctrl_X10006_Y10001_N0.ClkEnMux = 2'b01;
 
 alta_clkenctrl clken_ctrl_X10007_Y10001_N0(
 	.ClkIn(bus_clk),
-	.ClkEn(\macro_inst|adc1_eoc_d_A_Y ),
-	.ClkOut(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ));
-defparam clken_ctrl_X10007_Y10001_N0.coord_x = 19;
-defparam clken_ctrl_X10007_Y10001_N0.coord_y = 10;
+	.ClkEn(\macro_inst|bridge|apb_pdone ),
+	.ClkOut(\bus_clk__macro_inst|bridge|apb_pdone_X10007_Y10001_SIG_SIG ));
+defparam clken_ctrl_X10007_Y10001_N0.coord_x = 17;
+defparam clken_ctrl_X10007_Y10001_N0.coord_y = 12;
 defparam clken_ctrl_X10007_Y10001_N0.coord_z = 0;
 defparam clken_ctrl_X10007_Y10001_N0.ClkMux = 2'b10;
 defparam clken_ctrl_X10007_Y10001_N0.ClkEnMux = 2'b10;
+
+alta_clkenctrl clken_ctrl_X10007_Y10001_N1(
+	.ClkIn(bus_clk),
+	.ClkEn(),
+	.ClkOut(bus_clk_X10007_Y10001_SIG_VCC));
+defparam clken_ctrl_X10007_Y10001_N1.coord_x = 17;
+defparam clken_ctrl_X10007_Y10001_N1.coord_y = 12;
+defparam clken_ctrl_X10007_Y10001_N1.coord_z = 1;
+defparam clken_ctrl_X10007_Y10001_N1.ClkMux = 2'b10;
+defparam clken_ctrl_X10007_Y10001_N1.ClkEnMux = 2'b01;
 
 alta_io_gclk gclksw_gclk(
 	.inclk(sys_gck0),
@@ -1228,6 +1233,48 @@ defparam gpio0_io_in_o_0.DPCLK_DELAY = 4'b0000;
 defparam gpio0_io_in_o_0.OUT_DELAY = 1'b0;
 defparam gpio0_io_in_o_0.IN_DATA_DELAY = 3'b000;
 defparam gpio0_io_in_o_0.IN_REG_DELAY = 3'b000;
+
+alta_rio gpio1_io_in_o_0(
+	.padio(GPTIMER0_CH0),
+	.datain(gpio1_io_out_data[0]),
+	.oe(gpio1_io_out_en[0]),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.combout(gpio1_io_in[0]),
+	.regout());
+defparam gpio1_io_in_o_0.coord_x = 18;
+defparam gpio1_io_in_o_0.coord_y = 13;
+defparam gpio1_io_in_o_0.coord_z = 3;
+defparam gpio1_io_in_o_0.IN_ASYNC_MODE = 1'b0;
+defparam gpio1_io_in_o_0.IN_SYNC_MODE = 1'b0;
+defparam gpio1_io_in_o_0.IN_POWERUP = 1'b0;
+defparam gpio1_io_in_o_0.OUT_REG_MODE = 1'b0;
+defparam gpio1_io_in_o_0.OUT_ASYNC_MODE = 1'b0;
+defparam gpio1_io_in_o_0.OUT_SYNC_MODE = 1'b0;
+defparam gpio1_io_in_o_0.OUT_POWERUP = 1'b0;
+defparam gpio1_io_in_o_0.OE_REG_MODE = 1'b0;
+defparam gpio1_io_in_o_0.OE_ASYNC_MODE = 1'b0;
+defparam gpio1_io_in_o_0.OE_SYNC_MODE = 1'b0;
+defparam gpio1_io_in_o_0.OE_POWERUP = 1'b0;
+defparam gpio1_io_in_o_0.CFG_TRI_INPUT = 1'b0;
+defparam gpio1_io_in_o_0.CFG_INPUT_EN = 1'b1;
+defparam gpio1_io_in_o_0.CFG_PULL_UP = 1'b0;
+defparam gpio1_io_in_o_0.CFG_SLR = 1'b0;
+defparam gpio1_io_in_o_0.CFG_OPEN_DRAIN = 1'b0;
+defparam gpio1_io_in_o_0.CFG_PDRCTRL = 4'b0100;
+defparam gpio1_io_in_o_0.CFG_KEEP = 2'b00;
+defparam gpio1_io_in_o_0.CFG_LVDS_OUT_EN = 1'b0;
+defparam gpio1_io_in_o_0.CFG_LVDS_SEL_CUA = 2'b00;
+defparam gpio1_io_in_o_0.CFG_LVDS_IREF = 10'b0110000000;
+defparam gpio1_io_in_o_0.CFG_LVDS_IN_EN = 1'b0;
+defparam gpio1_io_in_o_0.DPCLK_DELAY = 4'b0000;
+defparam gpio1_io_in_o_0.OUT_DELAY = 1'b0;
+defparam gpio1_io_in_o_0.IN_DATA_DELAY = 3'b000;
+defparam gpio1_io_in_o_0.IN_REG_DELAY = 3'b000;
 
 alta_rio gpio3_io_in_o_0(
 	.padio(GPTIMER4_CH0),
@@ -1530,17 +1577,17 @@ alta_slice \macro_inst|adc1_eoc_d_reg (
 	.D(\macro_inst|adc1_eoc ),
 	.Cin(),
 	.Qin(\macro_inst|adc1_eoc_d ),
-	.Clk(bus_clk_X10001_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
+	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_eoc_inv ),
 	.Cout(),
 	.Q(\macro_inst|adc1_eoc_d ));
-defparam \macro_inst|adc1_eoc_d_reg .coord_x = 20;
-defparam \macro_inst|adc1_eoc_d_reg .coord_y = 12;
-defparam \macro_inst|adc1_eoc_d_reg .coord_z = 10;
+defparam \macro_inst|adc1_eoc_d_reg .coord_x = 19;
+defparam \macro_inst|adc1_eoc_d_reg .coord_y = 8;
+defparam \macro_inst|adc1_eoc_d_reg .coord_z = 8;
 defparam \macro_inst|adc1_eoc_d_reg .mask = 16'h00FF;
 defparam \macro_inst|adc1_eoc_d_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_eoc_d_reg .FeedbackMux = 1'b0;
@@ -1561,23 +1608,23 @@ defparam \macro_inst|adc1_inst .coord_z = 0;
 
 alta_slice \macro_inst|adc1_latest[0]_reg (
 	.A(),
-	.B(),
-	.C(\macro_inst|adc1_data [0]),
+	.B(\macro_inst|adc1_data [0]),
+	.C(),
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [0]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[0]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [0]));
-defparam \macro_inst|adc1_latest[0]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[0]_reg .coord_y = 12;
-defparam \macro_inst|adc1_latest[0]_reg .coord_z = 2;
-defparam \macro_inst|adc1_latest[0]_reg .mask = 16'hF0F0;
+defparam \macro_inst|adc1_latest[0]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[0]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[0]_reg .coord_z = 7;
+defparam \macro_inst|adc1_latest[0]_reg .mask = 16'hCCCC;
 defparam \macro_inst|adc1_latest[0]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[0]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest[0]_reg .ShiftMux = 1'b0;
@@ -1591,17 +1638,17 @@ alta_slice \macro_inst|adc1_latest[10]_reg (
 	.D(\macro_inst|adc1_data [10]),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [10]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[10]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [10]));
-defparam \macro_inst|adc1_latest[10]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[10]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[10]_reg .coord_z = 2;
+defparam \macro_inst|adc1_latest[10]_reg .coord_x = 18;
+defparam \macro_inst|adc1_latest[10]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[10]_reg .coord_z = 14;
 defparam \macro_inst|adc1_latest[10]_reg .mask = 16'hFF00;
 defparam \macro_inst|adc1_latest[10]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[10]_reg .FeedbackMux = 1'b0;
@@ -1612,22 +1659,22 @@ defparam \macro_inst|adc1_latest[10]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc1_latest[11]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc1_data [11]),
+	.C(\macro_inst|adc1_data [11]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [11]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[11]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [11]));
-defparam \macro_inst|adc1_latest[11]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[11]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[11]_reg .coord_z = 6;
-defparam \macro_inst|adc1_latest[11]_reg .mask = 16'hFF00;
+defparam \macro_inst|adc1_latest[11]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[11]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[11]_reg .coord_z = 9;
+defparam \macro_inst|adc1_latest[11]_reg .mask = 16'hF0F0;
 defparam \macro_inst|adc1_latest[11]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[11]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest[11]_reg .ShiftMux = 1'b0;
@@ -1637,22 +1684,22 @@ defparam \macro_inst|adc1_latest[11]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc1_latest[1]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc1_data [1]),
+	.C(\macro_inst|adc1_data [1]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [1]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[1]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [1]));
-defparam \macro_inst|adc1_latest[1]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[1]_reg .coord_y = 12;
+defparam \macro_inst|adc1_latest[1]_reg .coord_x = 18;
+defparam \macro_inst|adc1_latest[1]_reg .coord_y = 8;
 defparam \macro_inst|adc1_latest[1]_reg .coord_z = 8;
-defparam \macro_inst|adc1_latest[1]_reg .mask = 16'hFF00;
+defparam \macro_inst|adc1_latest[1]_reg .mask = 16'hF0F0;
 defparam \macro_inst|adc1_latest[1]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[1]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest[1]_reg .ShiftMux = 1'b0;
@@ -1662,22 +1709,22 @@ defparam \macro_inst|adc1_latest[1]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc1_latest[2]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc1_data [2]),
+	.C(\macro_inst|adc1_data [2]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [2]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[2]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [2]));
-defparam \macro_inst|adc1_latest[2]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[2]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[2]_reg .coord_z = 4;
-defparam \macro_inst|adc1_latest[2]_reg .mask = 16'hFF00;
+defparam \macro_inst|adc1_latest[2]_reg .coord_x = 18;
+defparam \macro_inst|adc1_latest[2]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[2]_reg .coord_z = 2;
+defparam \macro_inst|adc1_latest[2]_reg .mask = 16'hF0F0;
 defparam \macro_inst|adc1_latest[2]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[2]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest[2]_reg .ShiftMux = 1'b0;
@@ -1691,17 +1738,17 @@ alta_slice \macro_inst|adc1_latest[3]_reg (
 	.D(\macro_inst|adc1_data [3]),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [3]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[3]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [3]));
-defparam \macro_inst|adc1_latest[3]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[3]_reg .coord_y = 12;
-defparam \macro_inst|adc1_latest[3]_reg .coord_z = 14;
+defparam \macro_inst|adc1_latest[3]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[3]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[3]_reg .coord_z = 3;
 defparam \macro_inst|adc1_latest[3]_reg .mask = 16'hFF00;
 defparam \macro_inst|adc1_latest[3]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[3]_reg .FeedbackMux = 1'b0;
@@ -1712,22 +1759,22 @@ defparam \macro_inst|adc1_latest[3]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc1_latest[4]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc1_data [4]),
+	.C(\macro_inst|adc1_data [4]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [4]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[4]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [4]));
-defparam \macro_inst|adc1_latest[4]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[4]_reg .coord_y = 12;
-defparam \macro_inst|adc1_latest[4]_reg .coord_z = 5;
-defparam \macro_inst|adc1_latest[4]_reg .mask = 16'hFF00;
+defparam \macro_inst|adc1_latest[4]_reg .coord_x = 18;
+defparam \macro_inst|adc1_latest[4]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[4]_reg .coord_z = 10;
+defparam \macro_inst|adc1_latest[4]_reg .mask = 16'hF0F0;
 defparam \macro_inst|adc1_latest[4]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[4]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest[4]_reg .ShiftMux = 1'b0;
@@ -1737,22 +1784,22 @@ defparam \macro_inst|adc1_latest[4]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc1_latest[5]_reg (
 	.A(),
 	.B(),
-	.C(\macro_inst|adc1_data [5]),
-	.D(),
+	.C(),
+	.D(\macro_inst|adc1_data [5]),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [5]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[5]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [5]));
-defparam \macro_inst|adc1_latest[5]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[5]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[5]_reg .coord_z = 5;
-defparam \macro_inst|adc1_latest[5]_reg .mask = 16'hF0F0;
+defparam \macro_inst|adc1_latest[5]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[5]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[5]_reg .coord_z = 1;
+defparam \macro_inst|adc1_latest[5]_reg .mask = 16'hFF00;
 defparam \macro_inst|adc1_latest[5]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[5]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest[5]_reg .ShiftMux = 1'b0;
@@ -1766,17 +1813,17 @@ alta_slice \macro_inst|adc1_latest[6]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [6]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[6]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [6]));
-defparam \macro_inst|adc1_latest[6]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[6]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[6]_reg .coord_z = 7;
+defparam \macro_inst|adc1_latest[6]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[6]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[6]_reg .coord_z = 5;
 defparam \macro_inst|adc1_latest[6]_reg .mask = 16'hAAAA;
 defparam \macro_inst|adc1_latest[6]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[6]_reg .FeedbackMux = 1'b0;
@@ -1791,17 +1838,17 @@ alta_slice \macro_inst|adc1_latest[7]_reg (
 	.D(\macro_inst|adc1_data [7]),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [7]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[7]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [7]));
-defparam \macro_inst|adc1_latest[7]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[7]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[7]_reg .coord_z = 0;
+defparam \macro_inst|adc1_latest[7]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[7]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[7]_reg .coord_z = 4;
 defparam \macro_inst|adc1_latest[7]_reg .mask = 16'hFF00;
 defparam \macro_inst|adc1_latest[7]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[7]_reg .FeedbackMux = 1'b0;
@@ -1812,22 +1859,22 @@ defparam \macro_inst|adc1_latest[7]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc1_latest[8]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc1_data [8]),
+	.C(\macro_inst|adc1_data [8]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [8]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[8]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [8]));
-defparam \macro_inst|adc1_latest[8]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[8]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[8]_reg .coord_z = 3;
-defparam \macro_inst|adc1_latest[8]_reg .mask = 16'hFF00;
+defparam \macro_inst|adc1_latest[8]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[8]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[8]_reg .coord_z = 8;
+defparam \macro_inst|adc1_latest[8]_reg .mask = 16'hF0F0;
 defparam \macro_inst|adc1_latest[8]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[8]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest[8]_reg .ShiftMux = 1'b0;
@@ -1841,17 +1888,17 @@ alta_slice \macro_inst|adc1_latest[9]_reg (
 	.D(\macro_inst|adc1_data [9]),
 	.Cin(),
 	.Qin(\macro_inst|adc1_latest [9]),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10007_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest[9]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_latest [9]));
-defparam \macro_inst|adc1_latest[9]_reg .coord_x = 19;
-defparam \macro_inst|adc1_latest[9]_reg .coord_y = 10;
-defparam \macro_inst|adc1_latest[9]_reg .coord_z = 1;
+defparam \macro_inst|adc1_latest[9]_reg .coord_x = 17;
+defparam \macro_inst|adc1_latest[9]_reg .coord_y = 8;
+defparam \macro_inst|adc1_latest[9]_reg .coord_z = 10;
 defparam \macro_inst|adc1_latest[9]_reg .mask = 16'hFF00;
 defparam \macro_inst|adc1_latest[9]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest[9]_reg .FeedbackMux = 1'b0;
@@ -1860,10 +1907,10 @@ defparam \macro_inst|adc1_latest[9]_reg .BypassEn = 1'b0;
 defparam \macro_inst|adc1_latest[9]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc1_latest_dataa_0 (
-	.A(\macro_inst|adc1_latest [0]),
-	.B(\macro_inst|adc2_latest [0]),
-	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.A(\macro_inst|apb_paddr [3]),
+	.B(\macro_inst|adc1_latest [0]),
+	.C(\macro_inst|adc2_latest [0]),
+	.D(\macro_inst|apb_paddr [2]),
 	.Cin(),
 	.Qin(),
 	.Clk(),
@@ -1874,10 +1921,10 @@ alta_slice \macro_inst|adc1_latest_dataa_0 (
 	.LutOut(\macro_inst|adc1_latest_dataa_0_combout ),
 	.Cout(),
 	.Q());
-defparam \macro_inst|adc1_latest_dataa_0 .coord_x = 19;
-defparam \macro_inst|adc1_latest_dataa_0 .coord_y = 12;
-defparam \macro_inst|adc1_latest_dataa_0 .coord_z = 3;
-defparam \macro_inst|adc1_latest_dataa_0 .mask = 16'hF35F;
+defparam \macro_inst|adc1_latest_dataa_0 .coord_x = 18;
+defparam \macro_inst|adc1_latest_dataa_0 .coord_y = 8;
+defparam \macro_inst|adc1_latest_dataa_0 .coord_z = 0;
+defparam \macro_inst|adc1_latest_dataa_0 .mask = 16'hBB5F;
 defparam \macro_inst|adc1_latest_dataa_0 .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest_dataa_0 .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest_dataa_0 .ShiftMux = 1'b0;
@@ -1886,9 +1933,9 @@ defparam \macro_inst|adc1_latest_dataa_0 .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc1_latest_dataa_1 (
 	.A(\macro_inst|adc1_latest [1]),
-	.B(\macro_inst|adc2_latest [1]),
+	.B(\macro_inst|apb_paddr [3]),
 	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.D(\macro_inst|adc2_latest [1]),
 	.Cin(),
 	.Qin(),
 	.Clk(),
@@ -1899,10 +1946,10 @@ alta_slice \macro_inst|adc1_latest_dataa_1 (
 	.LutOut(\macro_inst|adc1_latest_dataa_1_combout ),
 	.Cout(),
 	.Q());
-defparam \macro_inst|adc1_latest_dataa_1 .coord_x = 19;
-defparam \macro_inst|adc1_latest_dataa_1 .coord_y = 12;
-defparam \macro_inst|adc1_latest_dataa_1 .coord_z = 7;
-defparam \macro_inst|adc1_latest_dataa_1 .mask = 16'hF35F;
+defparam \macro_inst|adc1_latest_dataa_1 .coord_x = 18;
+defparam \macro_inst|adc1_latest_dataa_1 .coord_y = 8;
+defparam \macro_inst|adc1_latest_dataa_1 .coord_z = 6;
+defparam \macro_inst|adc1_latest_dataa_1 .mask = 16'hD3DF;
 defparam \macro_inst|adc1_latest_dataa_1 .modeMux = 1'b0;
 defparam \macro_inst|adc1_latest_dataa_1 .FeedbackMux = 1'b0;
 defparam \macro_inst|adc1_latest_dataa_1 .ShiftMux = 1'b0;
@@ -1916,17 +1963,17 @@ alta_slice \macro_inst|adc1_valid_reg (
 	.D(vcc),
 	.Cin(),
 	.Qin(\macro_inst|adc1_valid ),
-	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc1_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_valid_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc1_valid ));
-defparam \macro_inst|adc1_valid_reg .coord_x = 19;
-defparam \macro_inst|adc1_valid_reg .coord_y = 12;
-defparam \macro_inst|adc1_valid_reg .coord_z = 1;
+defparam \macro_inst|adc1_valid_reg .coord_x = 17;
+defparam \macro_inst|adc1_valid_reg .coord_y = 8;
+defparam \macro_inst|adc1_valid_reg .coord_z = 2;
 defparam \macro_inst|adc1_valid_reg .mask = 16'hFF00;
 defparam \macro_inst|adc1_valid_reg .modeMux = 1'b0;
 defparam \macro_inst|adc1_valid_reg .FeedbackMux = 1'b0;
@@ -1937,22 +1984,22 @@ defparam \macro_inst|adc1_valid_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc2_eoc_d_reg (
 	.A(),
 	.B(),
-	.C(\macro_inst|adc2_eoc ),
-	.D(),
+	.C(),
+	.D(\macro_inst|adc2_eoc ),
 	.Cin(),
 	.Qin(\macro_inst|adc2_eoc_d ),
-	.Clk(bus_clk_X10001_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
+	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_eoc_inv ),
 	.Cout(),
 	.Q(\macro_inst|adc2_eoc_d ));
-defparam \macro_inst|adc2_eoc_d_reg .coord_x = 20;
-defparam \macro_inst|adc2_eoc_d_reg .coord_y = 12;
-defparam \macro_inst|adc2_eoc_d_reg .coord_z = 12;
-defparam \macro_inst|adc2_eoc_d_reg .mask = 16'h0F0F;
+defparam \macro_inst|adc2_eoc_d_reg .coord_x = 19;
+defparam \macro_inst|adc2_eoc_d_reg .coord_y = 8;
+defparam \macro_inst|adc2_eoc_d_reg .coord_z = 1;
+defparam \macro_inst|adc2_eoc_d_reg .mask = 16'h00FF;
 defparam \macro_inst|adc2_eoc_d_reg .modeMux = 1'b0;
 defparam \macro_inst|adc2_eoc_d_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_eoc_d_reg .ShiftMux = 1'b0;
@@ -1971,29 +2018,29 @@ defparam \macro_inst|adc2_inst .coord_y = 8;
 defparam \macro_inst|adc2_inst .coord_z = 0;
 
 alta_slice \macro_inst|adc2_latest[0]_reg (
-	.A(\macro_inst|adc_clk_div [0]),
-	.B(vcc),
+	.A(vcc),
+	.B(\macro_inst|adc2_eoc_d ),
 	.C(\macro_inst|adc2_data [0]),
-	.D(vcc),
+	.D(\macro_inst|adc2_eoc ),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [0]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
-	.LutOut(\macro_inst|adc_clk_div_datab_0_combout ),
-	.Cout(\macro_inst|adc_clk_div_datab_0_cout [1]),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(\macro_inst|adc2_eoc_d_A_Y ),
+	.Cout(),
 	.Q(\macro_inst|adc2_latest [0]));
-defparam \macro_inst|adc2_latest[0]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[0]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[0]_reg .coord_z = 1;
-defparam \macro_inst|adc2_latest[0]_reg .mask = 16'h6688;
-defparam \macro_inst|adc2_latest[0]_reg .modeMux = 1'b1;
+defparam \macro_inst|adc2_latest[0]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[0]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[0]_reg .coord_z = 2;
+defparam \macro_inst|adc2_latest[0]_reg .mask = 16'h0033;
+defparam \macro_inst|adc2_latest[0]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc2_latest[0]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[0]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|adc2_latest[0]_reg .BypassEn = 1'b1;
-defparam \macro_inst|adc2_latest[0]_reg .CarryEnb = 1'b0;
+defparam \macro_inst|adc2_latest[0]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[10]_reg (
 	.A(),
@@ -2002,17 +2049,17 @@ alta_slice \macro_inst|adc2_latest[10]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [10]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
 	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [10]));
-defparam \macro_inst|adc2_latest[10]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[10]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[10]_reg .coord_z = 15;
+defparam \macro_inst|adc2_latest[10]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[10]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[10]_reg .coord_z = 3;
 defparam \macro_inst|adc2_latest[10]_reg .mask = 16'hFFFF;
 defparam \macro_inst|adc2_latest[10]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[10]_reg .FeedbackMux = 1'b0;
@@ -2027,17 +2074,17 @@ alta_slice \macro_inst|adc2_latest[11]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [11]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
 	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [11]));
-defparam \macro_inst|adc2_latest[11]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[11]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[11]_reg .coord_z = 14;
+defparam \macro_inst|adc2_latest[11]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[11]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[11]_reg .coord_z = 11;
 defparam \macro_inst|adc2_latest[11]_reg .mask = 16'hFFFF;
 defparam \macro_inst|adc2_latest[11]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[11]_reg .FeedbackMux = 1'b0;
@@ -2048,73 +2095,73 @@ defparam \macro_inst|adc2_latest[11]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc2_latest[1]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc2_data [1]),
+	.C(\macro_inst|adc2_data [1]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [1]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
-	.SyncReset(),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|adc2_latest[1]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [1]));
-defparam \macro_inst|adc2_latest[1]_reg .coord_x = 18;
-defparam \macro_inst|adc2_latest[1]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[1]_reg .coord_z = 0;
-defparam \macro_inst|adc2_latest[1]_reg .mask = 16'hFF00;
-defparam \macro_inst|adc2_latest[1]_reg .modeMux = 1'b0;
+defparam \macro_inst|adc2_latest[1]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[1]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[1]_reg .coord_z = 7;
+defparam \macro_inst|adc2_latest[1]_reg .mask = 16'hFFFF;
+defparam \macro_inst|adc2_latest[1]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[1]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[1]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|adc2_latest[1]_reg .BypassEn = 1'b0;
+defparam \macro_inst|adc2_latest[1]_reg .BypassEn = 1'b1;
 defparam \macro_inst|adc2_latest[1]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[2]_reg (
-	.A(\macro_inst|adc1_eoc_d ),
-	.B(vcc),
+	.A(),
+	.B(),
 	.C(\macro_inst|adc2_data [2]),
-	.D(\macro_inst|adc1_eoc ),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [2]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
-	.LutOut(\macro_inst|adc1_eoc_d_A_Y ),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [2]));
-defparam \macro_inst|adc2_latest[2]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[2]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[2]_reg .coord_z = 13;
-defparam \macro_inst|adc2_latest[2]_reg .mask = 16'h0055;
-defparam \macro_inst|adc2_latest[2]_reg .modeMux = 1'b0;
+defparam \macro_inst|adc2_latest[2]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[2]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[2]_reg .coord_z = 4;
+defparam \macro_inst|adc2_latest[2]_reg .mask = 16'hFFFF;
+defparam \macro_inst|adc2_latest[2]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[2]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[2]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|adc2_latest[2]_reg .BypassEn = 1'b1;
 defparam \macro_inst|adc2_latest[2]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[3]_reg (
-	.A(\macro_inst|adc2_eoc_d ),
-	.B(\macro_inst|adc2_eoc ),
+	.A(),
+	.B(),
 	.C(\macro_inst|adc2_data [3]),
-	.D(vcc),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [3]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
-	.LutOut(\macro_inst|adc2_eoc_d_A_Y ),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [3]));
-defparam \macro_inst|adc2_latest[3]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[3]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[3]_reg .coord_z = 11;
-defparam \macro_inst|adc2_latest[3]_reg .mask = 16'h1111;
-defparam \macro_inst|adc2_latest[3]_reg .modeMux = 1'b0;
+defparam \macro_inst|adc2_latest[3]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[3]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[3]_reg .coord_z = 6;
+defparam \macro_inst|adc2_latest[3]_reg .mask = 16'hFFFF;
+defparam \macro_inst|adc2_latest[3]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[3]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[3]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|adc2_latest[3]_reg .BypassEn = 1'b1;
@@ -2123,151 +2170,151 @@ defparam \macro_inst|adc2_latest[3]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc2_latest[4]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc2_data [4]),
+	.C(\macro_inst|adc2_data [4]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [4]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10006_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
-	.SyncReset(),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|adc2_latest[4]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [4]));
-defparam \macro_inst|adc2_latest[4]_reg .coord_x = 18;
-defparam \macro_inst|adc2_latest[4]_reg .coord_y = 10;
-defparam \macro_inst|adc2_latest[4]_reg .coord_z = 2;
-defparam \macro_inst|adc2_latest[4]_reg .mask = 16'hFF00;
-defparam \macro_inst|adc2_latest[4]_reg .modeMux = 1'b0;
+defparam \macro_inst|adc2_latest[4]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[4]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[4]_reg .coord_z = 10;
+defparam \macro_inst|adc2_latest[4]_reg .mask = 16'hFFFF;
+defparam \macro_inst|adc2_latest[4]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[4]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[4]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|adc2_latest[4]_reg .BypassEn = 1'b0;
+defparam \macro_inst|adc2_latest[4]_reg .BypassEn = 1'b1;
 defparam \macro_inst|adc2_latest[4]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[5]_reg (
-	.A(\macro_inst|adc_clk_div [3]),
-	.B(vcc),
+	.A(),
+	.B(),
 	.C(\macro_inst|adc2_data [5]),
-	.D(vcc),
-	.Cin(\macro_inst|adc_clk_div_datab_0_cout [3]),
+	.D(),
+	.Cin(),
 	.Qin(\macro_inst|adc2_latest [5]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
-	.LutOut(\macro_inst|adc_clk_div_datab_3_combout ),
-	.Cout(\macro_inst|adc_clk_div_datab_0_cout [4]),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
+	.Cout(),
 	.Q(\macro_inst|adc2_latest [5]));
-defparam \macro_inst|adc2_latest[5]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[5]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[5]_reg .coord_z = 4;
-defparam \macro_inst|adc2_latest[5]_reg .mask = 16'h69B2;
+defparam \macro_inst|adc2_latest[5]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[5]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[5]_reg .coord_z = 12;
+defparam \macro_inst|adc2_latest[5]_reg .mask = 16'hFFFF;
 defparam \macro_inst|adc2_latest[5]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[5]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[5]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|adc2_latest[5]_reg .BypassEn = 1'b1;
-defparam \macro_inst|adc2_latest[5]_reg .CarryEnb = 1'b0;
+defparam \macro_inst|adc2_latest[5]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[6]_reg (
-	.A(\macro_inst|adc_clk_div [1]),
-	.B(vcc),
+	.A(),
+	.B(),
 	.C(\macro_inst|adc2_data [6]),
-	.D(vcc),
-	.Cin(\macro_inst|adc_clk_div_datab_0_cout [1]),
+	.D(),
+	.Cin(),
 	.Qin(\macro_inst|adc2_latest [6]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
-	.LutOut(\macro_inst|adc_clk_div_datab_1_combout ),
-	.Cout(\macro_inst|adc_clk_div_datab_0_cout [2]),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
+	.Cout(),
 	.Q(\macro_inst|adc2_latest [6]));
-defparam \macro_inst|adc2_latest[6]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[6]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[6]_reg .coord_z = 2;
-defparam \macro_inst|adc2_latest[6]_reg .mask = 16'h69B2;
+defparam \macro_inst|adc2_latest[6]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[6]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[6]_reg .coord_z = 5;
+defparam \macro_inst|adc2_latest[6]_reg .mask = 16'hFFFF;
 defparam \macro_inst|adc2_latest[6]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[6]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[6]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|adc2_latest[6]_reg .BypassEn = 1'b1;
-defparam \macro_inst|adc2_latest[6]_reg .CarryEnb = 1'b0;
+defparam \macro_inst|adc2_latest[6]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[7]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|adc2_data [7]),
+	.C(\macro_inst|adc2_data [7]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [7]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10006_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
-	.SyncReset(),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|adc2_latest[7]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [7]));
-defparam \macro_inst|adc2_latest[7]_reg .coord_x = 18;
-defparam \macro_inst|adc2_latest[7]_reg .coord_y = 10;
-defparam \macro_inst|adc2_latest[7]_reg .coord_z = 3;
-defparam \macro_inst|adc2_latest[7]_reg .mask = 16'hFF00;
-defparam \macro_inst|adc2_latest[7]_reg .modeMux = 1'b0;
+defparam \macro_inst|adc2_latest[7]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[7]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[7]_reg .coord_z = 0;
+defparam \macro_inst|adc2_latest[7]_reg .mask = 16'hFFFF;
+defparam \macro_inst|adc2_latest[7]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[7]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[7]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|adc2_latest[7]_reg .BypassEn = 1'b0;
+defparam \macro_inst|adc2_latest[7]_reg .BypassEn = 1'b1;
 defparam \macro_inst|adc2_latest[7]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[8]_reg (
-	.A(vcc),
-	.B(\macro_inst|adc_clk_div [2]),
+	.A(),
+	.B(),
 	.C(\macro_inst|adc2_data [8]),
-	.D(vcc),
-	.Cin(\macro_inst|adc_clk_div_datab_0_cout [2]),
+	.D(),
+	.Cin(),
 	.Qin(\macro_inst|adc2_latest [8]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10001_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(SyncReset_X10001_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10001_Y10001_VCC),
-	.LutOut(\macro_inst|adc_clk_div_datab_2_combout ),
-	.Cout(\macro_inst|adc_clk_div_datab_0_cout [3]),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(),
+	.Cout(),
 	.Q(\macro_inst|adc2_latest [8]));
-defparam \macro_inst|adc2_latest[8]_reg .coord_x = 20;
-defparam \macro_inst|adc2_latest[8]_reg .coord_y = 12;
-defparam \macro_inst|adc2_latest[8]_reg .coord_z = 3;
-defparam \macro_inst|adc2_latest[8]_reg .mask = 16'h69D4;
+defparam \macro_inst|adc2_latest[8]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[8]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[8]_reg .coord_z = 9;
+defparam \macro_inst|adc2_latest[8]_reg .mask = 16'hFFFF;
 defparam \macro_inst|adc2_latest[8]_reg .modeMux = 1'b1;
 defparam \macro_inst|adc2_latest[8]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[8]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|adc2_latest[8]_reg .BypassEn = 1'b1;
-defparam \macro_inst|adc2_latest[8]_reg .CarryEnb = 1'b0;
+defparam \macro_inst|adc2_latest[8]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_latest[9]_reg (
-	.A(),
-	.B(),
-	.C(),
-	.D(\macro_inst|adc2_data [9]),
+	.A(\macro_inst|adc1_eoc_d ),
+	.B(vcc),
+	.C(\macro_inst|adc2_data [9]),
+	.D(\macro_inst|adc1_eoc ),
 	.Cin(),
 	.Qin(\macro_inst|adc2_latest [9]),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10006_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
-	.SyncReset(),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10004_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.SyncReset(SyncReset_X10004_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|adc2_latest[9]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.LutOut(\macro_inst|adc1_eoc_d_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|adc2_latest [9]));
-defparam \macro_inst|adc2_latest[9]_reg .coord_x = 18;
-defparam \macro_inst|adc2_latest[9]_reg .coord_y = 10;
-defparam \macro_inst|adc2_latest[9]_reg .coord_z = 11;
-defparam \macro_inst|adc2_latest[9]_reg .mask = 16'hFF00;
+defparam \macro_inst|adc2_latest[9]_reg .coord_x = 19;
+defparam \macro_inst|adc2_latest[9]_reg .coord_y = 8;
+defparam \macro_inst|adc2_latest[9]_reg .coord_z = 13;
+defparam \macro_inst|adc2_latest[9]_reg .mask = 16'h0055;
 defparam \macro_inst|adc2_latest[9]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc2_latest[9]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc2_latest[9]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|adc2_latest[9]_reg .BypassEn = 1'b0;
+defparam \macro_inst|adc2_latest[9]_reg .BypassEn = 1'b1;
 defparam \macro_inst|adc2_latest[9]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc2_valid_reg (
@@ -2277,17 +2324,17 @@ alta_slice \macro_inst|adc2_valid_reg (
 	.D(vcc),
 	.Cin(),
 	.Qin(\macro_inst|adc2_valid ),
-	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10005_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|adc2_eoc_d_A_Y_X10002_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_valid_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|adc2_valid ));
-defparam \macro_inst|adc2_valid_reg .coord_x = 18;
-defparam \macro_inst|adc2_valid_reg .coord_y = 12;
-defparam \macro_inst|adc2_valid_reg .coord_z = 1;
+defparam \macro_inst|adc2_valid_reg .coord_x = 20;
+defparam \macro_inst|adc2_valid_reg .coord_y = 8;
+defparam \macro_inst|adc2_valid_reg .coord_z = 10;
 defparam \macro_inst|adc2_valid_reg .mask = 16'hFF00;
 defparam \macro_inst|adc2_valid_reg .modeMux = 1'b0;
 defparam \macro_inst|adc2_valid_reg .FeedbackMux = 1'b0;
@@ -2297,13 +2344,13 @@ defparam \macro_inst|adc2_valid_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc_clk_div[0]_reg (
 	.A(vcc),
-	.B(\macro_inst|adc_clk_div_datab_0_combout ),
-	.C(vcc),
-	.D(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.B(vcc),
+	.C(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.D(\macro_inst|adc_clk_div_datab_0_combout ),
 	.Cin(),
 	.Qin(\macro_inst|adc_clk_div [0]),
-	.Clk(bus_clk_X10001_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
+	.Clk(bus_clk_X10002_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
@@ -2311,9 +2358,9 @@ alta_slice \macro_inst|adc_clk_div[0]_reg (
 	.Cout(),
 	.Q(\macro_inst|adc_clk_div [0]));
 defparam \macro_inst|adc_clk_div[0]_reg .coord_x = 20;
-defparam \macro_inst|adc_clk_div[0]_reg .coord_y = 12;
+defparam \macro_inst|adc_clk_div[0]_reg .coord_y = 8;
 defparam \macro_inst|adc_clk_div[0]_reg .coord_z = 8;
-defparam \macro_inst|adc_clk_div[0]_reg .mask = 16'h00CC;
+defparam \macro_inst|adc_clk_div[0]_reg .mask = 16'h0F00;
 defparam \macro_inst|adc_clk_div[0]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc_clk_div[0]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc_clk_div[0]_reg .ShiftMux = 1'b0;
@@ -2323,12 +2370,12 @@ defparam \macro_inst|adc_clk_div[0]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc_clk_div[1]_reg (
 	.A(vcc),
 	.B(vcc),
-	.C(\macro_inst|adc_clk_div_datab_1_combout ),
-	.D(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.C(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.D(\macro_inst|adc_clk_div_datab_1_combout ),
 	.Cin(),
 	.Qin(\macro_inst|adc_clk_div [1]),
-	.Clk(bus_clk_X10001_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
+	.Clk(bus_clk_X10002_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
@@ -2336,9 +2383,9 @@ alta_slice \macro_inst|adc_clk_div[1]_reg (
 	.Cout(),
 	.Q(\macro_inst|adc_clk_div [1]));
 defparam \macro_inst|adc_clk_div[1]_reg .coord_x = 20;
-defparam \macro_inst|adc_clk_div[1]_reg .coord_y = 12;
+defparam \macro_inst|adc_clk_div[1]_reg .coord_y = 8;
 defparam \macro_inst|adc_clk_div[1]_reg .coord_z = 6;
-defparam \macro_inst|adc_clk_div[1]_reg .mask = 16'h00F0;
+defparam \macro_inst|adc_clk_div[1]_reg .mask = 16'h0F00;
 defparam \macro_inst|adc_clk_div[1]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc_clk_div[1]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc_clk_div[1]_reg .ShiftMux = 1'b0;
@@ -2347,13 +2394,13 @@ defparam \macro_inst|adc_clk_div[1]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc_clk_div[2]_reg (
 	.A(vcc),
-	.B(\macro_inst|adc_clk_div_datab_2_combout ),
-	.C(vcc),
-	.D(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.B(vcc),
+	.C(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.D(\macro_inst|adc_clk_div_datab_2_combout ),
 	.Cin(),
 	.Qin(\macro_inst|adc_clk_div [2]),
-	.Clk(bus_clk_X10001_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
+	.Clk(bus_clk_X10002_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
@@ -2361,9 +2408,9 @@ alta_slice \macro_inst|adc_clk_div[2]_reg (
 	.Cout(),
 	.Q(\macro_inst|adc_clk_div [2]));
 defparam \macro_inst|adc_clk_div[2]_reg .coord_x = 20;
-defparam \macro_inst|adc_clk_div[2]_reg .coord_y = 12;
-defparam \macro_inst|adc_clk_div[2]_reg .coord_z = 7;
-defparam \macro_inst|adc_clk_div[2]_reg .mask = 16'h00CC;
+defparam \macro_inst|adc_clk_div[2]_reg .coord_y = 8;
+defparam \macro_inst|adc_clk_div[2]_reg .coord_z = 5;
+defparam \macro_inst|adc_clk_div[2]_reg .mask = 16'h0F00;
 defparam \macro_inst|adc_clk_div[2]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc_clk_div[2]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc_clk_div[2]_reg .ShiftMux = 1'b0;
@@ -2373,12 +2420,12 @@ defparam \macro_inst|adc_clk_div[2]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|adc_clk_div[3]_reg (
 	.A(vcc),
 	.B(vcc),
-	.C(\macro_inst|adc_clk_div_datab_3_combout ),
-	.D(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.C(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.D(\macro_inst|adc_clk_div_datab_3_combout ),
 	.Cin(),
 	.Qin(\macro_inst|adc_clk_div [3]),
-	.Clk(bus_clk_X10001_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
+	.Clk(bus_clk_X10002_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
@@ -2386,9 +2433,9 @@ alta_slice \macro_inst|adc_clk_div[3]_reg (
 	.Cout(),
 	.Q(\macro_inst|adc_clk_div [3]));
 defparam \macro_inst|adc_clk_div[3]_reg .coord_x = 20;
-defparam \macro_inst|adc_clk_div[3]_reg .coord_y = 12;
-defparam \macro_inst|adc_clk_div[3]_reg .coord_z = 0;
-defparam \macro_inst|adc_clk_div[3]_reg .mask = 16'h00F0;
+defparam \macro_inst|adc_clk_div[3]_reg .coord_y = 8;
+defparam \macro_inst|adc_clk_div[3]_reg .coord_z = 7;
+defparam \macro_inst|adc_clk_div[3]_reg .mask = 16'h0F00;
 defparam \macro_inst|adc_clk_div[3]_reg .modeMux = 1'b0;
 defparam \macro_inst|adc_clk_div[3]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|adc_clk_div[3]_reg .ShiftMux = 1'b0;
@@ -2396,9 +2443,9 @@ defparam \macro_inst|adc_clk_div[3]_reg .BypassEn = 1'b0;
 defparam \macro_inst|adc_clk_div[3]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|adc_clk_div_dataa_1 (
-	.A(\macro_inst|adc_clk_div [0]),
-	.B(\macro_inst|adc_clk_div [1]),
-	.C(\macro_inst|adc_clk_div [3]),
+	.A(\macro_inst|adc_clk_div [1]),
+	.B(\macro_inst|adc_clk_div [3]),
+	.C(\macro_inst|adc_clk_div [0]),
 	.D(\macro_inst|adc_clk_div [2]),
 	.Cin(),
 	.Qin(),
@@ -2411,45 +2458,20 @@ alta_slice \macro_inst|adc_clk_div_dataa_1 (
 	.Cout(),
 	.Q());
 defparam \macro_inst|adc_clk_div_dataa_1 .coord_x = 20;
-defparam \macro_inst|adc_clk_div_dataa_1 .coord_y = 12;
-defparam \macro_inst|adc_clk_div_dataa_1 .coord_z = 5;
-defparam \macro_inst|adc_clk_div_dataa_1 .mask = 16'h0020;
+defparam \macro_inst|adc_clk_div_dataa_1 .coord_y = 8;
+defparam \macro_inst|adc_clk_div_dataa_1 .coord_z = 0;
+defparam \macro_inst|adc_clk_div_dataa_1 .mask = 16'h0040;
 defparam \macro_inst|adc_clk_div_dataa_1 .modeMux = 1'b0;
 defparam \macro_inst|adc_clk_div_dataa_1 .FeedbackMux = 1'b0;
 defparam \macro_inst|adc_clk_div_dataa_1 .ShiftMux = 1'b0;
 defparam \macro_inst|adc_clk_div_dataa_1 .BypassEn = 1'b0;
 defparam \macro_inst|adc_clk_div_dataa_1 .CarryEnb = 1'b1;
 
-alta_slice \macro_inst|adc_sclk_reg (
-	.A(vcc),
+alta_slice \macro_inst|adc_clk_div_datab_0 (
+	.A(\macro_inst|adc_clk_div [0]),
 	.B(vcc),
 	.C(vcc),
-	.D(\macro_inst|adc_clk_div_dataa_1_combout ),
-	.Cin(),
-	.Qin(\macro_inst|adc_sclk ),
-	.Clk(bus_clk_X10001_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
-	.SyncReset(),
-	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|adc_sclk_A_Y ),
-	.Cout(),
-	.Q(\macro_inst|adc_sclk ));
-defparam \macro_inst|adc_sclk_reg .coord_x = 20;
-defparam \macro_inst|adc_sclk_reg .coord_y = 12;
-defparam \macro_inst|adc_sclk_reg .coord_z = 9;
-defparam \macro_inst|adc_sclk_reg .mask = 16'h0FF0;
-defparam \macro_inst|adc_sclk_reg .modeMux = 1'b0;
-defparam \macro_inst|adc_sclk_reg .FeedbackMux = 1'b1;
-defparam \macro_inst|adc_sclk_reg .ShiftMux = 1'b0;
-defparam \macro_inst|adc_sclk_reg .BypassEn = 1'b0;
-defparam \macro_inst|adc_sclk_reg .CarryEnb = 1'b1;
-
-alta_slice \macro_inst|apb_penable_B_Y_combout (
-	.A(vcc),
-	.B(\macro_inst|apb_psel ),
-	.C(\macro_inst|apb_penable ),
-	.D(\macro_inst|apb_pwrite ),
+	.D(vcc),
 	.Cin(),
 	.Qin(),
 	.Clk(),
@@ -2457,38 +2479,138 @@ alta_slice \macro_inst|apb_penable_B_Y_combout (
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
-	.LutOut(\macro_inst|apb_penable_B_Y ),
-	.Cout(),
+	.LutOut(\macro_inst|adc_clk_div_datab_0_combout ),
+	.Cout(\macro_inst|adc_clk_div_datab_0_cout [1]),
 	.Q());
-defparam \macro_inst|apb_penable_B_Y_combout .coord_x = 14;
-defparam \macro_inst|apb_penable_B_Y_combout .coord_y = 12;
-defparam \macro_inst|apb_penable_B_Y_combout .coord_z = 4;
-defparam \macro_inst|apb_penable_B_Y_combout .mask = 16'h000C;
-defparam \macro_inst|apb_penable_B_Y_combout .modeMux = 1'b0;
-defparam \macro_inst|apb_penable_B_Y_combout .FeedbackMux = 1'b0;
-defparam \macro_inst|apb_penable_B_Y_combout .ShiftMux = 1'b0;
-defparam \macro_inst|apb_penable_B_Y_combout .BypassEn = 1'b0;
-defparam \macro_inst|apb_penable_B_Y_combout .CarryEnb = 1'b1;
+defparam \macro_inst|adc_clk_div_datab_0 .coord_x = 20;
+defparam \macro_inst|adc_clk_div_datab_0 .coord_y = 8;
+defparam \macro_inst|adc_clk_div_datab_0 .coord_z = 1;
+defparam \macro_inst|adc_clk_div_datab_0 .mask = 16'h6688;
+defparam \macro_inst|adc_clk_div_datab_0 .modeMux = 1'b1;
+defparam \macro_inst|adc_clk_div_datab_0 .FeedbackMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_0 .ShiftMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_0 .BypassEn = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_0 .CarryEnb = 1'b0;
+
+alta_slice \macro_inst|adc_clk_div_datab_1 (
+	.A(\macro_inst|adc_clk_div [1]),
+	.B(vcc),
+	.C(vcc),
+	.D(vcc),
+	.Cin(\macro_inst|adc_clk_div_datab_0_cout [1]),
+	.Qin(),
+	.Clk(),
+	.AsyncReset(),
+	.SyncReset(),
+	.ShiftData(),
+	.SyncLoad(),
+	.LutOut(\macro_inst|adc_clk_div_datab_1_combout ),
+	.Cout(\macro_inst|adc_clk_div_datab_0_cout [2]),
+	.Q());
+defparam \macro_inst|adc_clk_div_datab_1 .coord_x = 20;
+defparam \macro_inst|adc_clk_div_datab_1 .coord_y = 8;
+defparam \macro_inst|adc_clk_div_datab_1 .coord_z = 2;
+defparam \macro_inst|adc_clk_div_datab_1 .mask = 16'h69B2;
+defparam \macro_inst|adc_clk_div_datab_1 .modeMux = 1'b1;
+defparam \macro_inst|adc_clk_div_datab_1 .FeedbackMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_1 .ShiftMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_1 .BypassEn = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_1 .CarryEnb = 1'b0;
+
+alta_slice \macro_inst|adc_clk_div_datab_2 (
+	.A(vcc),
+	.B(\macro_inst|adc_clk_div [2]),
+	.C(vcc),
+	.D(vcc),
+	.Cin(\macro_inst|adc_clk_div_datab_0_cout [2]),
+	.Qin(),
+	.Clk(),
+	.AsyncReset(),
+	.SyncReset(),
+	.ShiftData(),
+	.SyncLoad(),
+	.LutOut(\macro_inst|adc_clk_div_datab_2_combout ),
+	.Cout(\macro_inst|adc_clk_div_datab_0_cout [3]),
+	.Q());
+defparam \macro_inst|adc_clk_div_datab_2 .coord_x = 20;
+defparam \macro_inst|adc_clk_div_datab_2 .coord_y = 8;
+defparam \macro_inst|adc_clk_div_datab_2 .coord_z = 3;
+defparam \macro_inst|adc_clk_div_datab_2 .mask = 16'h69D4;
+defparam \macro_inst|adc_clk_div_datab_2 .modeMux = 1'b1;
+defparam \macro_inst|adc_clk_div_datab_2 .FeedbackMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_2 .ShiftMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_2 .BypassEn = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_2 .CarryEnb = 1'b0;
+
+alta_slice \macro_inst|adc_clk_div_datab_3 (
+	.A(vcc),
+	.B(\macro_inst|adc_clk_div [3]),
+	.C(vcc),
+	.D(vcc),
+	.Cin(\macro_inst|adc_clk_div_datab_0_cout [3]),
+	.Qin(),
+	.Clk(),
+	.AsyncReset(),
+	.SyncReset(),
+	.ShiftData(),
+	.SyncLoad(),
+	.LutOut(\macro_inst|adc_clk_div_datab_3_combout ),
+	.Cout(\macro_inst|adc_clk_div_datab_0_cout [4]),
+	.Q());
+defparam \macro_inst|adc_clk_div_datab_3 .coord_x = 20;
+defparam \macro_inst|adc_clk_div_datab_3 .coord_y = 8;
+defparam \macro_inst|adc_clk_div_datab_3 .coord_z = 4;
+defparam \macro_inst|adc_clk_div_datab_3 .mask = 16'h69D4;
+defparam \macro_inst|adc_clk_div_datab_3 .modeMux = 1'b1;
+defparam \macro_inst|adc_clk_div_datab_3 .FeedbackMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_3 .ShiftMux = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_3 .BypassEn = 1'b0;
+defparam \macro_inst|adc_clk_div_datab_3 .CarryEnb = 1'b0;
+
+alta_slice \macro_inst|adc_sclk_reg (
+	.A(\macro_inst|adc_clk_div_dataa_1_combout ),
+	.B(vcc),
+	.C(vcc),
+	.D(vcc),
+	.Cin(),
+	.Qin(\macro_inst|adc_sclk ),
+	.Clk(bus_clk_X10002_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.SyncReset(),
+	.ShiftData(),
+	.SyncLoad(),
+	.LutOut(\macro_inst|adc_sclk_A_Y ),
+	.Cout(),
+	.Q(\macro_inst|adc_sclk ));
+defparam \macro_inst|adc_sclk_reg .coord_x = 20;
+defparam \macro_inst|adc_sclk_reg .coord_y = 8;
+defparam \macro_inst|adc_sclk_reg .coord_z = 9;
+defparam \macro_inst|adc_sclk_reg .mask = 16'h5A5A;
+defparam \macro_inst|adc_sclk_reg .modeMux = 1'b0;
+defparam \macro_inst|adc_sclk_reg .FeedbackMux = 1'b1;
+defparam \macro_inst|adc_sclk_reg .ShiftMux = 1'b0;
+defparam \macro_inst|adc_sclk_reg .BypassEn = 1'b0;
+defparam \macro_inst|adc_sclk_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[0]_reg (
 	.A(\macro_inst|adc1_valid ),
-	.B(\macro_inst|adc1_latest_dataa_0_combout ),
+	.B(\macro_inst|apb_paddr [3]),
 	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.D(\macro_inst|adc1_latest_dataa_0_combout ),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [0]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_0_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [0]));
-defparam \macro_inst|apb_prdata[0]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[0]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[0]_reg .coord_z = 0;
-defparam \macro_inst|apb_prdata[0]_reg .mask = 16'h333B;
+defparam \macro_inst|apb_prdata[0]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[0]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[0]_reg .coord_z = 1;
+defparam \macro_inst|apb_prdata[0]_reg .mask = 16'h02FF;
 defparam \macro_inst|apb_prdata[0]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[0]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[0]_reg .ShiftMux = 1'b0;
@@ -2496,24 +2618,24 @@ defparam \macro_inst|apb_prdata[0]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[0]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[10]_reg (
-	.A(\macro_inst|apb_paddr [2]),
+	.A(\macro_inst|adc1_latest [10]),
 	.B(\macro_inst|apb_paddr [3]),
-	.C(\macro_inst|adc1_latest [10]),
+	.C(\macro_inst|apb_paddr [2]),
 	.D(\macro_inst|adc2_latest [10]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [10]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_10_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [10]));
-defparam \macro_inst|apb_prdata[10]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[10]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[10]_reg .coord_z = 11;
-defparam \macro_inst|apb_prdata[10]_reg .mask = 16'h6420;
+defparam \macro_inst|apb_prdata[10]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[10]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[10]_reg .coord_z = 5;
+defparam \macro_inst|apb_prdata[10]_reg .mask = 16'h2C20;
 defparam \macro_inst|apb_prdata[10]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[10]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[10]_reg .ShiftMux = 1'b0;
@@ -2521,24 +2643,24 @@ defparam \macro_inst|apb_prdata[10]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[10]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[11]_reg (
-	.A(\macro_inst|adc2_latest [11]),
+	.A(\macro_inst|apb_paddr [3]),
 	.B(\macro_inst|adc1_latest [11]),
 	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.D(\macro_inst|adc2_latest [11]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [11]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_11_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [11]));
-defparam \macro_inst|apb_prdata[11]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[11]_reg .coord_y = 12;
+defparam \macro_inst|apb_prdata[11]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[11]_reg .coord_y = 8;
 defparam \macro_inst|apb_prdata[11]_reg .coord_z = 12;
-defparam \macro_inst|apb_prdata[11]_reg .mask = 16'h0AC0;
+defparam \macro_inst|apb_prdata[11]_reg .mask = 16'h4A40;
 defparam \macro_inst|apb_prdata[11]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[11]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[11]_reg .ShiftMux = 1'b0;
@@ -2547,23 +2669,23 @@ defparam \macro_inst|apb_prdata[11]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[1]_reg (
 	.A(\macro_inst|adc2_valid ),
-	.B(\macro_inst|adc1_latest_dataa_1_combout ),
+	.B(\macro_inst|apb_paddr [3]),
 	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.D(\macro_inst|adc1_latest_dataa_1_combout ),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [1]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc1_latest_A_1_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [1]));
-defparam \macro_inst|apb_prdata[1]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[1]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[1]_reg .coord_z = 6;
-defparam \macro_inst|apb_prdata[1]_reg .mask = 16'h333B;
+defparam \macro_inst|apb_prdata[1]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[1]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[1]_reg .coord_z = 7;
+defparam \macro_inst|apb_prdata[1]_reg .mask = 16'h02FF;
 defparam \macro_inst|apb_prdata[1]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[1]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[1]_reg .ShiftMux = 1'b0;
@@ -2571,24 +2693,24 @@ defparam \macro_inst|apb_prdata[1]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[1]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[2]_reg (
-	.A(\macro_inst|adc2_latest [2]),
-	.B(\macro_inst|adc1_latest [2]),
+	.A(\macro_inst|apb_paddr [3]),
+	.B(\macro_inst|adc2_latest [2]),
 	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.D(\macro_inst|adc1_latest [2]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [2]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_2_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [2]));
-defparam \macro_inst|apb_prdata[2]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[2]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[2]_reg .coord_z = 10;
-defparam \macro_inst|apb_prdata[2]_reg .mask = 16'h0AC0;
+defparam \macro_inst|apb_prdata[2]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[2]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[2]_reg .coord_z = 3;
+defparam \macro_inst|apb_prdata[2]_reg .mask = 16'h5808;
 defparam \macro_inst|apb_prdata[2]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[2]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[2]_reg .ShiftMux = 1'b0;
@@ -2596,23 +2718,23 @@ defparam \macro_inst|apb_prdata[2]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[2]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[3]_reg (
-	.A(\macro_inst|apb_paddr [2]),
-	.B(\macro_inst|adc2_latest [3]),
-	.C(\macro_inst|adc1_latest [3]),
-	.D(\macro_inst|apb_paddr [3]),
+	.A(\macro_inst|apb_paddr [3]),
+	.B(\macro_inst|adc1_latest [3]),
+	.C(\macro_inst|adc2_latest [3]),
+	.D(\macro_inst|apb_paddr [2]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [3]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_3_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [3]));
-defparam \macro_inst|apb_prdata[3]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[3]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[3]_reg .coord_z = 9;
+defparam \macro_inst|apb_prdata[3]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[3]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[3]_reg .coord_z = 15;
 defparam \macro_inst|apb_prdata[3]_reg .mask = 16'h44A0;
 defparam \macro_inst|apb_prdata[3]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[3]_reg .FeedbackMux = 1'b0;
@@ -2621,24 +2743,24 @@ defparam \macro_inst|apb_prdata[3]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[3]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[4]_reg (
-	.A(\macro_inst|adc1_latest [4]),
-	.B(\macro_inst|adc2_latest [4]),
+	.A(\macro_inst|apb_paddr [3]),
+	.B(\macro_inst|adc1_latest [4]),
 	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.D(\macro_inst|adc2_latest [4]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [4]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_4_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [4]));
-defparam \macro_inst|apb_prdata[4]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[4]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[4]_reg .coord_z = 4;
-defparam \macro_inst|apb_prdata[4]_reg .mask = 16'h0CA0;
+defparam \macro_inst|apb_prdata[4]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[4]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[4]_reg .coord_z = 11;
+defparam \macro_inst|apb_prdata[4]_reg .mask = 16'h4A40;
 defparam \macro_inst|apb_prdata[4]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[4]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[4]_reg .ShiftMux = 1'b0;
@@ -2646,24 +2768,24 @@ defparam \macro_inst|apb_prdata[4]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[4]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[5]_reg (
-	.A(\macro_inst|adc2_latest [5]),
-	.B(\macro_inst|adc1_latest [5]),
+	.A(\macro_inst|adc1_latest [5]),
+	.B(\macro_inst|adc2_latest [5]),
 	.C(\macro_inst|apb_paddr [2]),
 	.D(\macro_inst|apb_paddr [3]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [5]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_5_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [5]));
-defparam \macro_inst|apb_prdata[5]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[5]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[5]_reg .coord_z = 15;
-defparam \macro_inst|apb_prdata[5]_reg .mask = 16'h0AC0;
+defparam \macro_inst|apb_prdata[5]_reg .coord_x = 17;
+defparam \macro_inst|apb_prdata[5]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[5]_reg .coord_z = 0;
+defparam \macro_inst|apb_prdata[5]_reg .mask = 16'h0CA0;
 defparam \macro_inst|apb_prdata[5]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[5]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[5]_reg .ShiftMux = 1'b0;
@@ -2671,14 +2793,14 @@ defparam \macro_inst|apb_prdata[5]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[5]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[6]_reg (
-	.A(\macro_inst|apb_paddr [3]),
-	.B(\macro_inst|adc2_latest [6]),
-	.C(\macro_inst|apb_paddr [2]),
+	.A(\macro_inst|adc2_latest [6]),
+	.B(\macro_inst|apb_paddr [2]),
+	.C(\macro_inst|apb_paddr [3]),
 	.D(\macro_inst|adc1_latest [6]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [6]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10006_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
@@ -2686,9 +2808,9 @@ alta_slice \macro_inst|apb_prdata[6]_reg (
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [6]));
 defparam \macro_inst|apb_prdata[6]_reg .coord_x = 18;
-defparam \macro_inst|apb_prdata[6]_reg .coord_y = 10;
-defparam \macro_inst|apb_prdata[6]_reg .coord_z = 5;
-defparam \macro_inst|apb_prdata[6]_reg .mask = 16'h5808;
+defparam \macro_inst|apb_prdata[6]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[6]_reg .coord_z = 9;
+defparam \macro_inst|apb_prdata[6]_reg .mask = 16'h2C20;
 defparam \macro_inst|apb_prdata[6]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[6]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[6]_reg .ShiftMux = 1'b0;
@@ -2696,24 +2818,24 @@ defparam \macro_inst|apb_prdata[6]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[6]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[7]_reg (
-	.A(\macro_inst|apb_paddr [2]),
-	.B(\macro_inst|adc1_latest [7]),
-	.C(\macro_inst|apb_paddr [3]),
-	.D(\macro_inst|adc2_latest [7]),
+	.A(\macro_inst|adc1_latest [7]),
+	.B(\macro_inst|adc2_latest [7]),
+	.C(\macro_inst|apb_paddr [2]),
+	.D(\macro_inst|apb_paddr [3]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [7]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10006_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10005_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_7_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [7]));
-defparam \macro_inst|apb_prdata[7]_reg .coord_x = 18;
-defparam \macro_inst|apb_prdata[7]_reg .coord_y = 10;
-defparam \macro_inst|apb_prdata[7]_reg .coord_z = 0;
-defparam \macro_inst|apb_prdata[7]_reg .mask = 16'h5808;
+defparam \macro_inst|apb_prdata[7]_reg .coord_x = 17;
+defparam \macro_inst|apb_prdata[7]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[7]_reg .coord_z = 6;
+defparam \macro_inst|apb_prdata[7]_reg .mask = 16'h0CA0;
 defparam \macro_inst|apb_prdata[7]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[7]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[7]_reg .ShiftMux = 1'b0;
@@ -2722,23 +2844,23 @@ defparam \macro_inst|apb_prdata[7]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[8]_reg (
 	.A(\macro_inst|adc2_latest [8]),
-	.B(\macro_inst|adc1_latest [8]),
-	.C(\macro_inst|apb_paddr [2]),
-	.D(\macro_inst|apb_paddr [3]),
+	.B(\macro_inst|apb_paddr [2]),
+	.C(\macro_inst|apb_paddr [3]),
+	.D(\macro_inst|adc1_latest [8]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [8]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10002_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10002_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|adc2_latest_A_8_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [8]));
-defparam \macro_inst|apb_prdata[8]_reg .coord_x = 19;
-defparam \macro_inst|apb_prdata[8]_reg .coord_y = 12;
-defparam \macro_inst|apb_prdata[8]_reg .coord_z = 13;
-defparam \macro_inst|apb_prdata[8]_reg .mask = 16'h0AC0;
+defparam \macro_inst|apb_prdata[8]_reg .coord_x = 18;
+defparam \macro_inst|apb_prdata[8]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[8]_reg .coord_z = 4;
+defparam \macro_inst|apb_prdata[8]_reg .mask = 16'h2C20;
 defparam \macro_inst|apb_prdata[8]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[8]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[8]_reg .ShiftMux = 1'b0;
@@ -2746,14 +2868,14 @@ defparam \macro_inst|apb_prdata[8]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[8]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|apb_prdata[9]_reg (
-	.A(\macro_inst|adc1_latest [9]),
-	.B(\macro_inst|adc2_latest [9]),
-	.C(\macro_inst|apb_paddr [3]),
-	.D(\macro_inst|apb_paddr [2]),
+	.A(\macro_inst|adc2_latest [9]),
+	.B(\macro_inst|apb_paddr [3]),
+	.C(\macro_inst|apb_paddr [2]),
+	.D(\macro_inst|adc1_latest [9]),
 	.Cin(),
 	.Qin(\macro_inst|apb_prdata [9]),
-	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10006_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|apb_penable_B_Y_X10001_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10001_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
@@ -2761,39 +2883,14 @@ alta_slice \macro_inst|apb_prdata[9]_reg (
 	.Cout(),
 	.Q(\macro_inst|apb_prdata [9]));
 defparam \macro_inst|apb_prdata[9]_reg .coord_x = 18;
-defparam \macro_inst|apb_prdata[9]_reg .coord_y = 10;
-defparam \macro_inst|apb_prdata[9]_reg .coord_z = 4;
-defparam \macro_inst|apb_prdata[9]_reg .mask = 16'h0AC0;
+defparam \macro_inst|apb_prdata[9]_reg .coord_y = 8;
+defparam \macro_inst|apb_prdata[9]_reg .coord_z = 13;
+defparam \macro_inst|apb_prdata[9]_reg .mask = 16'h3808;
 defparam \macro_inst|apb_prdata[9]_reg .modeMux = 1'b0;
 defparam \macro_inst|apb_prdata[9]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|apb_prdata[9]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|apb_prdata[9]_reg .BypassEn = 1'b0;
 defparam \macro_inst|apb_prdata[9]_reg .CarryEnb = 1'b1;
-
-alta_slice \macro_inst|bridge|ahb_htrans_B_1_Y_combout (
-	.A(vcc),
-	.B(\macro_inst|bridge|hreadyout_reg_q ),
-	.C(vcc),
-	.D(\macro_inst|bridge|ahb_htrans [1]),
-	.Cin(),
-	.Qin(),
-	.Clk(),
-	.AsyncReset(),
-	.SyncReset(),
-	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|bridge|ahb_htrans_B_1_Y ),
-	.Cout(),
-	.Q());
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .coord_x = 14;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .coord_y = 12;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .coord_z = 6;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .mask = 16'h3300;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .modeMux = 1'b0;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .FeedbackMux = 1'b0;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .BypassEn = 1'b0;
-defparam \macro_inst|bridge|ahb_htrans_B_1_Y_combout .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|apbState[0]_reg (
 	.A(),
@@ -2802,17 +2899,17 @@ alta_slice \macro_inst|bridge|apbState[0]_reg (
 	.D(\macro_inst|bridge|pvalid_A_1_Y_A_Y ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|apbState[0]_reg_q ),
-	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|pvalid_A_1_Y_A_Y_inv ),
 	.Cout(),
 	.Q(\macro_inst|bridge|apbState[0]_reg_q ));
-defparam \macro_inst|bridge|apbState[0]_reg .coord_x = 15;
+defparam \macro_inst|bridge|apbState[0]_reg .coord_x = 14;
 defparam \macro_inst|bridge|apbState[0]_reg .coord_y = 12;
-defparam \macro_inst|bridge|apbState[0]_reg .coord_z = 7;
+defparam \macro_inst|bridge|apbState[0]_reg .coord_z = 6;
 defparam \macro_inst|bridge|apbState[0]_reg .mask = 16'h00FF;
 defparam \macro_inst|bridge|apbState[0]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|apbState[0]_reg .FeedbackMux = 1'b0;
@@ -2821,35 +2918,35 @@ defparam \macro_inst|bridge|apbState[0]_reg .BypassEn = 1'b0;
 defparam \macro_inst|bridge|apbState[0]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|apbState[1]_reg (
-	.A(),
-	.B(),
-	.C(),
-	.D(\macro_inst|bridge|apbState [2]),
+	.A(\macro_inst|bridge|apbState[0]_reg_q ),
+	.B(vcc),
+	.C(\macro_inst|bridge|apbState [2]),
+	.D(\macro_inst|bridge|pvalid ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|apbState [1]),
 	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
 	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
-	.SyncReset(),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|bridge|apbState[1]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
+	.LutOut(\macro_inst|bridge|pvalid_A_1_Y_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|bridge|apbState [1]));
 defparam \macro_inst|bridge|apbState[1]_reg .coord_x = 14;
 defparam \macro_inst|bridge|apbState[1]_reg .coord_y = 12;
-defparam \macro_inst|bridge|apbState[1]_reg .coord_z = 13;
-defparam \macro_inst|bridge|apbState[1]_reg .mask = 16'hFF00;
+defparam \macro_inst|bridge|apbState[1]_reg .coord_z = 3;
+defparam \macro_inst|bridge|apbState[1]_reg .mask = 16'h00F5;
 defparam \macro_inst|bridge|apbState[1]_reg .modeMux = 1'b0;
-defparam \macro_inst|bridge|apbState[1]_reg .FeedbackMux = 1'b0;
+defparam \macro_inst|bridge|apbState[1]_reg .FeedbackMux = 1'b1;
 defparam \macro_inst|bridge|apbState[1]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|apbState[1]_reg .BypassEn = 1'b0;
+defparam \macro_inst|bridge|apbState[1]_reg .BypassEn = 1'b1;
 defparam \macro_inst|bridge|apbState[1]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|apbState[2]_reg (
-	.A(vcc),
-	.B(\macro_inst|bridge|apbState [1]),
-	.C(\macro_inst|bridge|apbState[0]_reg_q ),
-	.D(\macro_inst|bridge|pvalid ),
+	.A(\macro_inst|bridge|apbState[0]_reg_q ),
+	.B(vcc),
+	.C(\macro_inst|bridge|pvalid ),
+	.D(\macro_inst|bridge|apbState [1]),
 	.Cin(),
 	.Qin(\macro_inst|bridge|apbState [2]),
 	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
@@ -2862,8 +2959,8 @@ alta_slice \macro_inst|bridge|apbState[2]_reg (
 	.Q(\macro_inst|bridge|apbState [2]));
 defparam \macro_inst|bridge|apbState[2]_reg .coord_x = 14;
 defparam \macro_inst|bridge|apbState[2]_reg .coord_y = 12;
-defparam \macro_inst|bridge|apbState[2]_reg .coord_z = 1;
-defparam \macro_inst|bridge|apbState[2]_reg .mask = 16'hCF00;
+defparam \macro_inst|bridge|apbState[2]_reg .coord_z = 12;
+defparam \macro_inst|bridge|apbState[2]_reg .mask = 16'hF050;
 defparam \macro_inst|bridge|apbState[2]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|apbState[2]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|apbState[2]_reg .ShiftMux = 1'b0;
@@ -2877,17 +2974,17 @@ alta_slice \macro_inst|bridge|haddr[2]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|bridge|haddr [2]),
-	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
-	.SyncReset(SyncReset_X10003_Y10001_GND),
+	.Clk(bus_clk_X10006_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
+	.SyncReset(SyncReset_X10006_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10003_Y10001_SIG ),
+	.SyncLoad(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10006_Y10001_SIG ),
 	.LutOut(\macro_inst|bridge|haddr[2]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|haddr [2]));
-defparam \macro_inst|bridge|haddr[2]_reg .coord_x = 14;
+defparam \macro_inst|bridge|haddr[2]_reg .coord_x = 15;
 defparam \macro_inst|bridge|haddr[2]_reg .coord_y = 12;
-defparam \macro_inst|bridge|haddr[2]_reg .coord_z = 2;
+defparam \macro_inst|bridge|haddr[2]_reg .coord_z = 0;
 defparam \macro_inst|bridge|haddr[2]_reg .mask = 16'hF0F0;
 defparam \macro_inst|bridge|haddr[2]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|haddr[2]_reg .FeedbackMux = 1'b1;
@@ -2902,17 +2999,17 @@ alta_slice \macro_inst|bridge|haddr[3]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|bridge|haddr [3]),
-	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
-	.SyncReset(SyncReset_X10003_Y10001_GND),
+	.Clk(bus_clk_X10006_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
+	.SyncReset(SyncReset_X10006_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10003_Y10001_SIG ),
+	.SyncLoad(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10006_Y10001_SIG ),
 	.LutOut(\macro_inst|bridge|haddr[3]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|haddr [3]));
-defparam \macro_inst|bridge|haddr[3]_reg .coord_x = 14;
+defparam \macro_inst|bridge|haddr[3]_reg .coord_x = 15;
 defparam \macro_inst|bridge|haddr[3]_reg .coord_y = 12;
-defparam \macro_inst|bridge|haddr[3]_reg .coord_z = 14;
+defparam \macro_inst|bridge|haddr[3]_reg .coord_z = 12;
 defparam \macro_inst|bridge|haddr[3]_reg .mask = 16'hF0F0;
 defparam \macro_inst|bridge|haddr[3]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|haddr[3]_reg .FeedbackMux = 1'b1;
@@ -2927,17 +3024,17 @@ alta_slice \macro_inst|bridge|hdone_reg (
 	.D(\macro_inst|bridge|ahb_hreadyout_A_Y ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|hdone_reg_q ),
-	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.Clk(bus_clk_X10007_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|ahb_hreadyout_A_Y_inv ),
 	.Cout(),
 	.Q(\macro_inst|bridge|hdone_reg_q ));
-defparam \macro_inst|bridge|hdone_reg .coord_x = 15;
+defparam \macro_inst|bridge|hdone_reg .coord_x = 17;
 defparam \macro_inst|bridge|hdone_reg .coord_y = 12;
-defparam \macro_inst|bridge|hdone_reg .coord_z = 11;
+defparam \macro_inst|bridge|hdone_reg .coord_z = 13;
 defparam \macro_inst|bridge|hdone_reg .mask = 16'h00FF;
 defparam \macro_inst|bridge|hdone_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|hdone_reg .FeedbackMux = 1'b0;
@@ -2962,7 +3059,7 @@ alta_slice \macro_inst|bridge|hreadyout_reg (
 	.Q(\macro_inst|bridge|hreadyout_reg_q ));
 defparam \macro_inst|bridge|hreadyout_reg .coord_x = 14;
 defparam \macro_inst|bridge|hreadyout_reg .coord_y = 12;
-defparam \macro_inst|bridge|hreadyout_reg .coord_z = 3;
+defparam \macro_inst|bridge|hreadyout_reg .coord_z = 1;
 defparam \macro_inst|bridge|hreadyout_reg .mask = 16'h00FF;
 defparam \macro_inst|bridge|hreadyout_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|hreadyout_reg .FeedbackMux = 1'b0;
@@ -2971,9 +3068,9 @@ defparam \macro_inst|bridge|hreadyout_reg .BypassEn = 1'b0;
 defparam \macro_inst|bridge|hreadyout_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|hreadyout_reg_q_S_Y_combout (
-	.A(\macro_inst|bridge|hdone_reg_q ),
-	.B(\macro_inst|bridge|hreadyout_reg_q ),
-	.C(\macro_inst|bridge|pdone ),
+	.A(\macro_inst|bridge|pdone ),
+	.B(\macro_inst|bridge|hdone_reg_q ),
+	.C(\macro_inst|bridge|hreadyout_reg_q ),
 	.D(\macro_inst|bridge|ahb_htrans [1]),
 	.Cin(),
 	.Qin(),
@@ -2987,8 +3084,8 @@ alta_slice \macro_inst|bridge|hreadyout_reg_q_S_Y_combout (
 	.Q());
 defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .coord_x = 14;
 defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .coord_y = 12;
-defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .coord_z = 5;
-defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .mask = 16'h80B3;
+defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .coord_z = 0;
+defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .mask = 16'h808F;
 defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .modeMux = 1'b0;
 defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|hreadyout_reg_q_S_Y_combout .ShiftMux = 1'b0;
@@ -3002,17 +3099,17 @@ alta_slice \macro_inst|bridge|hwrite_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|bridge|hwrite ),
-	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
-	.SyncReset(SyncReset_X10003_Y10001_GND),
+	.Clk(bus_clk_X10006_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10006_Y10001_INV),
+	.SyncReset(SyncReset_X10006_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10003_Y10001_SIG ),
+	.SyncLoad(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10006_Y10001_SIG ),
 	.LutOut(\macro_inst|bridge|hwrite_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|hwrite ));
-defparam \macro_inst|bridge|hwrite_reg .coord_x = 14;
+defparam \macro_inst|bridge|hwrite_reg .coord_x = 15;
 defparam \macro_inst|bridge|hwrite_reg .coord_y = 12;
-defparam \macro_inst|bridge|hwrite_reg .coord_z = 0;
+defparam \macro_inst|bridge|hwrite_reg .coord_z = 13;
 defparam \macro_inst|bridge|hwrite_reg .mask = 16'hF0F0;
 defparam \macro_inst|bridge|hwrite_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|hwrite_reg .FeedbackMux = 1'b1;
@@ -3027,17 +3124,17 @@ alta_slice \macro_inst|bridge|paddr[2]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|apb_paddr [2]),
-	.Clk(bus_clk_X10005_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
-	.SyncReset(SyncReset_X10005_Y10001_GND),
+	.Clk(bus_clk_X10007_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.SyncReset(SyncReset_X10007_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10005_Y10001_SIG ),
+	.SyncLoad(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10007_Y10001_SIG ),
 	.LutOut(\macro_inst|bridge|paddr[2]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|apb_paddr [2]));
-defparam \macro_inst|bridge|paddr[2]_reg .coord_x = 18;
+defparam \macro_inst|bridge|paddr[2]_reg .coord_x = 17;
 defparam \macro_inst|bridge|paddr[2]_reg .coord_y = 12;
-defparam \macro_inst|bridge|paddr[2]_reg .coord_z = 3;
+defparam \macro_inst|bridge|paddr[2]_reg .coord_z = 1;
 defparam \macro_inst|bridge|paddr[2]_reg .mask = 16'hF0F0;
 defparam \macro_inst|bridge|paddr[2]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|paddr[2]_reg .FeedbackMux = 1'b1;
@@ -3052,15 +3149,15 @@ alta_slice \macro_inst|bridge|paddr[3]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|apb_paddr [3]),
-	.Clk(bus_clk_X10005_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
-	.SyncReset(SyncReset_X10005_Y10001_GND),
+	.Clk(bus_clk_X10007_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.SyncReset(SyncReset_X10007_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10005_Y10001_SIG ),
+	.SyncLoad(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10007_Y10001_SIG ),
 	.LutOut(\macro_inst|bridge|paddr[3]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|apb_paddr [3]));
-defparam \macro_inst|bridge|paddr[3]_reg .coord_x = 18;
+defparam \macro_inst|bridge|paddr[3]_reg .coord_x = 17;
 defparam \macro_inst|bridge|paddr[3]_reg .coord_y = 12;
 defparam \macro_inst|bridge|paddr[3]_reg .coord_z = 2;
 defparam \macro_inst|bridge|paddr[3]_reg .mask = 16'hF0F0;
@@ -3077,17 +3174,17 @@ alta_slice \macro_inst|bridge|pdone_reg (
 	.D(\macro_inst|bridge|apb_pdone ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|pdone ),
-	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|pdone_B_1_Y ),
 	.Cout(),
 	.Q(\macro_inst|bridge|pdone ));
-defparam \macro_inst|bridge|pdone_reg .coord_x = 15;
+defparam \macro_inst|bridge|pdone_reg .coord_x = 14;
 defparam \macro_inst|bridge|pdone_reg .coord_y = 12;
-defparam \macro_inst|bridge|pdone_reg .coord_z = 1;
+defparam \macro_inst|bridge|pdone_reg .coord_z = 14;
 defparam \macro_inst|bridge|pdone_reg .mask = 16'h0F00;
 defparam \macro_inst|bridge|pdone_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|pdone_reg .FeedbackMux = 1'b1;
@@ -3096,24 +3193,24 @@ defparam \macro_inst|bridge|pdone_reg .BypassEn = 1'b0;
 defparam \macro_inst|bridge|pdone_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|penable_reg (
-	.A(vcc),
-	.B(\macro_inst|bridge|apbState [2]),
+	.A(\macro_inst|bridge|apbState [2]),
+	.B(vcc),
 	.C(vcc),
 	.D(\macro_inst|bridge|apbState [1]),
 	.Cin(),
 	.Qin(\macro_inst|apb_penable ),
-	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|apbState_A_1_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_penable ));
-defparam \macro_inst|bridge|penable_reg .coord_x = 15;
+defparam \macro_inst|bridge|penable_reg .coord_x = 14;
 defparam \macro_inst|bridge|penable_reg .coord_y = 12;
-defparam \macro_inst|bridge|penable_reg .coord_z = 2;
-defparam \macro_inst|bridge|penable_reg .mask = 16'h00FC;
+defparam \macro_inst|bridge|penable_reg .coord_z = 4;
+defparam \macro_inst|bridge|penable_reg .mask = 16'h00FA;
 defparam \macro_inst|bridge|penable_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|penable_reg .FeedbackMux = 1'b1;
 defparam \macro_inst|bridge|penable_reg .ShiftMux = 1'b0;
@@ -3127,22 +3224,22 @@ alta_slice \macro_inst|bridge|prdata[0]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [0]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
-	.SyncReset(SyncReset_X10004_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10007_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.SyncReset(),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
-	.LutOut(),
+	.SyncLoad(),
+	.LutOut(\macro_inst|bridge|prdata[0]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [0]));
-defparam \macro_inst|bridge|prdata[0]_reg .coord_x = 15;
+defparam \macro_inst|bridge|prdata[0]_reg .coord_x = 17;
 defparam \macro_inst|bridge|prdata[0]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[0]_reg .coord_z = 10;
-defparam \macro_inst|bridge|prdata[0]_reg .mask = 16'hFFFF;
-defparam \macro_inst|bridge|prdata[0]_reg .modeMux = 1'b1;
+defparam \macro_inst|bridge|prdata[0]_reg .coord_z = 4;
+defparam \macro_inst|bridge|prdata[0]_reg .mask = 16'hF0F0;
+defparam \macro_inst|bridge|prdata[0]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[0]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[0]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|prdata[0]_reg .BypassEn = 1'b1;
+defparam \macro_inst|bridge|prdata[0]_reg .BypassEn = 1'b0;
 defparam \macro_inst|bridge|prdata[0]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|prdata[10]_reg (
@@ -3152,17 +3249,17 @@ alta_slice \macro_inst|bridge|prdata[10]_reg (
 	.D(\macro_inst|apb_prdata [10]),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [10]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10007_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|prdata[10]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [10]));
-defparam \macro_inst|bridge|prdata[10]_reg .coord_x = 14;
+defparam \macro_inst|bridge|prdata[10]_reg .coord_x = 17;
 defparam \macro_inst|bridge|prdata[10]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[10]_reg .coord_z = 10;
+defparam \macro_inst|bridge|prdata[10]_reg .coord_z = 7;
 defparam \macro_inst|bridge|prdata[10]_reg .mask = 16'hFF00;
 defparam \macro_inst|bridge|prdata[10]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[10]_reg .FeedbackMux = 1'b0;
@@ -3173,51 +3270,51 @@ defparam \macro_inst|bridge|prdata[10]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|bridge|prdata[11]_reg (
 	.A(),
 	.B(),
-	.C(\macro_inst|apb_prdata [11]),
-	.D(),
+	.C(),
+	.D(\macro_inst|apb_prdata [11]),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [11]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
-	.SyncReset(SyncReset_X10004_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10007_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.SyncReset(),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
-	.LutOut(),
+	.SyncLoad(),
+	.LutOut(\macro_inst|bridge|prdata[11]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [11]));
-defparam \macro_inst|bridge|prdata[11]_reg .coord_x = 15;
+defparam \macro_inst|bridge|prdata[11]_reg .coord_x = 17;
 defparam \macro_inst|bridge|prdata[11]_reg .coord_y = 12;
 defparam \macro_inst|bridge|prdata[11]_reg .coord_z = 8;
-defparam \macro_inst|bridge|prdata[11]_reg .mask = 16'hFFFF;
-defparam \macro_inst|bridge|prdata[11]_reg .modeMux = 1'b1;
+defparam \macro_inst|bridge|prdata[11]_reg .mask = 16'hFF00;
+defparam \macro_inst|bridge|prdata[11]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[11]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[11]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|prdata[11]_reg .BypassEn = 1'b1;
+defparam \macro_inst|bridge|prdata[11]_reg .BypassEn = 1'b0;
 defparam \macro_inst|bridge|prdata[11]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|prdata[1]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|apb_prdata [1]),
+	.C(\macro_inst|apb_prdata [1]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [1]),
 	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
 	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
-	.SyncReset(),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|bridge|prdata[1]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
+	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [1]));
 defparam \macro_inst|bridge|prdata[1]_reg .coord_x = 14;
 defparam \macro_inst|bridge|prdata[1]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[1]_reg .coord_z = 12;
-defparam \macro_inst|bridge|prdata[1]_reg .mask = 16'hFF00;
-defparam \macro_inst|bridge|prdata[1]_reg .modeMux = 1'b0;
+defparam \macro_inst|bridge|prdata[1]_reg .coord_z = 15;
+defparam \macro_inst|bridge|prdata[1]_reg .mask = 16'hFFFF;
+defparam \macro_inst|bridge|prdata[1]_reg .modeMux = 1'b1;
 defparam \macro_inst|bridge|prdata[1]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[1]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|prdata[1]_reg .BypassEn = 1'b0;
+defparam \macro_inst|bridge|prdata[1]_reg .BypassEn = 1'b1;
 defparam \macro_inst|bridge|prdata[1]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|prdata[2]_reg (
@@ -3227,17 +3324,17 @@ alta_slice \macro_inst|bridge|prdata[2]_reg (
 	.D(\macro_inst|apb_prdata [2]),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [2]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10007_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|prdata[2]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [2]));
-defparam \macro_inst|bridge|prdata[2]_reg .coord_x = 14;
+defparam \macro_inst|bridge|prdata[2]_reg .coord_x = 17;
 defparam \macro_inst|bridge|prdata[2]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[2]_reg .coord_z = 8;
+defparam \macro_inst|bridge|prdata[2]_reg .coord_z = 5;
 defparam \macro_inst|bridge|prdata[2]_reg .mask = 16'hFF00;
 defparam \macro_inst|bridge|prdata[2]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[2]_reg .FeedbackMux = 1'b0;
@@ -3252,17 +3349,17 @@ alta_slice \macro_inst|bridge|prdata[3]_reg (
 	.D(\macro_inst|apb_prdata [3]),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [3]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10007_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|prdata[3]_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [3]));
-defparam \macro_inst|bridge|prdata[3]_reg .coord_x = 14;
+defparam \macro_inst|bridge|prdata[3]_reg .coord_x = 17;
 defparam \macro_inst|bridge|prdata[3]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[3]_reg .coord_z = 7;
+defparam \macro_inst|bridge|prdata[3]_reg .coord_z = 6;
 defparam \macro_inst|bridge|prdata[3]_reg .mask = 16'hFF00;
 defparam \macro_inst|bridge|prdata[3]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[3]_reg .FeedbackMux = 1'b0;
@@ -3271,24 +3368,24 @@ defparam \macro_inst|bridge|prdata[3]_reg .BypassEn = 1'b0;
 defparam \macro_inst|bridge|prdata[3]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|prdata[4]_reg (
-	.A(\macro_inst|bridge|pvalid ),
-	.B(\macro_inst|bridge|hdone_reg_q ),
+	.A(\macro_inst|apb_psel ),
+	.B(vcc),
 	.C(\macro_inst|apb_prdata [4]),
-	.D(\macro_inst|bridge|hreadyout_reg_q ),
+	.D(\macro_inst|apb_penable ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [4]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
-	.SyncReset(SyncReset_X10004_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
-	.LutOut(\macro_inst|bridge|ahb_hreadyout_A_Y ),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
+	.LutOut(\macro_inst|bridge|apb_pdone ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [4]));
-defparam \macro_inst|bridge|prdata[4]_reg .coord_x = 15;
+defparam \macro_inst|bridge|prdata[4]_reg .coord_x = 14;
 defparam \macro_inst|bridge|prdata[4]_reg .coord_y = 12;
 defparam \macro_inst|bridge|prdata[4]_reg .coord_z = 5;
-defparam \macro_inst|bridge|prdata[4]_reg .mask = 16'h11FF;
+defparam \macro_inst|bridge|prdata[4]_reg .mask = 16'hAA00;
 defparam \macro_inst|bridge|prdata[4]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[4]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[4]_reg .ShiftMux = 1'b0;
@@ -3302,17 +3399,17 @@ alta_slice \macro_inst|bridge|prdata[5]_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [5]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
-	.SyncReset(SyncReset_X10004_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
 	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [5]));
-defparam \macro_inst|bridge|prdata[5]_reg .coord_x = 15;
+defparam \macro_inst|bridge|prdata[5]_reg .coord_x = 14;
 defparam \macro_inst|bridge|prdata[5]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[5]_reg .coord_z = 9;
+defparam \macro_inst|bridge|prdata[5]_reg .coord_z = 10;
 defparam \macro_inst|bridge|prdata[5]_reg .mask = 16'hFFFF;
 defparam \macro_inst|bridge|prdata[5]_reg .modeMux = 1'b1;
 defparam \macro_inst|bridge|prdata[5]_reg .FeedbackMux = 1'b0;
@@ -3321,25 +3418,25 @@ defparam \macro_inst|bridge|prdata[5]_reg .BypassEn = 1'b1;
 defparam \macro_inst|bridge|prdata[5]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|prdata[6]_reg (
-	.A(),
-	.B(),
+	.A(\macro_inst|apb_penable ),
+	.B(\macro_inst|apb_psel ),
 	.C(\macro_inst|apb_prdata [6]),
-	.D(),
+	.D(\macro_inst|apb_pwrite ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [6]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
-	.SyncReset(SyncReset_X10004_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
-	.LutOut(),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
+	.LutOut(\macro_inst|apb_penable_B_Y ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [6]));
-defparam \macro_inst|bridge|prdata[6]_reg .coord_x = 15;
+defparam \macro_inst|bridge|prdata[6]_reg .coord_x = 14;
 defparam \macro_inst|bridge|prdata[6]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[6]_reg .coord_z = 6;
-defparam \macro_inst|bridge|prdata[6]_reg .mask = 16'hFFFF;
-defparam \macro_inst|bridge|prdata[6]_reg .modeMux = 1'b1;
+defparam \macro_inst|bridge|prdata[6]_reg .coord_z = 9;
+defparam \macro_inst|bridge|prdata[6]_reg .mask = 16'h0044;
+defparam \macro_inst|bridge|prdata[6]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[6]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[6]_reg .ShiftMux = 1'b0;
 defparam \macro_inst|bridge|prdata[6]_reg .BypassEn = 1'b1;
@@ -3348,47 +3445,47 @@ defparam \macro_inst|bridge|prdata[6]_reg .CarryEnb = 1'b1;
 alta_slice \macro_inst|bridge|prdata[7]_reg (
 	.A(),
 	.B(),
-	.C(),
-	.D(\macro_inst|apb_prdata [7]),
+	.C(\macro_inst|apb_prdata [7]),
+	.D(),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [7]),
 	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
 	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
-	.SyncReset(),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|bridge|prdata[7]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
+	.LutOut(),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [7]));
 defparam \macro_inst|bridge|prdata[7]_reg .coord_x = 14;
 defparam \macro_inst|bridge|prdata[7]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[7]_reg .coord_z = 9;
-defparam \macro_inst|bridge|prdata[7]_reg .mask = 16'hFF00;
-defparam \macro_inst|bridge|prdata[7]_reg .modeMux = 1'b0;
+defparam \macro_inst|bridge|prdata[7]_reg .coord_z = 7;
+defparam \macro_inst|bridge|prdata[7]_reg .mask = 16'hFFFF;
+defparam \macro_inst|bridge|prdata[7]_reg .modeMux = 1'b1;
 defparam \macro_inst|bridge|prdata[7]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[7]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|prdata[7]_reg .BypassEn = 1'b0;
+defparam \macro_inst|bridge|prdata[7]_reg .BypassEn = 1'b1;
 defparam \macro_inst|bridge|prdata[7]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|prdata[8]_reg (
-	.A(\macro_inst|apb_psel ),
-	.B(vcc),
+	.A(\macro_inst|bridge|pvalid ),
+	.B(\macro_inst|bridge|hreadyout_reg_q ),
 	.C(\macro_inst|apb_prdata [8]),
-	.D(\macro_inst|apb_penable ),
+	.D(\macro_inst|bridge|hdone_reg_q ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [8]),
-	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10004_Y10001_SIG_SIG ),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
-	.SyncReset(SyncReset_X10004_Y10001_GND),
+	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(SyncLoad_X10004_Y10001_VCC),
-	.LutOut(\macro_inst|bridge|apb_pdone ),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
+	.LutOut(\macro_inst|bridge|ahb_hreadyout_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [8]));
-defparam \macro_inst|bridge|prdata[8]_reg .coord_x = 15;
+defparam \macro_inst|bridge|prdata[8]_reg .coord_x = 14;
 defparam \macro_inst|bridge|prdata[8]_reg .coord_y = 12;
-defparam \macro_inst|bridge|prdata[8]_reg .coord_z = 3;
-defparam \macro_inst|bridge|prdata[8]_reg .mask = 16'hAA00;
+defparam \macro_inst|bridge|prdata[8]_reg .coord_z = 13;
+defparam \macro_inst|bridge|prdata[8]_reg .mask = 16'h3377;
 defparam \macro_inst|bridge|prdata[8]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[8]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[8]_reg .ShiftMux = 1'b0;
@@ -3396,99 +3493,74 @@ defparam \macro_inst|bridge|prdata[8]_reg .BypassEn = 1'b1;
 defparam \macro_inst|bridge|prdata[8]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|prdata[9]_reg (
-	.A(),
-	.B(),
-	.C(),
-	.D(\macro_inst|apb_prdata [9]),
+	.A(vcc),
+	.B(\macro_inst|bridge|hreadyout_reg_q ),
+	.C(\macro_inst|apb_prdata [9]),
+	.D(\macro_inst|bridge|ahb_htrans [1]),
 	.Cin(),
 	.Qin(\macro_inst|bridge|ahb_hrdata [9]),
 	.Clk(\bus_clk__macro_inst|bridge|apb_pdone_X10003_Y10001_SIG_SIG ),
 	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
-	.SyncReset(),
+	.SyncReset(SyncReset_X10003_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|bridge|prdata[9]_reg__feeder__LutOut ),
+	.SyncLoad(SyncLoad_X10003_Y10001_VCC),
+	.LutOut(\macro_inst|bridge|ahb_htrans_B_1_Y ),
 	.Cout(),
 	.Q(\macro_inst|bridge|ahb_hrdata [9]));
 defparam \macro_inst|bridge|prdata[9]_reg .coord_x = 14;
 defparam \macro_inst|bridge|prdata[9]_reg .coord_y = 12;
 defparam \macro_inst|bridge|prdata[9]_reg .coord_z = 11;
-defparam \macro_inst|bridge|prdata[9]_reg .mask = 16'hFF00;
+defparam \macro_inst|bridge|prdata[9]_reg .mask = 16'h3300;
 defparam \macro_inst|bridge|prdata[9]_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|prdata[9]_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|prdata[9]_reg .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|prdata[9]_reg .BypassEn = 1'b0;
+defparam \macro_inst|bridge|prdata[9]_reg .BypassEn = 1'b1;
 defparam \macro_inst|bridge|prdata[9]_reg .CarryEnb = 1'b1;
 
 alta_slice \macro_inst|bridge|psel_reg (
-	.A(\macro_inst|bridge|pvalid ),
-	.B(\macro_inst|bridge|apbState[0]_reg_q ),
+	.A(\macro_inst|bridge|apbState[0]_reg_q ),
+	.B(\macro_inst|bridge|pvalid ),
 	.C(vcc),
 	.D(\macro_inst|bridge|apbState [1]),
 	.Cin(),
 	.Qin(\macro_inst|apb_psel ),
-	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|apb_psel_A_Y_B_Y ),
 	.Cout(),
 	.Q(\macro_inst|apb_psel ));
-defparam \macro_inst|bridge|psel_reg .coord_x = 15;
+defparam \macro_inst|bridge|psel_reg .coord_x = 14;
 defparam \macro_inst|bridge|psel_reg .coord_y = 12;
-defparam \macro_inst|bridge|psel_reg .coord_z = 4;
-defparam \macro_inst|bridge|psel_reg .mask = 16'hBAF2;
+defparam \macro_inst|bridge|psel_reg .coord_z = 8;
+defparam \macro_inst|bridge|psel_reg .mask = 16'hDCF4;
 defparam \macro_inst|bridge|psel_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|psel_reg .FeedbackMux = 1'b1;
 defparam \macro_inst|bridge|psel_reg .ShiftMux = 1'b0;
 defparam \macro_inst|bridge|psel_reg .BypassEn = 1'b0;
 defparam \macro_inst|bridge|psel_reg .CarryEnb = 1'b1;
 
-alta_slice \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout (
-	.A(vcc),
-	.B(\macro_inst|bridge|apbState [1]),
-	.C(\macro_inst|bridge|apbState[0]_reg_q ),
-	.D(\macro_inst|bridge|pvalid ),
-	.Cin(),
-	.Qin(),
-	.Clk(),
-	.AsyncReset(),
-	.SyncReset(),
-	.ShiftData(),
-	.SyncLoad(),
-	.LutOut(\macro_inst|bridge|pvalid_A_1_Y_A_Y ),
-	.Cout(),
-	.Q());
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .coord_x = 14;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .coord_y = 12;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .coord_z = 15;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .mask = 16'h00CF;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .modeMux = 1'b0;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .FeedbackMux = 1'b0;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .ShiftMux = 1'b0;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .BypassEn = 1'b0;
-defparam \macro_inst|bridge|pvalid_A_1_Y_A_Y_combout .CarryEnb = 1'b1;
-
 alta_slice \macro_inst|bridge|pvalid_reg (
-	.A(vcc),
-	.B(\macro_inst|bridge|pdone ),
+	.A(\macro_inst|bridge|pdone ),
+	.B(vcc),
 	.C(\macro_inst|apb_psel ),
 	.D(\macro_inst|bridge|hreadyout_reg_q ),
 	.Cin(),
 	.Qin(\macro_inst|bridge|pvalid ),
-	.Clk(bus_clk_X10004_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10004_Y10001_INV),
+	.Clk(bus_clk_X10003_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10003_Y10001_INV),
 	.SyncReset(),
 	.ShiftData(),
 	.SyncLoad(),
 	.LutOut(\macro_inst|bridge|hreadyout_reg_q_A_Y ),
 	.Cout(),
 	.Q(\macro_inst|bridge|pvalid ));
-defparam \macro_inst|bridge|pvalid_reg .coord_x = 15;
+defparam \macro_inst|bridge|pvalid_reg .coord_x = 14;
 defparam \macro_inst|bridge|pvalid_reg .coord_y = 12;
-defparam \macro_inst|bridge|pvalid_reg .coord_z = 0;
-defparam \macro_inst|bridge|pvalid_reg .mask = 16'h0300;
+defparam \macro_inst|bridge|pvalid_reg .coord_z = 2;
+defparam \macro_inst|bridge|pvalid_reg .mask = 16'h0500;
 defparam \macro_inst|bridge|pvalid_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|pvalid_reg .FeedbackMux = 1'b0;
 defparam \macro_inst|bridge|pvalid_reg .ShiftMux = 1'b0;
@@ -3502,17 +3574,17 @@ alta_slice \macro_inst|bridge|pwrite_reg (
 	.D(),
 	.Cin(),
 	.Qin(\macro_inst|apb_pwrite ),
-	.Clk(bus_clk_X10005_Y10001_SIG_VCC),
-	.AsyncReset(sys_resetn__AsyncReset_X10005_Y10001_INV),
-	.SyncReset(SyncReset_X10005_Y10001_GND),
+	.Clk(bus_clk_X10007_Y10001_SIG_VCC),
+	.AsyncReset(sys_resetn__AsyncReset_X10007_Y10001_INV),
+	.SyncReset(SyncReset_X10007_Y10001_GND),
 	.ShiftData(),
-	.SyncLoad(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10005_Y10001_SIG ),
+	.SyncLoad(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10007_Y10001_SIG ),
 	.LutOut(\macro_inst|bridge|pwrite_reg__feeder__LutOut ),
 	.Cout(),
 	.Q(\macro_inst|apb_pwrite ));
-defparam \macro_inst|bridge|pwrite_reg .coord_x = 18;
+defparam \macro_inst|bridge|pwrite_reg .coord_x = 17;
 defparam \macro_inst|bridge|pwrite_reg .coord_y = 12;
-defparam \macro_inst|bridge|pwrite_reg .coord_z = 4;
+defparam \macro_inst|bridge|pwrite_reg .coord_z = 12;
 defparam \macro_inst|bridge|pwrite_reg .mask = 16'hF0F0;
 defparam \macro_inst|bridge|pwrite_reg .modeMux = 1'b0;
 defparam \macro_inst|bridge|pwrite_reg .FeedbackMux = 1'b1;
@@ -3632,7 +3704,7 @@ alta_rv32 rv32(
 	.gpio0_io_in({gnd, gnd, gnd, gnd, gnd, gnd, gnd, gpio0_io_in[0]}),
 	.gpio0_io_out_data({gpio0_io_out_data[7], gpio0_io_out_data[6], gpio0_io_out_data[5], gpio0_io_out_data[4], gpio0_io_out_data[3], gpio0_io_out_data[2], gpio0_io_out_data[1], gpio0_io_out_data[0]}),
 	.gpio0_io_out_en({gpio0_io_out_en[7], gpio0_io_out_en[6], gpio0_io_out_en[5], gpio0_io_out_en[4], gpio0_io_out_en[3], gpio0_io_out_en[2], gpio0_io_out_en[1], gpio0_io_out_en[0]}),
-	.gpio1_io_in({gnd, gnd, gnd, gnd, gnd, gnd, gnd, gnd}),
+	.gpio1_io_in({gnd, gnd, gnd, gnd, gnd, gnd, gnd, gpio1_io_in[0]}),
 	.gpio1_io_out_data({gpio1_io_out_data[7], gpio1_io_out_data[6], gpio1_io_out_data[5], gpio1_io_out_data[4], gpio1_io_out_data[3], gpio1_io_out_data[2], gpio1_io_out_data[1], gpio1_io_out_data[0]}),
 	.gpio1_io_out_en({gpio1_io_out_en[7], gpio1_io_out_en[6], gpio1_io_out_en[5], gpio1_io_out_en[4], gpio1_io_out_en[3], gpio1_io_out_en[2], gpio1_io_out_en[1], gpio1_io_out_en[0]}),
 	.sys_ctrl_clkSource({sys_ctrl_clkSource[1], sys_ctrl_clkSource[0]}),
@@ -3695,45 +3767,37 @@ defparam \rv32|resetn_out~ALTA_GCLK .coord_x = 22;
 defparam \rv32|resetn_out~ALTA_GCLK .coord_y = 4;
 defparam \rv32|resetn_out~ALTA_GCLK .coord_z = 0;
 
-alta_syncctrl syncload_ctrl_X10001_Y10001(
-	.Din(),
-	.Dout(SyncLoad_X10001_Y10001_VCC));
-defparam syncload_ctrl_X10001_Y10001.coord_x = 20;
-defparam syncload_ctrl_X10001_Y10001.coord_y = 12;
-defparam syncload_ctrl_X10001_Y10001.coord_z = 1;
-defparam syncload_ctrl_X10001_Y10001.SyncCtrlMux = 2'b01;
-
 alta_syncctrl syncload_ctrl_X10003_Y10001(
-	.Din(\macro_inst|bridge|ahb_htrans_B_1_Y ),
-	.Dout(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10003_Y10001_SIG ));
+	.Din(),
+	.Dout(SyncLoad_X10003_Y10001_VCC));
 defparam syncload_ctrl_X10003_Y10001.coord_x = 14;
 defparam syncload_ctrl_X10003_Y10001.coord_y = 12;
 defparam syncload_ctrl_X10003_Y10001.coord_z = 1;
-defparam syncload_ctrl_X10003_Y10001.SyncCtrlMux = 2'b10;
+defparam syncload_ctrl_X10003_Y10001.SyncCtrlMux = 2'b01;
 
 alta_syncctrl syncload_ctrl_X10004_Y10001(
 	.Din(),
 	.Dout(SyncLoad_X10004_Y10001_VCC));
-defparam syncload_ctrl_X10004_Y10001.coord_x = 15;
-defparam syncload_ctrl_X10004_Y10001.coord_y = 12;
+defparam syncload_ctrl_X10004_Y10001.coord_x = 19;
+defparam syncload_ctrl_X10004_Y10001.coord_y = 8;
 defparam syncload_ctrl_X10004_Y10001.coord_z = 1;
 defparam syncload_ctrl_X10004_Y10001.SyncCtrlMux = 2'b01;
 
-alta_syncctrl syncload_ctrl_X10005_Y10001(
-	.Din(\macro_inst|bridge|pvalid_A_Y ),
-	.Dout(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10005_Y10001_SIG ));
-defparam syncload_ctrl_X10005_Y10001.coord_x = 18;
-defparam syncload_ctrl_X10005_Y10001.coord_y = 12;
-defparam syncload_ctrl_X10005_Y10001.coord_z = 1;
-defparam syncload_ctrl_X10005_Y10001.SyncCtrlMux = 2'b10;
+alta_syncctrl syncload_ctrl_X10006_Y10001(
+	.Din(\macro_inst|bridge|ahb_htrans_B_1_Y ),
+	.Dout(\macro_inst|bridge|ahb_htrans_B_1_Y__SyncLoad_X10006_Y10001_SIG ));
+defparam syncload_ctrl_X10006_Y10001.coord_x = 15;
+defparam syncload_ctrl_X10006_Y10001.coord_y = 12;
+defparam syncload_ctrl_X10006_Y10001.coord_z = 1;
+defparam syncload_ctrl_X10006_Y10001.SyncCtrlMux = 2'b10;
 
-alta_syncctrl syncreset_ctrl_X10001_Y10001(
-	.Din(),
-	.Dout(SyncReset_X10001_Y10001_GND));
-defparam syncreset_ctrl_X10001_Y10001.coord_x = 20;
-defparam syncreset_ctrl_X10001_Y10001.coord_y = 12;
-defparam syncreset_ctrl_X10001_Y10001.coord_z = 0;
-defparam syncreset_ctrl_X10001_Y10001.SyncCtrlMux = 2'b00;
+alta_syncctrl syncload_ctrl_X10007_Y10001(
+	.Din(\macro_inst|bridge|pvalid_A_Y ),
+	.Dout(\macro_inst|bridge|pvalid_A_Y__SyncLoad_X10007_Y10001_SIG ));
+defparam syncload_ctrl_X10007_Y10001.coord_x = 17;
+defparam syncload_ctrl_X10007_Y10001.coord_y = 12;
+defparam syncload_ctrl_X10007_Y10001.coord_z = 1;
+defparam syncload_ctrl_X10007_Y10001.SyncCtrlMux = 2'b10;
 
 alta_syncctrl syncreset_ctrl_X10003_Y10001(
 	.Din(),
@@ -3746,17 +3810,25 @@ defparam syncreset_ctrl_X10003_Y10001.SyncCtrlMux = 2'b00;
 alta_syncctrl syncreset_ctrl_X10004_Y10001(
 	.Din(),
 	.Dout(SyncReset_X10004_Y10001_GND));
-defparam syncreset_ctrl_X10004_Y10001.coord_x = 15;
-defparam syncreset_ctrl_X10004_Y10001.coord_y = 12;
+defparam syncreset_ctrl_X10004_Y10001.coord_x = 19;
+defparam syncreset_ctrl_X10004_Y10001.coord_y = 8;
 defparam syncreset_ctrl_X10004_Y10001.coord_z = 0;
 defparam syncreset_ctrl_X10004_Y10001.SyncCtrlMux = 2'b00;
 
-alta_syncctrl syncreset_ctrl_X10005_Y10001(
+alta_syncctrl syncreset_ctrl_X10006_Y10001(
 	.Din(),
-	.Dout(SyncReset_X10005_Y10001_GND));
-defparam syncreset_ctrl_X10005_Y10001.coord_x = 18;
-defparam syncreset_ctrl_X10005_Y10001.coord_y = 12;
-defparam syncreset_ctrl_X10005_Y10001.coord_z = 0;
-defparam syncreset_ctrl_X10005_Y10001.SyncCtrlMux = 2'b00;
+	.Dout(SyncReset_X10006_Y10001_GND));
+defparam syncreset_ctrl_X10006_Y10001.coord_x = 15;
+defparam syncreset_ctrl_X10006_Y10001.coord_y = 12;
+defparam syncreset_ctrl_X10006_Y10001.coord_z = 0;
+defparam syncreset_ctrl_X10006_Y10001.SyncCtrlMux = 2'b00;
+
+alta_syncctrl syncreset_ctrl_X10007_Y10001(
+	.Din(),
+	.Dout(SyncReset_X10007_Y10001_GND));
+defparam syncreset_ctrl_X10007_Y10001.coord_x = 17;
+defparam syncreset_ctrl_X10007_Y10001.coord_y = 12;
+defparam syncreset_ctrl_X10007_Y10001.coord_z = 0;
+defparam syncreset_ctrl_X10007_Y10001.SyncCtrlMux = 2'b00;
 
 endmodule
