@@ -5,13 +5,14 @@
 #include <stdint.h>
 #include "lvgl.h"
 
-/* Temporary values. Voltage and current use tenths of V and A, respectively. */
+/* Speed is signed km/h (negative = reverse). Voltage/current use tenths of
+ * V/A. Positive current/power means discharge; negative means charging/regen. */
 typedef struct {
-  uint8_t current_speed_kmh;
+  int16_t current_speed_kmh;
   uint8_t battery_percent;
   uint16_t voltage_tenths_v;
-  uint16_t current_tenths_a;
-  uint16_t power_w;
+  int16_t current_tenths_a;
+  int32_t power_w;
   uint8_t brake_percent;
   uint8_t throttle_percent;
 } DashboardData;

@@ -11,4 +11,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     generate_font("font_dashboard_14", 14, "".join(chr(x) for x in range(32, 127)),
                   weight=600, font_path=args.font)
-    generate_font("font_dashboard_24", 24, " 0123456789.VAW", weight=650, font_path=args.font)
+    generate_font("font_dashboard_24", 24, " -0123456789.VAW", weight=650, font_path=args.font)

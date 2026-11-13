@@ -9,4 +9,4 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--font", default=DEFAULT_FONT)
     args = parser.parse_args()
-    generate_font("font_speed_58", 58, "0123456789", weight=700, font_path=args.font)
+    generate_font("font_speed_58", 58, "-0123456789", weight=700, font_path=args.font)

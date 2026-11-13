@@ -36,11 +36,19 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 
 `lvgl_task.c` 中的 `dashboard_data` 暂时由 `dashboard_demo_timer()` 每 500 ms 更新。
 `DashboardData` 字段定义在 `dashboard.h`：速度单位 km/h、电池和占空比单位为百分比；
+速度为有符号 `int16_t`，负值表示倒车，速度圆弧按绝对值显示（圆弧范围 0～99）。
 `voltage_tenths_v`、`current_tenths_a` 分别以 0.1 V、0.1 A 为单位，`power_w` 为瓦特。
-演示功率从模拟电压和电流计算。
+电流字段为 `int16_t`，功率字段为 `int32_t`；约定放电/驱动为正，充电/回收为负。
+电流显示保留一位小数，支持 `-0.5 A` 这样的负数，功率显示支持负整数。
+演示功率用有符号计算从模拟电压和电流获得，演示周期中包含负电流/负功率阶段。
 
-电池图标和百分比放在同一个顶部容器中，填充对外框保持对称留白。
+电池图标和百分比放在同一个顶部容器中，内部使用 5 个长方形格子，
+每格对应约 20% 电量，有电时向上取整显示格数，0% 时全部为空格。
+绿色表示正常电量，灰色表示空格；格子对外框保持对称留白。
 电量严格低于 20% 时，外框、端子、填充和百分比文字变红；20% 起恢复正常颜色。
+颜色在 `dashboard.c` 顶部独立配置：`COLOR_VOLTAGE` 用于电压卡片，
+`COLOR_THROTTLE` 用于油门进度条，`COLOR_BATTERY` 用于正常电量格子，
+`COLOR_BATTERY_LOW` 用于低电量提示，修改其中一项不会影响其他项。
 `user/battery.h` 按已确认的 48 V、13 串 LiPo、满电 54.6 V 配置。
 满电参考为 13×4.2 V=54.6 V；单节 3.7 V 标称、4.2 V 满电的背景说明见
 [Adafruit LiPo 电压说明](https://learn.adafruit.com/li-ion-and-lipoly-batteries/voltages)。

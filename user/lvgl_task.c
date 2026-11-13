@@ -33,7 +33,8 @@ static void dashboard_demo_timer(lv_timer_t *timer)
   static int16_t battery_voltage_step = -2;
   (void)timer;
   ++step;
-  dashboard_data.current_speed_kmh = (uint8_t)((dashboard_data.current_speed_kmh + 1U) % 100U);
+  dashboard_data.current_speed_kmh = dashboard_data.current_speed_kmh >= 99
+                                      ? -99 : dashboard_data.current_speed_kmh + 1;
   int32_t next_voltage = (int32_t)dashboard_data.voltage_tenths_v + battery_voltage_step;
   if (next_voltage <= (int32_t)BATTERY_DEMO_MIN_TENTHS_V) {
     next_voltage = BATTERY_DEMO_MIN_TENTHS_V;
@@ -44,9 +45,13 @@ static void dashboard_demo_timer(lv_timer_t *timer)
   }
   dashboard_data.voltage_tenths_v = (uint16_t)next_voltage;
   dashboard_data.battery_percent = Battery_EstimatePercent(dashboard_data.voltage_tenths_v);
-  dashboard_data.current_tenths_a = (uint16_t)(30U + (step * 3U) % 100U);
-  dashboard_data.power_w = (uint16_t)(((uint32_t)dashboard_data.voltage_tenths_v *
-                                       dashboard_data.current_tenths_a + 50U) / 100U);
+  dashboard_data.current_tenths_a = (int16_t)(30U + (step * 3U) % 100U);
+  /* Include a charging/regeneration phase in each 20 second demo cycle. */
+  if (step % 40U >= 30U)
+    dashboard_data.current_tenths_a = -(int16_t)(5U + (step * 3U) % 50U);
+  int32_t power_centiw = (int32_t)dashboard_data.voltage_tenths_v *
+                        dashboard_data.current_tenths_a;
+  dashboard_data.power_w = (power_centiw + (power_centiw < 0 ? -50 : 50)) / 100;
   dashboard_data.brake_percent = (uint8_t)((step * 2U) % 101U);
   dashboard_data.throttle_percent = (uint8_t)((step * 3U) % 101U);
   Dashboard_Refresh(&dashboard_data);
