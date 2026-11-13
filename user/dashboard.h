@@ -13,6 +13,7 @@ typedef struct {
   uint16_t voltage_tenths_v;
   int16_t current_tenths_a;
   int32_t power_w;
+  int16_t controller_temperature_c; /* Controller temperature, whole degrees C. */
   uint8_t brake_percent;
   uint8_t throttle_percent;
 } DashboardData;

@@ -18,6 +18,7 @@ DashboardData dashboard_data = {
   .voltage_tenths_v = 524,
   .current_tenths_a = 86,
   .power_w = 451,
+  .controller_temperature_c = 35,
   .brake_percent = 18,
   .throttle_percent = 63,
 };
@@ -52,6 +53,7 @@ static void dashboard_demo_timer(lv_timer_t *timer)
   int32_t power_centiw = (int32_t)dashboard_data.voltage_tenths_v *
                         dashboard_data.current_tenths_a;
   dashboard_data.power_w = (power_centiw + (power_centiw < 0 ? -50 : 50)) / 100;
+  dashboard_data.controller_temperature_c = (int16_t)(30U + (step / 4U) % 51U);
   dashboard_data.brake_percent = (uint8_t)((step * 2U) % 101U);
   dashboard_data.throttle_percent = (uint8_t)((step * 3U) % 101U);
   Dashboard_Refresh(&dashboard_data);

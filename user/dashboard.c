@@ -13,10 +13,10 @@ LV_FONT_DECLARE(font_title_cn_14);
 #define COLOR_TEXT     0x000000
 #define COLOR_CYAN     0x005E73
 #define COLOR_SPEED_ARC 0x711C96
-#define COLOR_BIKE_LOGO 0x711C96
-#define COLOR_VOLTAGE  0x12FF32  /* Voltage card accent. */
-#define COLOR_THROTTLE 0x12FF32  /* Throttle progress fill. */
-#define COLOR_BATTERY  0x12FF32  /* Battery cells at 20% and above. */
+#define COLOR_BIKE_LOGO 0x000000
+#define COLOR_VOLTAGE  0xF50057  /* Voltage card accent. */
+#define COLOR_THROTTLE 0x64DD17  /* Throttle progress fill. */
+#define COLOR_BATTERY  0x64DD17  /* Battery cells at 20% and above. */
 #define COLOR_BATTERY_LOW 0xFF0000 /* Battery warning below 20%. */
 #define COLOR_YELLOW   0x8A4D00
 #define COLOR_RED      0xFF0000
@@ -30,7 +30,7 @@ typedef struct {
   lv_obj_t *battery_body;
   lv_obj_t *battery_terminal;
   lv_obj_t *battery_segments[BATTERY_SEGMENTS];
-  lv_obj_t *battery_text;
+  lv_obj_t *controller_temperature;
   lv_obj_t *voltage;
   lv_obj_t *current;
   lv_obj_t *power;
@@ -150,10 +150,10 @@ bool Dashboard_Create(lv_obj_t *screen)
       }
     }
     ui.battery_terminal = box(battery_group, 34, 7, 3, 6, COLOR_TEXT, COLOR_TEXT, 1);
-    ui.battery_text = text(battery_group, 42, 0, 42, "0%", &font_dashboard_14,
-                             COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
-    if (ui.battery_text != NULL)
-      lv_obj_align(ui.battery_text, LV_ALIGN_RIGHT_MID, 0, 0);
+    ui.controller_temperature = text(battery_group, 42, 0, 42, "0°C",
+                                      &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_RIGHT);
+    if (ui.controller_temperature != NULL)
+      lv_obj_align(ui.controller_temperature, LV_ALIGN_RIGHT_MID, 0, 0);
   }
 
   ui.gauge = lv_arc_create(screen);
@@ -188,7 +188,7 @@ bool Dashboard_Create(lv_obj_t *screen)
   for (unsigned i = 0; i < BATTERY_SEGMENTS; ++i)
     battery_ready = battery_ready && ui.battery_segments[i] != NULL;
   return !create_failed && ui.speed && ui.gauge && ui.battery_body &&
-         ui.battery_terminal && battery_ready && ui.battery_text &&
+         ui.battery_terminal && battery_ready && ui.controller_temperature &&
          ui.voltage && ui.current && ui.power &&
          ui.brake_text && ui.brake_fill && ui.throttle_text && ui.throttle_fill;
 }
@@ -216,7 +216,6 @@ void Dashboard_Refresh(const DashboardData *data)
     uint8_t value = limit_percent(data->battery_percent);
     uint32_t indicator = value < BATTERY_LOW_PERCENT ? COLOR_BATTERY_LOW : COLOR_BATTERY;
     uint32_t outline = value < BATTERY_LOW_PERCENT ? COLOR_BATTERY_LOW : COLOR_TEXT;
-    lv_label_set_text_fmt(ui.battery_text, "%u%%", (unsigned)value);
     unsigned active_segments = ((unsigned)value * BATTERY_SEGMENTS + 99U) / 100U;
     for (unsigned i = 0; i < BATTERY_SEGMENTS; ++i) {
       uint32_t color = i < active_segments ? indicator : COLOR_TRACK;
@@ -224,8 +223,9 @@ void Dashboard_Refresh(const DashboardData *data)
     }
     lv_obj_set_style_border_color(ui.battery_body, lv_color_hex(outline), 0);
     lv_obj_set_style_bg_color(ui.battery_terminal, lv_color_hex(outline), 0);
-    lv_obj_set_style_text_color(ui.battery_text, lv_color_hex(outline), 0);
   }
+  if (!previous_valid || data->controller_temperature_c != previous.controller_temperature_c)
+    lv_label_set_text_fmt(ui.controller_temperature, "%d°C", (int)data->controller_temperature_c);
   if (!previous_valid || data->voltage_tenths_v != previous.voltage_tenths_v)
     lv_label_set_text_fmt(ui.voltage, "%u.%u V", (unsigned)(data->voltage_tenths_v / 10U), (unsigned)(data->voltage_tenths_v % 10U));
   if (!previous_valid || data->current_tenths_a != previous.current_tenths_a) {
