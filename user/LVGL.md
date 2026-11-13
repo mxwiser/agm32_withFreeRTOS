@@ -34,8 +34,8 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 
 ## 演示数据及后续对接
 
-`lvgl_task.c` 中的 `dashboard_data` 暂时由 `dashboard_demo_timer()` 每 500 ms 更新。
-刹车和油门进度条读取 CPLD 的 ADC1、ADC2 实测百分比，其余数据仍为演示值；
+`lvgl_task.c` 中的演示数据由 `dashboard_demo_timer()` 每 500 ms 更新；ADC 每 1 ms 读取、每 100 ms 更新界面。
+左侧进度条分别显示 CPLD 的 ADC1 刹车及 ADC2 油门，右侧显示 `ppm_task.c` 中独立任务产生的临时 PPM 值，其余数据仍为演示值；
 ADC 尚无有效结果时显示 `--`。接口及寄存器说明见 `user/CPLD_ADC.md`。
 `DashboardData` 字段定义在 `dashboard.h`：速度单位 km/h、电池和占空比单位为百分比；
 速度为有符号 `int16_t`，负值表示倒车，速度圆弧按绝对值显示（圆弧范围 0～99）。

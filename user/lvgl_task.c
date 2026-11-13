@@ -8,9 +8,11 @@
 #include "lvgl.h"
 #include "dashboard.h"
 #include "battery.h"
-#include "cpld_adc.h"
+#include "input_task.h"
+#include "ppm_task.h"
 
 #define DASHBOARD_DEMO_PERIOD_MS 500U
+#define DASHBOARD_ADC_PERIOD_MS 100U
 
 /* Demo values only; replace the timer with real measurements later. */
 DashboardData dashboard_data = {
@@ -22,6 +24,7 @@ DashboardData dashboard_data = {
   .controller_temperature_c = 35,
   .brake_percent = 0,
   .throttle_percent = 0,
+  .ppm_throttle_percent = 0,
 };
 
 /* RGB565, ten lines; uint32_t provides suitable alignment for the renderer. */
@@ -29,12 +32,21 @@ static uint32_t draw_buffer[ST7789_NATIVE_HEIGHT * 10U * 2U / sizeof(uint32_t)];
 volatile ST7789_Status lvgl_lcd_status = ST7789_NOT_INITIALIZED;
 volatile uint32_t lvgl_flush_errors;
 
-static void dashboard_update_adc(void)
+static void dashboard_update_inputs(void)
 {
-  CpldAdc_Poll();
-  dashboard_data.brake_percent = cpld_adc_values.adc1_percent;
-  dashboard_data.throttle_percent = cpld_adc_values.adc2_percent;
-  dashboard_data.adc_valid_mask = cpld_adc_values.valid_mask;
+  InputValues sample;
+  Input_GetSnapshot(&sample);
+  dashboard_data.brake_percent = sample.adc.adc1_percent;
+  dashboard_data.throttle_percent = sample.adc.adc2_percent;
+  dashboard_data.adc_valid_mask = sample.adc.valid_mask;
+  dashboard_data.ppm_throttle_percent = Ppm_GetThrottlePercent();
+}
+
+static void dashboard_adc_timer(lv_timer_t *timer)
+{
+  (void)timer;
+  dashboard_update_inputs();
+  Dashboard_Refresh(&dashboard_data);
 }
 
 static void dashboard_demo_timer(lv_timer_t *timer)
@@ -43,7 +55,6 @@ static void dashboard_demo_timer(lv_timer_t *timer)
   static int16_t battery_voltage_step = -2;
   (void)timer;
   ++step;
-  dashboard_update_adc();
   dashboard_data.current_speed_kmh = dashboard_data.current_speed_kmh >= 99
                                       ? -99 : dashboard_data.current_speed_kmh + 1;
   int32_t next_voltage = (int32_t)dashboard_data.voltage_tenths_v + battery_voltage_step;
@@ -109,10 +120,13 @@ void LVGL_Task(void *argument)
     vTaskDelete(NULL);
     return;
   }
-  dashboard_update_adc();
+  dashboard_update_inputs();
   Dashboard_Refresh(&dashboard_data);
   if (lv_timer_create(dashboard_demo_timer, DASHBOARD_DEMO_PERIOD_MS, NULL) == NULL) {
     printf("Dashboard demo timer allocation failed\n");
+  }
+  if (lv_timer_create(dashboard_adc_timer, DASHBOARD_ADC_PERIOD_MS, NULL) == NULL) {
+    printf("Dashboard ADC timer allocation failed\n");
   }
 
   for (;;) {

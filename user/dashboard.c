@@ -38,6 +38,8 @@ typedef struct {
   lv_obj_t *brake_fill;
   lv_obj_t *throttle_text;
   lv_obj_t *throttle_fill;
+  lv_obj_t *ppm_text;
+  lv_obj_t *ppm_fill;
 } DashboardWidgets;
 
 static DashboardWidgets ui;
@@ -123,6 +125,19 @@ static bool duty_card(lv_obj_t *screen, int x, const char *title, uint32_t accen
   return *value != NULL && *fill != NULL;
 }
 
+static bool combined_duty_card(lv_obj_t *screen)
+{
+  lv_obj_t *card = box(screen, 6, 191, 151, 43, COLOR_PANEL, COLOR_BORDER, 5);
+  if (card == NULL) return false;
+  ui.brake_text = text(card, 8, 4, 64, "B --", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
+  ui.throttle_text = text(card, 75, 4, 67, "T --", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_RIGHT);
+  lv_obj_t *track = box(card, 8, 27, 135, 8, COLOR_TRACK, COLOR_TRACK, 4);
+  if (track == NULL) return false;
+  ui.brake_fill = box(track, 66, 0, 1, 8, COLOR_RED, COLOR_RED, 0);
+  ui.throttle_fill = box(track, 68, 0, 1, 8, COLOR_THROTTLE, COLOR_THROTTLE, 0);
+  return ui.brake_text && ui.throttle_text && ui.brake_fill && ui.throttle_fill;
+}
+
 bool Dashboard_Create(lv_obj_t *screen)
 {
   create_failed = false;
@@ -181,8 +196,8 @@ bool Dashboard_Create(lv_obj_t *screen)
   ui.voltage = metric_card(screen, 31, "Voltage", COLOR_VOLTAGE);
   ui.current = metric_card(screen, 83, "Current", COLOR_CYAN);
   ui.power = metric_card(screen, 135, "Power", COLOR_YELLOW);
-  (void)duty_card(screen, 6, "BRAKE", COLOR_RED, &ui.brake_text, &ui.brake_fill);
-  (void)duty_card(screen, 163, "THROTTLE", COLOR_THROTTLE, &ui.throttle_text, &ui.throttle_fill);
+  (void)combined_duty_card(screen);
+  (void)duty_card(screen, 163, "PPM THR", COLOR_THROTTLE, &ui.ppm_text, &ui.ppm_fill);
 
   bool battery_ready = true;
   for (unsigned i = 0; i < BATTERY_SEGMENTS; ++i)
@@ -190,7 +205,8 @@ bool Dashboard_Create(lv_obj_t *screen)
   return !create_failed && ui.speed && ui.gauge && ui.battery_body &&
          ui.battery_terminal && battery_ready && ui.controller_temperature &&
          ui.voltage && ui.current && ui.power &&
-         ui.brake_text && ui.brake_fill && ui.throttle_text && ui.throttle_fill;
+         ui.brake_text && ui.brake_fill && ui.throttle_text && ui.throttle_fill &&
+         ui.ppm_text && ui.ppm_fill;
 }
 
 static void set_bar(lv_obj_t *fill, uint8_t value, int max_width)
@@ -199,6 +215,17 @@ static void set_bar(lv_obj_t *fill, uint8_t value, int max_width)
   lv_obj_set_hidden(fill, value == 0U);
   if (value != 0U) {
     int width = (max_width * value + 99) / 100;
+    lv_obj_set_width(fill, width);
+  }
+}
+
+static void set_brake_bar(lv_obj_t *fill, uint8_t value)
+{
+  value = limit_percent(value);
+  lv_obj_set_hidden(fill, value == 0U);
+  if (value != 0U) {
+    int width = (67 * value + 99) / 100;
+    lv_obj_set_pos(fill, 67 - width, 0);
     lv_obj_set_width(fill, width);
   }
 }
@@ -240,23 +267,28 @@ void Dashboard_Refresh(const DashboardData *data)
       ((data->adc_valid_mask ^ previous.adc_valid_mask) & 1U)) {
     uint8_t value = limit_percent(data->brake_percent);
     if (data->adc_valid_mask & 1U) {
-      lv_label_set_text_fmt(ui.brake_text, "%u%%", (unsigned)value);
-      set_bar(ui.brake_fill, value, 135);
+      lv_label_set_text_fmt(ui.brake_text, "B %u%%", (unsigned)value);
+      set_brake_bar(ui.brake_fill, value);
     } else {
-      lv_label_set_text(ui.brake_text, "--");
-      set_bar(ui.brake_fill, 0, 135);
+      lv_label_set_text(ui.brake_text, "B --");
+      set_brake_bar(ui.brake_fill, 0);
     }
   }
   if (!previous_valid || data->throttle_percent != previous.throttle_percent ||
       ((data->adc_valid_mask ^ previous.adc_valid_mask) & 2U)) {
     uint8_t value = limit_percent(data->throttle_percent);
     if (data->adc_valid_mask & 2U) {
-      lv_label_set_text_fmt(ui.throttle_text, "%u%%", (unsigned)value);
-      set_bar(ui.throttle_fill, value, 135);
+      lv_label_set_text_fmt(ui.throttle_text, "T %u%%", (unsigned)value);
+      set_bar(ui.throttle_fill, value, 67);
     } else {
-      lv_label_set_text(ui.throttle_text, "--");
-      set_bar(ui.throttle_fill, 0, 135);
+      lv_label_set_text(ui.throttle_text, "T --");
+      set_bar(ui.throttle_fill, 0, 67);
     }
+  }
+  if (!previous_valid || data->ppm_throttle_percent != previous.ppm_throttle_percent) {
+    uint8_t value = limit_percent(data->ppm_throttle_percent);
+    lv_label_set_text_fmt(ui.ppm_text, "%u%%", (unsigned)value);
+    set_bar(ui.ppm_fill, value, 135);
   }
   previous = *data;
   previous_valid = true;
