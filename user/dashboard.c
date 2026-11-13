@@ -1,4 +1,5 @@
 #include "dashboard.h"
+#include "battery.h"
 
 LV_FONT_DECLARE(font_speed_58);
 LV_FONT_DECLARE(font_dashboard_14);
@@ -14,10 +15,13 @@ LV_FONT_DECLARE(font_title_cn_14);
 #define COLOR_GREEN    0x006D32
 #define COLOR_YELLOW   0x8A4D00
 #define COLOR_RED      0xAA1835
+#define BATTERY_FILL_WIDTH 30
 
 typedef struct {
   lv_obj_t *speed;
   lv_obj_t *gauge;
+  lv_obj_t *battery_body;
+  lv_obj_t *battery_terminal;
   lv_obj_t *battery_fill;
   lv_obj_t *battery_text;
   lv_obj_t *voltage;
@@ -127,10 +131,20 @@ bool Dashboard_Create(lv_obj_t *screen)
   (void)text(screen, 44, 4, 180, "汽车与交通工程学院 毛小文",
              &font_title_cn_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
 
-  lv_obj_t *battery = box(screen, 230, 6, 34, 14, COLOR_PANEL, COLOR_TEXT, 2);
-  if (battery != NULL) ui.battery_fill = box(battery, 2, 2, 29, 10, COLOR_GREEN, COLOR_GREEN, 0);
-  (void)box(screen, 264, 10, 3, 6, COLOR_TEXT, COLOR_TEXT, 1);
-  ui.battery_text = text(screen, 272, 5, 45, "0%", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
+  lv_obj_t *battery_group = box(screen, 230, 3, 84, 20, COLOR_PANEL, COLOR_PANEL, 0);
+  if (battery_group != NULL) {
+    ui.battery_body = box(battery_group, 0, 3, 34, 14, COLOR_PANEL, COLOR_TEXT, 2);
+    if (ui.battery_body != NULL) {
+      /* Child coordinates start inside the 1 px border: leave a 1 px inset. */
+      ui.battery_fill = box(ui.battery_body, 1, 1, BATTERY_FILL_WIDTH, 10,
+                             COLOR_GREEN, COLOR_GREEN, 0);
+    }
+    ui.battery_terminal = box(battery_group, 34, 7, 3, 6, COLOR_TEXT, COLOR_TEXT, 1);
+    ui.battery_text = text(battery_group, 42, 0, 42, "0%", &font_dashboard_14,
+                             COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
+    if (ui.battery_text != NULL)
+      lv_obj_align(ui.battery_text, LV_ALIGN_RIGHT_MID, 0, 0);
+  }
 
   ui.gauge = lv_arc_create(screen);
   if (ui.gauge != NULL) {
@@ -160,7 +174,8 @@ bool Dashboard_Create(lv_obj_t *screen)
   (void)duty_card(screen, 6, "BRAKE", COLOR_RED, &ui.brake_text, &ui.brake_fill);
   (void)duty_card(screen, 163, "THROTTLE", COLOR_GREEN, &ui.throttle_text, &ui.throttle_fill);
 
-  return !create_failed && ui.speed && ui.gauge && ui.battery_fill && ui.battery_text &&
+  return !create_failed && ui.speed && ui.gauge && ui.battery_body &&
+         ui.battery_terminal && ui.battery_fill && ui.battery_text &&
          ui.voltage && ui.current && ui.power &&
          ui.brake_text && ui.brake_fill && ui.throttle_text && ui.throttle_fill;
 }
@@ -184,8 +199,14 @@ void Dashboard_Refresh(const DashboardData *data)
   }
   if (!previous_valid || data->battery_percent != previous.battery_percent) {
     uint8_t value = limit_percent(data->battery_percent);
+    uint32_t indicator = value < BATTERY_LOW_PERCENT ? COLOR_RED : COLOR_GREEN;
+    uint32_t outline = value < BATTERY_LOW_PERCENT ? COLOR_RED : COLOR_TEXT;
     lv_label_set_text_fmt(ui.battery_text, "%u%%", (unsigned)value);
-    set_bar(ui.battery_fill, value, 29);
+    lv_obj_set_style_bg_color(ui.battery_fill, lv_color_hex(indicator), 0);
+    lv_obj_set_style_border_color(ui.battery_body, lv_color_hex(outline), 0);
+    lv_obj_set_style_bg_color(ui.battery_terminal, lv_color_hex(outline), 0);
+    lv_obj_set_style_text_color(ui.battery_text, lv_color_hex(outline), 0);
+    set_bar(ui.battery_fill, value, BATTERY_FILL_WIDTH);
   }
   if (!previous_valid || data->voltage_tenths_v != previous.voltage_tenths_v)
     lv_label_set_text_fmt(ui.voltage, "%u.%u V", (unsigned)(data->voltage_tenths_v / 10U), (unsigned)(data->voltage_tenths_v % 10U));

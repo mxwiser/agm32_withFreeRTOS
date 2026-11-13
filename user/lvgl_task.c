@@ -7,13 +7,14 @@
 #include "st7789.h"
 #include "lvgl.h"
 #include "dashboard.h"
+#include "battery.h"
 
 #define DASHBOARD_DEMO_PERIOD_MS 500U
 
 /* Demo values only; replace the timer with real measurements later. */
 DashboardData dashboard_data = {
   .current_speed_kmh = 26,
-  .battery_percent = 78,
+  .battery_percent = 0, /* Calculated from voltage when the task starts. */
   .voltage_tenths_v = 524,
   .current_tenths_a = 86,
   .power_w = 451,
@@ -29,11 +30,20 @@ volatile uint32_t lvgl_flush_errors;
 static void dashboard_demo_timer(lv_timer_t *timer)
 {
   static uint32_t step;
+  static int16_t battery_voltage_step = -2;
   (void)timer;
   ++step;
   dashboard_data.current_speed_kmh = (uint8_t)((dashboard_data.current_speed_kmh + 1U) % 100U);
-  dashboard_data.battery_percent = (uint8_t)(65U + (step / 4U) % 31U);
-  dashboard_data.voltage_tenths_v = (uint16_t)(500U + step % 51U);
+  int32_t next_voltage = (int32_t)dashboard_data.voltage_tenths_v + battery_voltage_step;
+  if (next_voltage <= (int32_t)BATTERY_DEMO_MIN_TENTHS_V) {
+    next_voltage = BATTERY_DEMO_MIN_TENTHS_V;
+    battery_voltage_step = 2;
+  } else if (next_voltage >= (int32_t)BATTERY_DEMO_MAX_TENTHS_V) {
+    next_voltage = BATTERY_DEMO_MAX_TENTHS_V;
+    battery_voltage_step = -2;
+  }
+  dashboard_data.voltage_tenths_v = (uint16_t)next_voltage;
+  dashboard_data.battery_percent = Battery_EstimatePercent(dashboard_data.voltage_tenths_v);
   dashboard_data.current_tenths_a = (uint16_t)(30U + (step * 3U) % 100U);
   dashboard_data.power_w = (uint16_t)(((uint32_t)dashboard_data.voltage_tenths_v *
                                        dashboard_data.current_tenths_a + 50U) / 100U);
@@ -78,6 +88,7 @@ void LVGL_Task(void *argument)
   lv_display_set_buffers(display, draw_buffer, NULL, sizeof(draw_buffer),
                          LV_DISPLAY_RENDER_MODE_PARTIAL);
 
+  dashboard_data.battery_percent = Battery_EstimatePercent(dashboard_data.voltage_tenths_v);
   if (!Dashboard_Create(lv_screen_active())) {
     printf("Dashboard allocation failed\n");
     vTaskDelete(NULL);

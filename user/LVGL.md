@@ -39,6 +39,17 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 `voltage_tenths_v`、`current_tenths_a` 分别以 0.1 V、0.1 A 为单位，`power_w` 为瓦特。
 演示功率从模拟电压和电流计算。
 
+电池图标和百分比放在同一个顶部容器中，填充对外框保持对称留白。
+电量严格低于 20% 时，外框、端子、填充和百分比文字变红；20% 起恢复正常颜色。
+`user/battery.h` 按已确认的 48 V、13 串 LiPo、满电 54.6 V 配置。
+满电参考为 13×4.2 V=54.6 V；单节 3.7 V 标称、4.2 V 满电的背景说明见
+[Adafruit LiPo 电压说明](https://learn.adafruit.com/li-ion-and-lipoly-batteries/voltages)。
+`Battery_EstimatePercent()` 使用 `battery.c` 中的分段曲线估算显示电量，
+该曲线是待校准的 UI 近似，不是实测容量曲线，也不参与任何充放电保护。
+当前示例曲线在 48.1 V 显示 20%，低于该值进入红色区域；负载压降、温度等会影响估算。
+模拟电压会在配置的显示范围内循环变化，百分比据此计算，不再独立变化。
+实际数据接入后优先使用 BMS 提供的 SOC，或按电芯厂家曲线校准显示估算。
+
 接入实际数据时，在 LVGL 任务中读取线程安全的消息或数据快照，填充 `DashboardData`
 并调用 `Dashboard_Refresh()`，再移除演示定时器。其他任务不要直接调用 LVGL API，
 也不要无同步地修改正在被 LVGL 任务读取的数据。
