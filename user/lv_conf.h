@@ -32,7 +32,7 @@
 #define LV_DRAW_SW_SUPPORT_A8 0
 #define LV_DRAW_SW_SUPPORT_I1 0
 #define LV_USE_ANIMIMG 0
-#define LV_USE_ARC 0
+#define LV_USE_ARC 1
 #define LV_USE_ARCLABEL 0
 #define LV_USE_BAR 0
 #define LV_USE_BUTTON 0
@@ -46,7 +46,7 @@
 #define LV_USE_IMAGEBUTTON 0
 #define LV_USE_KEYBOARD 0
 #define LV_USE_LED 1
-#define LV_USE_LINE 0
+#define LV_USE_LINE 1
 #define LV_USE_LIST 0
 #define LV_USE_MENU 0
 #define LV_USE_MSGBOX 0

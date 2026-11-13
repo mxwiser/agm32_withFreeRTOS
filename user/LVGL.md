@@ -1,7 +1,7 @@
 # LVGL 接入
 
 `main` 启动 `LVGL_Task`，由该 FreeRTOS 任务初始化 ST7789、LVGL 和显示设备，
-创建示例文字，并循环调用 `lv_timer_handler()`。屏幕默认为横屏 320×240，RGB565，
+创建自行车仪表界面，并循环调用 `lv_timer_handler()`。屏幕默认为横屏 320×240，RGB565，
 使用 10 行的局部绘图缓冲；刷新经过现有的同步 SPI/DMA 驱动，驱动负责像素字节序转换。
 LVGL 时钟使用 `board_millis()`，不依赖其他任务或 FreeRTOS tick hook。
 LVGL 创建设备时读取驱动当前宽高；若以后在运行中更改屏幕方向，还需同步更新
@@ -15,12 +15,25 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 `user/lv_conf.h` 使用 32 KiB LVGL 内存池和简单主题。受 208 KiB 程序 Flash 区域限制，
 当前只启用标签等基础功能，关闭了多数控件和非 RGB565 软件渲染格式。
 添加界面时可按需启用控件，并重新检查链接结果是否仍处于程序区内。
-默认字体使用由内置 Montserrat 48 精简出的 ASCII 字体（空格至 `~`），
-不含中文、度数符号或图标，位图直接放在 Flash，节省 RAM。
-示例数字使用 `user/user_fonts/big_numbers.c` 中的字体，仅包含数字和小数点。
-更改字体时可用 `python tools/make_font_ascii48.py` 重新生成该文件。
+仪表使用 58 号数字字体，以及精简后的 Montserrat 48、20 和 12 ASCII 字体（空格至 `~`），
+不含中文、度数符号或字体图标，位图直接放在 Flash，节省 RAM。
+对应字体可分别用 `python tools/make_font_ascii48.py` 和
+`python tools/make_dashboard_fonts.py` 从项目内的 LVGL 原始字体重新生成。
+58 号数字字体由 `python tools/make_speed_font.py` 生成，需要 Pillow。
+自行车、仪表环和卡片等图形由 LVGL 绘制；如后续添加图片素材，放在 `user/image`。
 当前关闭 Flex、Grid 自动布局和 Observer 数据绑定；如界面需要，可以在
 `user/lv_conf.h` 中重新启用。圆弧、圆角等复杂软件绘制能力仍然保留。
+
+## 演示数据及后续对接
+
+`lvgl_task.c` 中的 `dashboard_data` 暂时由 `dashboard_demo_timer()` 每 500 ms 更新。
+`DashboardData` 字段定义在 `dashboard.h`：速度单位 km/h、电池和占空比单位为百分比；
+`voltage_tenths_v`、`current_tenths_a` 分别以 0.1 V、0.1 A 为单位，`power_w` 为瓦特。
+大灯状态和红、蓝、绿 LED 状态也由临时值驱动，演示功率从模拟电压和电流计算。
+
+接入实际数据时，在 LVGL 任务中读取线程安全的消息或数据快照，填充 `DashboardData`
+并调用 `Dashboard_Refresh()`，再移除演示定时器。其他任务不要直接调用 LVGL API，
+也不要无同步地修改正在被 LVGL 任务读取的数据。
 
 ## Flash 分区及烧录
 
