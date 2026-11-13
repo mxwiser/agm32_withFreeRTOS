@@ -43,11 +43,12 @@ result = ST7789_FillRect(20, 30, 100, 60, ST7789_RGB565(0, 255, 0));
 // result = ST7789_SetRotation(1); // 横屏 320×240；0/1/2/3 对应四个方向。
 ```
 
-当前 `main` 创建 LED 和 LCD 两个应用任务。`lcd_demo.c` 每秒依次刷红、绿、蓝。
+当前 `main` 创建 LED 和 LVGL 两个应用任务，默认显示 LVGL 测试文字，见
+[`LVGL 线程说明`](../LVGL.md)。`lcd_demo.c` 保留了每秒依次刷红、绿、蓝的测试任务；
+如需运行它，应在 `main` 中替换 LVGL 任务，不能同时运行两个屏幕任务。
 调试器可观察 `lcd_init_status`、`lcd_readback_status`、`lcd_sync_status`、
 `lcd_last_status`、`lcd_frame_count`、`lcd_fill_time_ms`、`lcd_cpu_hz`、`lcd_spi_hz`。
 颜色保留 1 秒用于观察，这个停留时间与实际刷一帧所花的时间不同。
-测试完后，可将 `LCD_ColorTestTask` 的循环替换为界面绘制代码。
 
 本板实测：100 MHz MCU / 12.5 MHz SPI 时整屏约 99 ms；200 MHz MCU / 50 MHz SPI 时约 25 ms；
 当前 240 MHz MCU / 40 MHz SPI 时约 31 ms。240 MHz 试跑已验证 PLL 启动、LED 翻转和连续刷屏计数，未做长期稳定性验证。

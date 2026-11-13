@@ -1,7 +1,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "board.h"
-#include "lcd_demo.h"
+#include "lvgl_task.h"
 
 #define LED_TOGGLE_INTERVAL_MS 500
 
@@ -28,9 +28,9 @@ int main(void)
                   NULL,
                   tskIDLE_PRIORITY + 1,
                   NULL) == pdPASS &&
-      xTaskCreate(LCD_ColorTestTask,
-                  "LCD",
-                  512,
+      xTaskCreate(LVGL_Task,
+                  "LVGL",
+                  2048,
                   NULL,
                   tskIDLE_PRIORITY + 1,
                   NULL) == pdPASS) {
