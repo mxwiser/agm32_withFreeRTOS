@@ -4,7 +4,7 @@ LV_FONT_DECLARE(lv_font_bike_48);
 LV_FONT_DECLARE(font_speed_58);
 LV_FONT_DECLARE(font_dashboard_12);
 LV_FONT_DECLARE(font_dashboard_20);
-LV_FONT_DECLARE(font_title_cn_16);
+LV_FONT_DECLARE(font_title_cn_14);
 
 #define COLOR_BG       0x050C14
 #define COLOR_PANEL    0x101C29
@@ -76,6 +76,22 @@ static lv_obj_t *text(lv_obj_t *parent, int x, int y, int width,
   return label;
 }
 
+static void make_bike(lv_obj_t *screen)
+{
+  /* Line points must remain valid for the lifetime of the widget. */
+  static const lv_point_precise_t frame[] = {
+    {12, 16}, {19, 8}, {26, 16}, {12, 16}, {17, 10}, {23, 10}, {26, 16}, {34, 16}
+  };
+  (void)box(screen, 7, 11, 10, 10, COLOR_PANEL, COLOR_WHITE, LV_RADIUS_CIRCLE);
+  (void)box(screen, 29, 11, 10, 10, COLOR_PANEL, COLOR_WHITE, LV_RADIUS_CIRCLE);
+  lv_obj_t *line = lv_line_create(screen);
+  if (line == NULL) { create_failed = true; return; }
+  lv_obj_set_pos(line, 0, 0);
+  lv_obj_set_style_line_color(line, lv_color_hex(COLOR_WHITE), 0);
+  lv_obj_set_style_line_width(line, 2, 0);
+  lv_line_set_points(line, frame, sizeof(frame) / sizeof(frame[0]));
+}
+
 static lv_obj_t *metric_card(lv_obj_t *screen, int y, const char *title,
                              const char *symbol, uint32_t accent)
 {
@@ -113,8 +129,9 @@ bool Dashboard_Create(lv_obj_t *screen)
 
   (void)box(screen, 0, 0, 320, 26, COLOR_PANEL, COLOR_PANEL, 0);
   (void)box(screen, 0, 25, 320, 1, COLOR_CYAN, COLOR_CYAN, 0);
-  (void)text(screen, 7, 3, 212, "汽车与交通工程学院 毛小文",
-             &font_title_cn_16, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
+  make_bike(screen);
+  (void)text(screen, 44, 4, 180, "汽车与交通工程学院 毛小文",
+             &font_title_cn_14, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
 
   lv_obj_t *battery = box(screen, 230, 6, 34, 14, COLOR_PANEL, COLOR_WHITE, 2);
   if (battery != NULL) ui.battery_fill = box(battery, 2, 2, 29, 10, COLOR_GREEN, COLOR_GREEN, 0);

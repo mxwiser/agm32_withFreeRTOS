@@ -16,7 +16,7 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 当前只启用标签等基础功能，关闭了多数控件和非 RGB565 软件渲染格式。
 添加界面时可按需启用控件，并重新检查链接结果是否仍处于程序区内。
 仪表使用 58 号数字字体，以及精简后的 Montserrat 48、20 和 12 ASCII 字体（空格至 `~`）。
-标题使用 Noto Sans SC Medium 的 16 号精简字体，仅包含标题所需的中文和空格，
+标题使用 Noto Sans SC Medium 的 14 号精简字体，仅包含标题所需的中文和空格，
 如需其他中文或度数符号需另外添加字形。字体位图直接放在 Flash，节省 RAM。
 对应字体可分别用 `python tools/make_font_ascii48.py` 和
 `python tools/make_dashboard_fonts.py` 从项目内的 LVGL 原始字体重新生成。

@@ -9,14 +9,14 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 TITLE = "汽车与交通工程学院 毛小文"
-SIZE = 16
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--font", default="C:/Windows/Fonts/NotoSansSC-VF.ttf")
+    parser.add_argument("--size", type=int, default=14)
     args = parser.parse_args()
-    font = ImageFont.truetype(args.font, SIZE)
+    font = ImageFont.truetype(args.font, args.size)
     try:
         font.set_variation_by_name("Medium")
     except (OSError, AttributeError):
@@ -68,7 +68,7 @@ static const lv_font_fmt_txt_dsc_t font_dsc = {
     .kern_dsc = NULL, .kern_scale = 0, .cmap_num = 1, .bpp = 4,
     .kern_classes = 0, .bitmap_format = 0
 };
-const lv_font_t font_title_cn_16 = {
+const lv_font_t font_title_cn_%d = {
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,
     .line_height = %d, .base_line = %d,
@@ -77,8 +77,8 @@ const lv_font_t font_title_cn_16 = {
     .dsc = &font_dsc, .fallback = NULL, .user_data = NULL
 };
 ''' % ("\n".join(rows), "\n".join(descriptors), mapping,
-       start, codepoints[-1] - start + 1, len(codepoints), asc + desc, desc)
-    target = ROOT / "user/user_fonts/font_title_cn_16.c"
+       start, codepoints[-1] - start + 1, len(codepoints), args.size, asc + desc, desc)
+    target = ROOT / f"user/user_fonts/font_title_cn_{args.size}.c"
     target.write_text(result, encoding="utf-8", newline="\n")
     print(f"Generated {target}: {len(codepoints)} glyphs, {len(bitmap)} bitmap bytes")
 
