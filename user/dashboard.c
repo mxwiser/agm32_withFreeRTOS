@@ -1,21 +1,19 @@
 #include "dashboard.h"
 
-LV_FONT_DECLARE(lv_font_bike_48);
 LV_FONT_DECLARE(font_speed_58);
-LV_FONT_DECLARE(font_dashboard_12);
-LV_FONT_DECLARE(font_dashboard_20);
+LV_FONT_DECLARE(font_dashboard_14);
+LV_FONT_DECLARE(font_dashboard_24);
 LV_FONT_DECLARE(font_title_cn_14);
 
-#define COLOR_BG       0x050C14
-#define COLOR_PANEL    0x101C29
-#define COLOR_BORDER   0x41566C
-#define COLOR_TRACK    0x26394A
-#define COLOR_WHITE    0xF4F8FC
-#define COLOR_MUTED    0xAABBD0
-#define COLOR_CYAN     0x00E1E8
-#define COLOR_GREEN    0x50F045
-#define COLOR_YELLOW   0xFFC12A
-#define COLOR_RED      0xFF4558
+#define COLOR_BG       0xE5E7E9
+#define COLOR_PANEL    0xFAFAFA
+#define COLOR_BORDER   0x92999F
+#define COLOR_TRACK    0xB7BEC4
+#define COLOR_TEXT     0x000000
+#define COLOR_CYAN     0x005E73
+#define COLOR_GREEN    0x006D32
+#define COLOR_YELLOW   0x8A4D00
+#define COLOR_RED      0xAA1835
 
 typedef struct {
   lv_obj_t *speed;
@@ -82,37 +80,33 @@ static void make_bike(lv_obj_t *screen)
   static const lv_point_precise_t frame[] = {
     {12, 16}, {19, 8}, {26, 16}, {12, 16}, {17, 10}, {23, 10}, {26, 16}, {34, 16}
   };
-  (void)box(screen, 7, 11, 10, 10, COLOR_PANEL, COLOR_WHITE, LV_RADIUS_CIRCLE);
-  (void)box(screen, 29, 11, 10, 10, COLOR_PANEL, COLOR_WHITE, LV_RADIUS_CIRCLE);
+  (void)box(screen, 7, 11, 10, 10, COLOR_PANEL, COLOR_TEXT, LV_RADIUS_CIRCLE);
+  (void)box(screen, 29, 11, 10, 10, COLOR_PANEL, COLOR_TEXT, LV_RADIUS_CIRCLE);
   lv_obj_t *line = lv_line_create(screen);
   if (line == NULL) { create_failed = true; return; }
   lv_obj_set_pos(line, 0, 0);
-  lv_obj_set_style_line_color(line, lv_color_hex(COLOR_WHITE), 0);
+  lv_obj_set_style_line_color(line, lv_color_hex(COLOR_TEXT), 0);
   lv_obj_set_style_line_width(line, 2, 0);
   lv_line_set_points(line, frame, sizeof(frame) / sizeof(frame[0]));
 }
 
-static lv_obj_t *metric_card(lv_obj_t *screen, int y, const char *title,
-                             const char *symbol, uint32_t accent)
+static lv_obj_t *metric_card(lv_obj_t *screen, int y, const char *title, uint32_t accent)
 {
-  lv_obj_t *card = box(screen, 171, y, 144, 47, COLOR_PANEL, COLOR_BORDER, 5);
+  lv_obj_t *card = box(screen, 170, y, 144, 47, COLOR_PANEL, COLOR_BORDER, 5);
   if (card == NULL) return NULL;
   (void)box(card, 0, 3, 4, 41, accent, accent, 2);
-  (void)box(card, 9, 12, 22, 22, COLOR_PANEL, accent, LV_RADIUS_CIRCLE);
-  (void)text(card, 10, 16, 20, symbol, &font_dashboard_12, accent, LV_TEXT_ALIGN_CENTER);
-  (void)box(card, 37, 7, 1, 33, COLOR_BORDER, COLOR_BORDER, 0);
-  (void)text(card, 44, 3, 94, title, &font_dashboard_12, COLOR_MUTED, LV_TEXT_ALIGN_LEFT);
-  return text(card, 44, 19, 94, "0", &font_dashboard_20, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
+  (void)text(card, 12, 1, 124, title, &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
+  return text(card, 12, 16, 124, "0", &font_dashboard_24, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
 }
 
 static bool duty_card(lv_obj_t *screen, int x, const char *title, uint32_t accent,
                       lv_obj_t **value, lv_obj_t **fill)
 {
-  lv_obj_t *card = box(screen, x, 191, 153, 44, COLOR_PANEL, accent, 5);
+  lv_obj_t *card = box(screen, x, 191, 151, 43, COLOR_PANEL, COLOR_BORDER, 5);
   if (card == NULL) return false;
-  (void)text(card, 8, 5, 83, title, &font_dashboard_12, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
-  *value = text(card, 95, 5, 49, "0%", &font_dashboard_12, COLOR_WHITE, LV_TEXT_ALIGN_RIGHT);
-  lv_obj_t *track = box(card, 8, 27, 137, 8, COLOR_TRACK, COLOR_TRACK, 4);
+  (void)text(card, 8, 4, 83, title, &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
+  *value = text(card, 95, 4, 47, "0%", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_RIGHT);
+  lv_obj_t *track = box(card, 8, 27, 135, 8, COLOR_TRACK, COLOR_TRACK, 4);
   if (track == NULL) return false;
   *fill = box(track, 0, 0, 1, 8, accent, accent, 4);
   return *value != NULL && *fill != NULL;
@@ -131,17 +125,17 @@ bool Dashboard_Create(lv_obj_t *screen)
   (void)box(screen, 0, 25, 320, 1, COLOR_CYAN, COLOR_CYAN, 0);
   make_bike(screen);
   (void)text(screen, 44, 4, 180, "汽车与交通工程学院 毛小文",
-             &font_title_cn_14, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
+             &font_title_cn_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
 
-  lv_obj_t *battery = box(screen, 230, 6, 34, 14, COLOR_PANEL, COLOR_WHITE, 2);
+  lv_obj_t *battery = box(screen, 230, 6, 34, 14, COLOR_PANEL, COLOR_TEXT, 2);
   if (battery != NULL) ui.battery_fill = box(battery, 2, 2, 29, 10, COLOR_GREEN, COLOR_GREEN, 0);
-  (void)box(screen, 264, 10, 3, 6, COLOR_WHITE, COLOR_WHITE, 1);
-  ui.battery_text = text(screen, 272, 7, 45, "0%", &font_dashboard_12, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
+  (void)box(screen, 264, 10, 3, 6, COLOR_TEXT, COLOR_TEXT, 1);
+  ui.battery_text = text(screen, 272, 5, 45, "0%", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_LEFT);
 
   ui.gauge = lv_arc_create(screen);
   if (ui.gauge != NULL) {
-    lv_obj_set_pos(ui.gauge, 3, 29);
-    lv_obj_set_size(ui.gauge, 160, 160);
+    lv_obj_set_pos(ui.gauge, 5, 31);
+    lv_obj_set_size(ui.gauge, 156, 156);
     lv_obj_set_clickable(ui.gauge, false);
     lv_obj_set_style_bg_opa(ui.gauge, LV_OPA_TRANSP, LV_PART_MAIN);
     lv_obj_set_style_border_width(ui.gauge, 0, LV_PART_MAIN);
@@ -156,14 +150,14 @@ bool Dashboard_Create(lv_obj_t *screen)
     lv_arc_set_bg_angles(ui.gauge, 135, 45);
     lv_arc_set_range(ui.gauge, 0, 99);
   } else create_failed = true;
-  (void)text(screen, 25, 62, 116, "SPEED", &font_dashboard_12, COLOR_MUTED, LV_TEXT_ALIGN_CENTER);
-  ui.speed = text(screen, 14, 78, 140, "0", &font_speed_58, COLOR_WHITE, LV_TEXT_ALIGN_CENTER);
-  (void)text(screen, 25, 145, 116, "km/h", &font_dashboard_12, COLOR_CYAN, LV_TEXT_ALIGN_CENTER);
+  (void)text(screen, 25, 60, 116, "SPEED", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_CENTER);
+  ui.speed = text(screen, 14, 78, 140, "0", &font_speed_58, COLOR_TEXT, LV_TEXT_ALIGN_CENTER);
+  (void)text(screen, 25, 145, 116, "km/h", &font_dashboard_14, COLOR_TEXT, LV_TEXT_ALIGN_CENTER);
 
-  ui.voltage = metric_card(screen, 30, "Voltage", "V", COLOR_GREEN);
-  ui.current = metric_card(screen, 82, "Current", "A", COLOR_CYAN);
-  ui.power = metric_card(screen, 134, "Power", "W", COLOR_YELLOW);
-  (void)duty_card(screen, 4, "BRAKE", COLOR_RED, &ui.brake_text, &ui.brake_fill);
+  ui.voltage = metric_card(screen, 31, "Voltage", COLOR_GREEN);
+  ui.current = metric_card(screen, 83, "Current", COLOR_CYAN);
+  ui.power = metric_card(screen, 135, "Power", COLOR_YELLOW);
+  (void)duty_card(screen, 6, "BRAKE", COLOR_RED, &ui.brake_text, &ui.brake_fill);
   (void)duty_card(screen, 163, "THROTTLE", COLOR_GREEN, &ui.throttle_text, &ui.throttle_fill);
 
   return !create_failed && ui.speed && ui.gauge && ui.battery_fill && ui.battery_text &&
@@ -202,12 +196,12 @@ void Dashboard_Refresh(const DashboardData *data)
   if (!previous_valid || data->brake_percent != previous.brake_percent) {
     uint8_t value = limit_percent(data->brake_percent);
     lv_label_set_text_fmt(ui.brake_text, "%u%%", (unsigned)value);
-    set_bar(ui.brake_fill, value, 137);
+    set_bar(ui.brake_fill, value, 135);
   }
   if (!previous_valid || data->throttle_percent != previous.throttle_percent) {
     uint8_t value = limit_percent(data->throttle_percent);
     lv_label_set_text_fmt(ui.throttle_text, "%u%%", (unsigned)value);
-    set_bar(ui.throttle_fill, value, 137);
+    set_bar(ui.throttle_fill, value, 135);
   }
   previous = *data;
   previous_valid = true;

@@ -15,16 +15,20 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 `user/lv_conf.h` 使用 32 KiB LVGL 内存池和简单主题。受 208 KiB 程序 Flash 区域限制，
 当前只启用标签等基础功能，关闭了多数控件和非 RGB565 软件渲染格式。
 添加界面时可按需启用控件，并重新检查链接结果是否仍处于程序区内。
-仪表使用 58 号数字字体，以及精简后的 Montserrat 48、20 和 12 ASCII 字体（空格至 `~`）。
+仪表使用直接从 Noto Sans SC 栅格化的字体：58 号加粗速度数字、24 号电气数值、
+14 号半粗正文。速度字模不再由较小字模缩放，数值文字采用纯黑色。
+默认字体为 14 号正文，旧的 Montserrat 48 字体保留在源码中但不再被本界面链接使用。
 标题使用 Noto Sans SC Medium 的 14 号精简字体，仅包含标题所需的中文和空格，
 如需其他中文或度数符号需另外添加字形。字体位图直接放在 Flash，节省 RAM。
-对应字体可分别用 `python tools/make_font_ascii48.py` 和
-`python tools/make_dashboard_fonts.py` 从项目内的 LVGL 原始字体重新生成。
-58 号数字字体由 `python tools/make_speed_font.py` 生成，需要 Pillow。
+14/24 号字体由 `python tools/make_dashboard_fonts.py` 生成，58 号数字字体由
+`python tools/make_speed_font.py` 生成，两者均需要 Pillow，并通过 `tools/font_raster.py`
+直接按目标字号生成。默认使用本机安装的 `NotoSansSC-VF.ttf`；可用 `--font` 指定字体文件。
 标题字体由 `python tools/make_title_font.py` 生成，默认使用系统中安装的
 `NotoSansSC-VF.ttf`，也可通过 `--font` 指定文件。Noto Sans SC 采用 SIL OFL 1.1，
 许可文本位于 `user/user_fonts/OFL-1.1.txt`。
 仪表环和卡片等图形由 LVGL 绘制；如后续添加图片素材，放在 `user/image`。
+界面采用中性浅灰背景、近白色卡片和纯黑文字，右侧卡片省去小型装饰图标，
+为标题和数值提供更大的显示区域，以适应当前较高的 LCD 背光。
 当前关闭 Flex、Grid 自动布局和 Observer 数据绑定；如界面需要，可以在
 `user/lv_conf.h` 中重新启用。圆弧、圆角等复杂软件绘制能力仍然保留。
 

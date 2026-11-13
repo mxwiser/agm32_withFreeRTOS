@@ -8,7 +8,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-TITLE = "汽车与交通工程学院 毛小文"
+TITLE = "汽车与交通工程学院  毛小文"
 
 
 def main():
