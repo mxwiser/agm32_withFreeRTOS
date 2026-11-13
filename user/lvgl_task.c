@@ -50,6 +50,8 @@ void LVGL_Task(void *argument)
   lv_display_set_buffers(display, draw_buffer, NULL, sizeof(draw_buffer),
                          LV_DISPLAY_RENDER_MODE_PARTIAL);
 
+  lv_obj_remove_flag(lv_screen_active(), LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_scrollbar_mode(lv_screen_active(), LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0xCCCCCC), 0);
   lv_obj_set_style_bg_opa(lv_screen_active(), LV_OPA_COVER, 0);
   lv_obj_t *label = lv_label_create(lv_screen_active());

@@ -32,10 +32,10 @@ static const InitCommand panel_init[] = {
               0x32, 0x32, 0x3b, 0x14, 0x13, 0x28, 0x2f}},
 };
 
-#define TRANSFER_PIXELS 480U // Diagnostic: move DMA boundaries for comparison.
+#define TRANSFER_PIXELS 480U
 #define MAX_SCANLINE    511U
 
-// One guard word allows the diagnostic DMA source to start at the second word.
+// One guard word protects the DMA source when it starts at the second word.
 static uint32_t pixel_buffer[TRANSFER_PIXELS / 2U + 1U]; // DMA aligned
 static uint16_t screen_width = ST7789_NATIVE_HEIGHT;
 static uint16_t screen_height = ST7789_NATIVE_WIDTH;

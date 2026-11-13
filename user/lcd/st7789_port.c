@@ -146,9 +146,28 @@ ST7789_Status ST7789_PortWriteDMA(const uint32_t *data, size_t length)
     return ST7789_INVALID_ARGUMENT;
   }
   SPI_SetPhaseCtrl(LCD_SPI, SPI_PHASE_0, SPI_PHASE_ACTION_TX, SPI_PHASE_MODE_SINGLE, length);
-  // Diagnostic: test whether the preloaded word is transmitted before DMA
-  // requests. If so, starting DMA at data[0] repeats the first two pixels.
-  SPI_SetPhaseData(LCD_SPI, SPI_PHASE_0, *data);
+  // Load the first word with DMA before starting SPI, then let the SPI
+  // request line feed the remaining words. CS stays asserted throughout.
+  DMAC_Config(LCD_DMA_CHANNEL, (uint32_t)data, (uint32_t)&LCD_SPI->PHASE_DATA[0],
+              DMAC_ADDR_INCR_OFF, DMAC_ADDR_INCR_OFF,
+              DMAC_WIDTH_32_BIT, DMAC_WIDTH_32_BIT, DMAC_BURST_1, DMAC_BURST_1,
+              1, DMAC_MEM_TO_MEM_DMA_CTRL, 0, 0);
+  uint32_t start = ST7789_PortMillis();
+  while (!DMAC_IsChannelRawIntTCActive(LCD_DMA_CHANNEL)) {
+    if (DMAC_IsChannelRawIntErrorActive(LCD_DMA_CHANNEL) ||
+        (uint32_t)(ST7789_PortMillis() - start) >= LCD_SPI_TIMEOUT_MS) {
+      ST7789_Status result = DMAC_IsChannelRawIntErrorActive(LCD_DMA_CHANNEL)
+                               ? ST7789_IO_ERROR : ST7789_TIMEOUT;
+      DMAC_DisableChannel(LCD_DMA_CHANNEL);
+      SPI_Init(LCD_SPI, spi_divisor);
+      return result;
+    }
+  }
+  DMAC_DisableChannel(LCD_DMA_CHANNEL);
+  if (length <= 4U) {
+    SPI_Start(LCD_SPI, SPI_CTRL_PHASE_CNT1, SPI_CTRL_DMA_OFF, SPI_INTERRUPT_OFF);
+    return wait_spi(false);
+  }
   DMAC_Config(LCD_DMA_CHANNEL, (uint32_t)(data + 1), (uint32_t)&LCD_SPI->PHASE_DATA[0],
                 DMAC_ADDR_INCR_ON, DMAC_ADDR_INCR_OFF,
                 DMAC_WIDTH_32_BIT, DMAC_WIDTH_32_BIT, DMAC_BURST_1, DMAC_BURST_1,

@@ -11,7 +11,7 @@ void ST7789_PortBegin(bool data);
 void ST7789_PortDataMode(void);
 void ST7789_PortEnd(void);
 ST7789_Status ST7789_PortWrite(const uint8_t *data, size_t length);
-// Diagnostic: buffer must have one extra guard word after its rounded length.
+// Buffer must have one extra guard word after its rounded length.
 // It must be 4-byte aligned and length must be <= 4092 bytes.
 ST7789_Status ST7789_PortWriteDMA(const uint32_t *data, size_t length);
 ST7789_Status ST7789_PortRead(uint8_t command, uint8_t dummy_bits,
