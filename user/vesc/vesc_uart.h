@@ -8,6 +8,10 @@ typedef struct {
   VescTelemetry telemetry;
   uint32_t packets_ok;
   uint32_t last_update_tick;
+  uint32_t config_signature; /* VESC 电机配置版本签名，便于排查兼容性。 */
+  uint32_t config_packets_ok;
+  uint8_t battery_cells;
+  bool battery_config_valid;
   bool online;
 } VescStatus;
 

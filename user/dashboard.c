@@ -244,13 +244,13 @@ void Dashboard_Refresh(const DashboardData *data)
       lv_arc_set_value(ui.gauge, 0);
     }
   }
-  if (!previous_valid || data->electrical_valid != previous.electrical_valid ||
+  if (!previous_valid || data->battery_valid != previous.battery_valid ||
       data->battery_percent != previous.battery_percent) {
     uint8_t value = limit_percent(data->battery_percent);
     uint32_t indicator = value < BATTERY_LOW_PERCENT ? COLOR_BATTERY_LOW : COLOR_BATTERY;
-    uint32_t outline = !data->electrical_valid ? COLOR_BORDER :
+    uint32_t outline = !data->battery_valid ? COLOR_BORDER :
                        (value < BATTERY_LOW_PERCENT ? COLOR_BATTERY_LOW : COLOR_TEXT);
-    unsigned active_segments = data->electrical_valid ?
+    unsigned active_segments = data->battery_valid ?
                                ((unsigned)value * BATTERY_SEGMENTS + 99U) / 100U : 0U;
     for (unsigned i = 0; i < BATTERY_SEGMENTS; ++i) {
       uint32_t color = i < active_segments ? indicator : COLOR_TRACK;

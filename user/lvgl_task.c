@@ -47,6 +47,7 @@ static void dashboard_update_inputs(void)
                          VESC_GEAR_MOTOR_TURNS, VESC_GEAR_WHEEL_TURNS, &speed);
   dashboard_data.current_speed_kmh = dashboard_data.speed_valid ? speed : 0;
   dashboard_data.electrical_valid = vesc.online;
+  dashboard_data.battery_valid = vesc.online && vesc.battery_config_valid;
   dashboard_data.controller_temperature_valid = vesc.online;
   if (vesc.online) {
     VescElectricalValues values;
@@ -54,7 +55,8 @@ static void dashboard_update_inputs(void)
     dashboard_data.voltage_tenths_v = values.voltage_tenths_v;
     dashboard_data.current_tenths_a = values.current_tenths_a;
     dashboard_data.power_w = values.power_w;
-    dashboard_data.battery_percent = Battery_EstimatePercent(values.voltage_tenths_v);
+    if (dashboard_data.battery_valid)
+      dashboard_data.battery_percent = Battery_EstimatePercent(values.voltage_tenths_v, vesc.battery_cells);
     dashboard_data.controller_temperature_c =
         VescTemperature_WholeCelsius(vesc.telemetry.fet_temp_tenths_c);
   }

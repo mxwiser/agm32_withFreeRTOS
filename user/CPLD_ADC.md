@@ -21,6 +21,6 @@ ADC1、ADC2 分别使用独立的一维卡尔曼滤波器处理原始值，然�
 
 仪表盘左侧共用条中，B 刹车使用 ADC1，向左显示；T 油门使用 ADC2，向右显示，可同时显示。右侧 PPM 的独立任务每 1 ms 从两路滤波后的 ADC 值计算：`PPM = clamp(1.0 × 油门 - 1.5 × 刹车, -1, 1)`，油门和刹车分别根据各自量程归一化到 0～1。权重在 `user/config/ppm_config.h` 中定义；计算使用完整的 ADC 归一化精度，界面显示四舍五入后的百分比。负值向左表示刹车，正值向右表示驱动。任一路尚未完成首次有效采样时，PPM 显示 `--`。
 
-其他任务可调用 `Ppm_GetSnapshot()` 取得归一化值、百分比和有效标志。当前仅计算和显示，尚未生成或发送 PPM 信号；示例量程与滤波参数尚需根据传感器实测校准，也没有输入故障诊断。
+其他任务可调用 `Ppm_GetSnapshot()` 取得归一化值、百分比和有效标志。ADC 计算值当前仅用于显示，尚未驱动物理 PPM 输出；ADC3 / PIN_17 的物理输出目前仅用于固定开机测试，详见 `user/vesc/README.md`。示例量程与滤波参数尚需根据传感器实测校准，也没有输入故障诊断。
 
-车辆启动时默认锁定，车 Logo 显示红色，PPM 快照强制为 0。调用 `VehicleLock_SetLocked(false)` 解锁后 Logo 变黑，并在下一次有效 ADC 计算后恢复 PPM；调用 `VehicleLock_SetLocked(true)` 会同步清零 PPM。现在还没有接入实际锁车信号或 PPM 输出，后续输出必须始终使用 `Ppm_GetSnapshot()` 获取经过锁定限制的值。
+车辆启动时默认锁定，车 Logo 显示红色，PPM 快照强制为 0。当前若启用开机固定输出测试，等待中位且 VESC 在线后会临时解锁，测试结束重新锁车；见 `user/config/ppm_config.h`。调用 `VehicleLock_SetLocked(false)` 解锁后 Logo 变黑，并在下一次有效 ADC 计算后恢复 PPM 快照；调用 `VehicleLock_SetLocked(true)` 会同步清零快照并使物理测试输出回中位。现在还没有接入实际锁车信号，后续 ADC 控制输出必须尊重锁车和故障状态。

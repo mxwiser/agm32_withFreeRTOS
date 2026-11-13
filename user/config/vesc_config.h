@@ -7,6 +7,11 @@
 #define VESC_OFFLINE_TIMEOUT_MS 1000U      /* 多久未收到有效遥测判定离线，单位毫秒。 */
 #define VESC_FRAME_TIMEOUT_MS 50U          /* 不完整数据帧的接收超时，单位毫秒。 */
 #define VESC_RX_BUFFER_SIZE 128U           /* 接收环形缓冲区，须为 2～256 的 2 次幂。 */
+#define VESC_CONFIG_RETRY_MS 1000U          /* 未取得电机配置时的重试周期。 */
+#define VESC_CONFIG_REFRESH_MS 10000U       /* 已取得配置后的重新读取周期。 */
+#define VESC_CONFIG_TIMEOUT_MS 250U         /* 完整配置应答等待超时。 */
+#define VESC_CONFIG_VALIDITY_MS 30000U      /* 配置持续读取失败后的失效时间。 */
+#define VESC_CONFIG_REQUEST_GAP_MS 25U      /* 与实时遥测请求的最小间隔。 */
 
 /* ERPM 换算车速：参数未知时设为 0，界面显示 --；确认后按实车填写。 */
 #define VESC_MOTOR_POLE_PAIRS 10U       /* 20 个磁极对应 10 对极。 */

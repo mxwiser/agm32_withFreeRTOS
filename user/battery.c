@@ -20,19 +20,17 @@ static const BatteryPoint display_curve[] = {
   {BATTERY_FULL_CELL_MV, 100},
 };
 
-_Static_assert(BATTERY_SERIES_CELLS > 0 && BATTERY_SERIES_CELLS <= 16,
-               "Battery series count must be between 1 and 16");
-
-uint8_t Battery_EstimatePercent(uint16_t pack_voltage_tenths_v)
+uint8_t Battery_EstimatePercent(uint16_t pack_voltage_tenths_v, uint8_t series_cells)
 {
+  if (series_cells == 0U || series_cells > BATTERY_MAX_SERIES_CELLS) return 0U;
   uint32_t pack_mv = (uint32_t)pack_voltage_tenths_v * 100U;
-  if (pack_mv <= (uint32_t)display_curve[0].cell_mv * BATTERY_SERIES_CELLS)
+  if (pack_mv <= (uint32_t)display_curve[0].cell_mv * series_cells)
     return 0;
 
   for (size_t i = 1; i < sizeof(display_curve) / sizeof(display_curve[0]); ++i) {
-    uint32_t high = (uint32_t)display_curve[i].cell_mv * BATTERY_SERIES_CELLS;
+    uint32_t high = (uint32_t)display_curve[i].cell_mv * series_cells;
     if (pack_mv < high) {
-      uint32_t low = (uint32_t)display_curve[i - 1].cell_mv * BATTERY_SERIES_CELLS;
+      uint32_t low = (uint32_t)display_curve[i - 1].cell_mv * series_cells;
       uint32_t delta_percent = display_curve[i].percent - display_curve[i - 1].percent;
       return (uint8_t)(display_curve[i - 1].percent +
                       (pack_mv - low) * delta_percent / (high - low));
