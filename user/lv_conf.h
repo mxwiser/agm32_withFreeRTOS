@@ -45,8 +45,8 @@
 #define LV_USE_IMAGE 0
 #define LV_USE_IMAGEBUTTON 0
 #define LV_USE_KEYBOARD 0
-#define LV_USE_LED 1
-#define LV_USE_LINE 1
+#define LV_USE_LED 0
+#define LV_USE_LINE 0
 #define LV_USE_LIST 0
 #define LV_USE_MENU 0
 #define LV_USE_MSGBOX 0

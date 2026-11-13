@@ -19,8 +19,6 @@ DashboardData dashboard_data = {
   .power_w = 451,
   .brake_percent = 18,
   .throttle_percent = 63,
-  .headlight_on = true,
-  .led_state = DASHBOARD_LED_RED,
 };
 
 /* RGB565, ten lines; uint32_t provides suitable alignment for the renderer. */
@@ -41,8 +39,6 @@ static void dashboard_demo_timer(lv_timer_t *timer)
                                        dashboard_data.current_tenths_a + 50U) / 100U);
   dashboard_data.brake_percent = (uint8_t)((step * 2U) % 101U);
   dashboard_data.throttle_percent = (uint8_t)((step * 3U) % 101U);
-  dashboard_data.headlight_on = ((step / 10U) % 2U) == 0U;
-  dashboard_data.led_state = (DashboardLedState)((step / 2U) % 3U);
   Dashboard_Refresh(&dashboard_data);
 }
 

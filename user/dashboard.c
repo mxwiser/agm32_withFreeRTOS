@@ -4,6 +4,7 @@ LV_FONT_DECLARE(lv_font_bike_48);
 LV_FONT_DECLARE(font_speed_58);
 LV_FONT_DECLARE(font_dashboard_12);
 LV_FONT_DECLARE(font_dashboard_20);
+LV_FONT_DECLARE(font_title_cn_16);
 
 #define COLOR_BG       0x050C14
 #define COLOR_PANEL    0x101C29
@@ -21,8 +22,6 @@ typedef struct {
   lv_obj_t *gauge;
   lv_obj_t *battery_fill;
   lv_obj_t *battery_text;
-  lv_obj_t *headlight;
-  lv_obj_t *led;
   lv_obj_t *voltage;
   lv_obj_t *current;
   lv_obj_t *power;
@@ -77,22 +76,6 @@ static lv_obj_t *text(lv_obj_t *parent, int x, int y, int width,
   return label;
 }
 
-static void make_bike(lv_obj_t *screen)
-{
-  /* Static points must outlive the line widget. */
-  static const lv_point_precise_t frame[] = {
-    {12, 16}, {19, 8}, {26, 16}, {12, 16}, {17, 10}, {23, 10}, {26, 16}, {34, 16}
-  };
-  (void)box(screen, 7, 11, 10, 10, COLOR_PANEL, COLOR_WHITE, LV_RADIUS_CIRCLE);
-  (void)box(screen, 29, 11, 10, 10, COLOR_PANEL, COLOR_WHITE, LV_RADIUS_CIRCLE);
-  lv_obj_t *line = lv_line_create(screen);
-  if (line == NULL) { create_failed = true; return; }
-  lv_obj_set_pos(line, 0, 0);
-  lv_obj_set_style_line_color(line, lv_color_hex(COLOR_WHITE), 0);
-  lv_obj_set_style_line_width(line, 2, 0);
-  lv_line_set_points(line, frame, sizeof(frame) / sizeof(frame[0]));
-}
-
 static lv_obj_t *metric_card(lv_obj_t *screen, int y, const char *title,
                              const char *symbol, uint32_t accent)
 {
@@ -130,23 +113,13 @@ bool Dashboard_Create(lv_obj_t *screen)
 
   (void)box(screen, 0, 0, 320, 26, COLOR_PANEL, COLOR_PANEL, 0);
   (void)box(screen, 0, 25, 320, 1, COLOR_CYAN, COLOR_CYAN, 0);
-  make_bike(screen);
-  (void)text(screen, 45, 7, 56, "E-BIKE", &font_dashboard_12, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
+  (void)text(screen, 7, 3, 212, "汽车与交通工程学院 毛小文",
+             &font_title_cn_16, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
 
-  lv_obj_t *battery = box(screen, 153, 6, 34, 14, COLOR_PANEL, COLOR_WHITE, 2);
+  lv_obj_t *battery = box(screen, 230, 6, 34, 14, COLOR_PANEL, COLOR_WHITE, 2);
   if (battery != NULL) ui.battery_fill = box(battery, 2, 2, 29, 10, COLOR_GREEN, COLOR_GREEN, 0);
-  (void)box(screen, 187, 10, 3, 6, COLOR_WHITE, COLOR_WHITE, 1);
-  ui.battery_text = text(screen, 193, 7, 45, "0%", &font_dashboard_12, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
-  ui.headlight = text(screen, 247, 7, 50, "LIGHT", &font_dashboard_12, COLOR_CYAN, LV_TEXT_ALIGN_LEFT);
-  ui.led = lv_led_create(screen);
-  if (ui.led != NULL) {
-    lv_obj_set_pos(ui.led, 303, 8);
-    lv_obj_set_size(ui.led, 10, 10);
-    lv_obj_set_style_bg_color(ui.led, lv_color_white(), 0);
-    lv_obj_set_style_bg_opa(ui.led, LV_OPA_COVER, 0);
-    lv_obj_set_style_radius(ui.led, LV_RADIUS_CIRCLE, 0);
-    lv_led_on(ui.led);
-  } else create_failed = true;
+  (void)box(screen, 264, 10, 3, 6, COLOR_WHITE, COLOR_WHITE, 1);
+  ui.battery_text = text(screen, 272, 7, 45, "0%", &font_dashboard_12, COLOR_WHITE, LV_TEXT_ALIGN_LEFT);
 
   ui.gauge = lv_arc_create(screen);
   if (ui.gauge != NULL) {
@@ -177,7 +150,7 @@ bool Dashboard_Create(lv_obj_t *screen)
   (void)duty_card(screen, 163, "THROTTLE", COLOR_GREEN, &ui.throttle_text, &ui.throttle_fill);
 
   return !create_failed && ui.speed && ui.gauge && ui.battery_fill && ui.battery_text &&
-         ui.headlight && ui.led && ui.voltage && ui.current && ui.power &&
+         ui.voltage && ui.current && ui.power &&
          ui.brake_text && ui.brake_fill && ui.throttle_text && ui.throttle_fill;
 }
 
@@ -218,13 +191,6 @@ void Dashboard_Refresh(const DashboardData *data)
     uint8_t value = limit_percent(data->throttle_percent);
     lv_label_set_text_fmt(ui.throttle_text, "%u%%", (unsigned)value);
     set_bar(ui.throttle_fill, value, 137);
-  }
-  if (!previous_valid || data->headlight_on != previous.headlight_on)
-    lv_obj_set_style_text_color(ui.headlight, lv_color_hex(data->headlight_on ? COLOR_CYAN : COLOR_MUTED), 0);
-  if (!previous_valid || data->led_state != previous.led_state) {
-    uint32_t color = data->led_state == DASHBOARD_LED_BLUE ? 0x0000FF :
-                     data->led_state == DASHBOARD_LED_GREEN ? COLOR_GREEN : COLOR_RED;
-    lv_led_set_color(ui.led, lv_color_hex(color));
   }
   previous = *data;
   previous_valid = true;

@@ -6,12 +6,6 @@
 #include "lvgl.h"
 
 /* Temporary values. Voltage and current use tenths of V and A, respectively. */
-typedef enum {
-  DASHBOARD_LED_RED = 0,
-  DASHBOARD_LED_BLUE,
-  DASHBOARD_LED_GREEN
-} DashboardLedState;
-
 typedef struct {
   uint8_t current_speed_kmh;
   uint8_t battery_percent;
@@ -20,8 +14,6 @@ typedef struct {
   uint16_t power_w;
   uint8_t brake_percent;
   uint8_t throttle_percent;
-  bool headlight_on;
-  DashboardLedState led_state;
 } DashboardData;
 
 /* Only the LVGL task may modify these values or call the UI functions. */

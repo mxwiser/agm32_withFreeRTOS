@@ -15,12 +15,16 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 `user/lv_conf.h` 使用 32 KiB LVGL 内存池和简单主题。受 208 KiB 程序 Flash 区域限制，
 当前只启用标签等基础功能，关闭了多数控件和非 RGB565 软件渲染格式。
 添加界面时可按需启用控件，并重新检查链接结果是否仍处于程序区内。
-仪表使用 58 号数字字体，以及精简后的 Montserrat 48、20 和 12 ASCII 字体（空格至 `~`），
-不含中文、度数符号或字体图标，位图直接放在 Flash，节省 RAM。
+仪表使用 58 号数字字体，以及精简后的 Montserrat 48、20 和 12 ASCII 字体（空格至 `~`）。
+标题使用 Noto Sans SC Medium 的 16 号精简字体，仅包含标题所需的中文和空格，
+如需其他中文或度数符号需另外添加字形。字体位图直接放在 Flash，节省 RAM。
 对应字体可分别用 `python tools/make_font_ascii48.py` 和
 `python tools/make_dashboard_fonts.py` 从项目内的 LVGL 原始字体重新生成。
 58 号数字字体由 `python tools/make_speed_font.py` 生成，需要 Pillow。
-自行车、仪表环和卡片等图形由 LVGL 绘制；如后续添加图片素材，放在 `user/image`。
+标题字体由 `python tools/make_title_font.py` 生成，默认使用系统中安装的
+`NotoSansSC-VF.ttf`，也可通过 `--font` 指定文件。Noto Sans SC 采用 SIL OFL 1.1，
+许可文本位于 `user/user_fonts/OFL-1.1.txt`。
+仪表环和卡片等图形由 LVGL 绘制；如后续添加图片素材，放在 `user/image`。
 当前关闭 Flex、Grid 自动布局和 Observer 数据绑定；如界面需要，可以在
 `user/lv_conf.h` 中重新启用。圆弧、圆角等复杂软件绘制能力仍然保留。
 
@@ -29,7 +33,7 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 `lvgl_task.c` 中的 `dashboard_data` 暂时由 `dashboard_demo_timer()` 每 500 ms 更新。
 `DashboardData` 字段定义在 `dashboard.h`：速度单位 km/h、电池和占空比单位为百分比；
 `voltage_tenths_v`、`current_tenths_a` 分别以 0.1 V、0.1 A 为单位，`power_w` 为瓦特。
-大灯状态和红、蓝、绿 LED 状态也由临时值驱动，演示功率从模拟电压和电流计算。
+演示功率从模拟电压和电流计算。
 
 接入实际数据时，在 LVGL 任务中读取线程安全的消息或数据快照，填充 `DashboardData`
 并调用 `Dashboard_Refresh()`，再移除演示定时器。其他任务不要直接调用 LVGL API，
