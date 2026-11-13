@@ -64,8 +64,8 @@ ADC 尚无有效结果时显示 `--`。接口及寄存器说明见 `user/CPLD_AD
 电量根据 VESC 输入电压估算；串口离线时电池图标变灰，避免将过期数据误认为有效电量。
 实际数据接入后优先使用 BMS 提供的 SOC，或按电芯厂家曲线校准显示估算。
 
-接入实际数据时，在 LVGL 任务中读取线程安全的消息或数据快照，填充 `DashboardData`
-并调用 `Dashboard_Refresh()`，再移除演示定时器。其他任务不要直接调用 LVGL API，
+接入其他实际数据时，在 LVGL 任务中读取线程安全的消息或数据快照，填充 `DashboardData`
+并调用 `Dashboard_Refresh()`。其他任务不要直接调用 LVGL API，
 也不要无同步地修改正在被 LVGL 任务读取的数据。
 
 ## Flash 分区及烧录
