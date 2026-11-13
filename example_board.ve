@@ -14,8 +14,8 @@ CAN0_RX0 PIN_13 # PA3, CANRX <- U3 RXD
 # D1 status LED. GPIO4 bit 4 matches LED_GPIO_BITS and the RTOS timer demo.
 GPIO4_4 PIN_43 # PB7, LED, active high
 
-# Q1 / BZ1 buzzer control; initialize GPIO5 bit 0 low before enabling output.
-GPIO5_0 PIN_45 # PB8, Buzzerd, active high
+# Q1 / BZ1 buzzer control, hardware PWM via GPTIMER4 channel 0.
+GPTIMER4_CH0 PIN_45 # PB8, Buzzerd, active high
 
 # J6 display: write-only SPI, with SCL=SCK and SDA=MOSI.
 SPI0_SCK    PIN_28 # PB15, SCL, J6 pin 3

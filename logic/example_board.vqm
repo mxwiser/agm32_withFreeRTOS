@@ -2,7 +2,7 @@
 
 /* top =  1  */
 /* src = "example_board.v:5.1-464.10" */
-module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPIO5_3, PIN_HSE, PIN_HSI, PIN_OSC, SPI0_CSN, SPI0_SCK, SPI0_SI_IO0, UART0_UARTRXD, UART0_UARTTXD);
+module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_1, GPIO5_2, GPIO5_3, GPTIMER4_CH0, PIN_HSE, PIN_HSI, PIN_OSC, SPI0_CSN, SPI0_SCK, SPI0_SI_IO0, UART0_UARTRXD, UART0_UARTTXD);
   /* src = "example_board.v:22.15-22.23" */
   input CAN0_RX0;
   wire CAN0_RX0;
@@ -13,17 +13,17 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   inout GPIO4_4;
   wire GPIO4_4;
   /* src = "example_board.v:25.15-25.22" */
-  inout GPIO5_0;
-  wire GPIO5_0;
-  /* src = "example_board.v:26.15-26.22" */
   inout GPIO5_1;
   wire GPIO5_1;
-  /* src = "example_board.v:27.15-27.22" */
+  /* src = "example_board.v:26.15-26.22" */
   inout GPIO5_2;
   wire GPIO5_2;
-  /* src = "example_board.v:28.15-28.22" */
+  /* src = "example_board.v:27.15-27.22" */
   inout GPIO5_3;
   wire GPIO5_3;
+  /* src = "example_board.v:28.15-28.27" */
+  inout GPTIMER4_CH0;
+  wire GPTIMER4_CH0;
   /* src = "example_board.v:29.15-29.22" */
   input PIN_HSE;
   wire PIN_HSE;
@@ -94,33 +94,38 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   /* src = "example_board.v:335.12-335.27" */
   /* unused_bits = "0 1 2 3 4 5 6 7" */
   wire [7:0] gpio2_io_out_en;
-  /* src = "example_board.v:338.12-338.29" */
-  /* unused_bits = "0 1 2 3 4 5 6 7" */
+  /* keep = 1 */
+  /* src = "example_board.v:342.27-342.38" */
+  wire [7:0] gpio3_io_in;
+  /* keep = 1 */
+  /* src = "example_board.v:338.27-338.44" */
+  /* unused_bits = "1 2 3 4 5 6 7" */
   wire [7:0] gpio3_io_out_data;
-  /* src = "example_board.v:339.12-339.27" */
-  /* unused_bits = "0 1 2 3 4 5 6 7" */
+  /* keep = 1 */
+  /* src = "example_board.v:339.27-339.42" */
+  /* unused_bits = "1 2 3 4 5 6 7" */
   wire [7:0] gpio3_io_out_en;
   /* keep = 1 */
-  /* src = "example_board.v:350.27-350.38" */
+  /* src = "example_board.v:352.27-352.38" */
   wire [7:0] gpio4_io_in;
   /* keep = 1 */
-  /* src = "example_board.v:342.27-342.44" */
+  /* src = "example_board.v:344.27-344.44" */
   /* unused_bits = "0 1 2 3 7" */
   wire [7:0] gpio4_io_out_data;
   /* keep = 1 */
-  /* src = "example_board.v:343.27-343.42" */
+  /* src = "example_board.v:345.27-345.42" */
   /* unused_bits = "0 1 2 3 7" */
   wire [7:0] gpio4_io_out_en;
   /* keep = 1 */
   /* src = "example_board.v:362.27-362.38" */
   wire [7:0] gpio5_io_in;
   /* keep = 1 */
-  /* src = "example_board.v:352.27-352.44" */
-  /* unused_bits = "4 5 6 7" */
+  /* src = "example_board.v:354.27-354.44" */
+  /* unused_bits = "0 4 5 6 7" */
   wire [7:0] gpio5_io_out_data;
   /* keep = 1 */
-  /* src = "example_board.v:353.27-353.42" */
-  /* unused_bits = "4 5 6 7" */
+  /* src = "example_board.v:355.27-355.42" */
+  /* unused_bits = "0 4 5 6 7" */
   wire [7:0] gpio5_io_out_en;
   /* keep = 1 */
   /* src = "example_board.v:366.27-366.38" */
@@ -427,13 +432,6 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* module_not_derived = 1 */
   /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
-  cycloneive_io_obuf GPIO5_0_o (
-    .i(gpio5_io_out_data[0]),
-    .o(GPIO5_0),
-    .oe(gpio5_io_out_en[0])
-  );
-  /* module_not_derived = 1 */
-  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
   cycloneive_io_obuf GPIO5_1_o (
     .i(gpio5_io_out_data[1]),
     .o(GPIO5_1),
@@ -452,6 +450,13 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
     .i(gpio5_io_out_data[3]),
     .o(GPIO5_3),
     .oe(gpio5_io_out_en[3])
+  );
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:41.23-41.68" */
+  cycloneive_io_obuf GPTIMER4_CH0_o (
+    .i(gpio3_io_out_data[0]),
+    .o(GPTIMER4_CH0),
+    .oe(gpio3_io_out_en[0])
   );
   assign PIN_12_out_en = ~ /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:60.17-60.22" */ gpio8_io_out_en[7];
   /* keep = 1 */
@@ -544,17 +549,17 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   /* module_not_derived = 1 */
   /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
+  cycloneive_io_ibuf gpio3_io_in_o_0 (
+    .i(GPTIMER4_CH0),
+    .ibar(1'h0),
+    .o(gpio3_io_in[0])
+  );
+  /* module_not_derived = 1 */
+  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
   cycloneive_io_ibuf gpio4_io_in_o_4 (
     .i(GPIO4_4),
     .ibar(1'h0),
     .o(gpio4_io_in[4])
-  );
-  /* module_not_derived = 1 */
-  /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
-  cycloneive_io_ibuf gpio5_io_in_o_0 (
-    .i(GPIO5_0),
-    .ibar(1'h0),
-    .o(gpio5_io_in[0])
   );
   /* module_not_derived = 1 */
   /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:40.23-40.73" */
@@ -2319,13 +2324,13 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
     .gpio2_io_in(8'h00),
     .gpio2_io_out_data(gpio2_io_out_data),
     .gpio2_io_out_en(gpio2_io_out_en),
-    .gpio3_io_in(8'h00),
+    .gpio3_io_in({ 7'h00, gpio3_io_in[0] }),
     .gpio3_io_out_data(gpio3_io_out_data),
     .gpio3_io_out_en(gpio3_io_out_en),
     .gpio4_io_in({ 3'h0, gpio4_io_in[4], 4'h0 }),
     .gpio4_io_out_data(gpio4_io_out_data),
     .gpio4_io_out_en(gpio4_io_out_en),
-    .gpio5_io_in({ 4'h0, gpio5_io_in[3:0] }),
+    .gpio5_io_in({ 4'h0, gpio5_io_in[3:1], 1'h0 }),
     .gpio5_io_out_data(gpio5_io_out_data),
     .gpio5_io_out_en(gpio5_io_out_en),
     .gpio6_io_in({ 6'h00, gpio6_io_in[1], 1'h0 }),
@@ -2374,8 +2379,10 @@ module example_board(CAN0_RX0, CAN0_TX0, GPIO4_4, GPIO5_0, GPIO5_1, GPIO5_2, GPI
   );
   assign sys_resetn_A_Y = ~ /* src = "D:\\ProgramData\\agrv\\AgRV_pio\\packages\\tool-agrv_logic\\map\\bin\\../share/agm/rodina/cells_map.v:60.17-60.22" */ sys_resetn;
   assign gpio0_io_in[7:1] = 7'h00;
+  assign gpio3_io_in[7:1] = 7'h00;
   assign gpio4_io_in[3:0] = 4'h0;
   assign gpio4_io_in[7:5] = 3'h0;
+  assign gpio5_io_in[0] = 1'h0;
   assign gpio5_io_in[7:4] = 4'h0;
   assign gpio6_io_in[0] = 1'h0;
   assign gpio6_io_in[7:2] = 6'h00;

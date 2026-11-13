@@ -4,6 +4,7 @@
 #include "lvgl_task.h"
 #include "input_task.h"
 #include "ppm_task.h"
+#include "buzzer.h"
 
 #define LED_TOGGLE_INTERVAL_MS 500
 
@@ -47,7 +48,8 @@ int main(void)
                   configMINIMAL_STACK_SIZE,
                   NULL,
                   tskIDLE_PRIORITY + 2,
-                  NULL) == pdPASS) {
+                  NULL) == pdPASS &&
+      Buzzer_Init()) {
     vTaskStartScheduler();
   }
 

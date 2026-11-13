@@ -6,10 +6,10 @@ module example_board (
   CAN0_RX0,
   CAN0_TX0,
   GPIO4_4,
-  GPIO5_0,
   GPIO5_1,
   GPIO5_2,
   GPIO5_3,
+  GPTIMER4_CH0,
   PIN_HSE,
   PIN_HSI,
   PIN_OSC,
@@ -22,10 +22,10 @@ module example_board (
 input         CAN0_RX0;
 output        CAN0_TX0;
 inout         GPIO4_4;
-inout         GPIO5_0;
 inout         GPIO5_1;
 inout         GPIO5_2;
 inout         GPIO5_3;
+inout         GPTIMER4_CH0;
 input         PIN_HSE;
 input         PIN_HSI;
 input         PIN_OSC;
@@ -91,11 +91,11 @@ wire PIN_43_out_en;
 wire PIN_43_out_data;
 assign GPIO4_4 = PIN_43_out_en ? PIN_43_out_data : 1'bz;
 
-// GPIO5_0, GPIO5_0
-assign PIN_45_in = GPIO5_0;
+// GPTIMER4_CH0, GPIO3_0
+assign PIN_45_in = GPTIMER4_CH0;
 wire PIN_45_out_en;
 wire PIN_45_out_data;
-assign GPIO5_0 = PIN_45_out_en ? PIN_45_out_data : 1'bz;
+assign GPTIMER4_CH0 = PIN_45_out_en ? PIN_45_out_data : 1'bz;
 
 // PIN_HSE
 assign PIN_HSE_in = PIN_HSE;
@@ -335,9 +335,11 @@ wire [7:0] gpio2_io_out_data;
 wire [7:0] gpio2_io_out_en;
 wire [7:0] gpio2_io_in = {1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0};
 
-wire [7:0] gpio3_io_out_data;
-wire [7:0] gpio3_io_out_en;
-wire [7:0] gpio3_io_in = {1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0};
+(* keep = 1 *) wire [7:0] gpio3_io_out_data;
+(* keep = 1 *) wire [7:0] gpio3_io_out_en;
+assign PIN_45_out_data = gpio3_io_out_data[0];
+assign PIN_45_out_en = gpio3_io_out_en[0];
+(* keep = 1 *) wire [7:0] gpio3_io_in = {1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, PIN_45_in};
 
 (* keep = 1 *) wire [7:0] gpio4_io_out_data;
 (* keep = 1 *) wire [7:0] gpio4_io_out_en;
@@ -351,15 +353,13 @@ assign PIN_32_out_en = gpio4_io_out_en[6];
 
 (* keep = 1 *) wire [7:0] gpio5_io_out_data;
 (* keep = 1 *) wire [7:0] gpio5_io_out_en;
-assign PIN_45_out_data = gpio5_io_out_data[0];
-assign PIN_45_out_en = gpio5_io_out_en[0];
 assign PIN_30_out_data = gpio5_io_out_data[1];
 assign PIN_30_out_en = gpio5_io_out_en[1];
 assign PIN_31_out_data = gpio5_io_out_data[2];
 assign PIN_31_out_en = gpio5_io_out_en[2];
 assign PIN_33_out_data = gpio5_io_out_data[3];
 assign PIN_33_out_en = gpio5_io_out_en[3];
-(* keep = 1 *) wire [7:0] gpio5_io_in = {1'b0, 1'b0, 1'b0, 1'b0, PIN_33_in, PIN_31_in, PIN_30_in, PIN_45_in};
+(* keep = 1 *) wire [7:0] gpio5_io_in = {1'b0, 1'b0, 1'b0, 1'b0, PIN_33_in, PIN_31_in, PIN_30_in, 1'b0};
 
 wire [7:0] gpio6_io_out_data;
 wire [7:0] gpio6_io_out_en;
