@@ -25,6 +25,7 @@ DashboardData dashboard_data = {
   .brake_percent = 0,
   .throttle_percent = 0,
   .ppm_throttle_percent = 0,
+  .vehicle_locked = true,
 };
 
 /* RGB565, ten lines; uint32_t provides suitable alignment for the renderer. */
@@ -35,11 +36,15 @@ volatile uint32_t lvgl_flush_errors;
 static void dashboard_update_inputs(void)
 {
   InputValues sample;
+  PpmValues ppm;
   Input_GetSnapshot(&sample);
+  Ppm_GetSnapshot(&ppm);
   dashboard_data.brake_percent = sample.adc.adc1_percent;
   dashboard_data.throttle_percent = sample.adc.adc2_percent;
   dashboard_data.adc_valid_mask = sample.adc.valid_mask;
-  dashboard_data.ppm_throttle_percent = Ppm_GetThrottlePercent();
+  dashboard_data.ppm_throttle_percent = ppm.percent;
+  dashboard_data.ppm_valid = ppm.valid;
+  dashboard_data.vehicle_locked = ppm.vehicle_locked;
 }
 
 static void dashboard_adc_timer(lv_timer_t *timer)

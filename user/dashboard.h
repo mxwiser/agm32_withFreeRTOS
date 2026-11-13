@@ -17,6 +17,8 @@ typedef struct {
   uint8_t brake_percent;
   uint8_t throttle_percent;
   int16_t ppm_throttle_percent; /* -100..100: negative brake, positive drive. */
+  bool ppm_valid;
+  bool vehicle_locked;
   uint8_t adc_valid_mask; /* bit 0: brake / ADC1, bit 1: throttle / ADC2 */
 } DashboardData;
 

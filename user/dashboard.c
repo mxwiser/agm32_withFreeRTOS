@@ -13,7 +13,8 @@ LV_FONT_DECLARE(font_title_cn_14);
 #define COLOR_TEXT     0x000000
 #define COLOR_CYAN     0x005E73
 #define COLOR_SPEED_ARC 0x711C96
-#define COLOR_BIKE_LOGO 0x000000
+#define COLOR_BIKE_UNLOCKED 0x000000
+#define COLOR_BIKE_LOCKED 0xFF0000
 #define COLOR_VOLTAGE  0xF50057  /* Voltage card accent. */
 #define COLOR_THROTTLE 0x536DFE  /* Throttle progress fill. */
 #define COLOR_BATTERY  0x64DD17  /* Battery cells at 20% and above. */
@@ -27,6 +28,9 @@ LV_FONT_DECLARE(font_title_cn_14);
 typedef struct {
   lv_obj_t *speed;
   lv_obj_t *gauge;
+  lv_obj_t *bike_wheel_left;
+  lv_obj_t *bike_wheel_right;
+  lv_obj_t *bike_frame;
   lv_obj_t *battery_body;
   lv_obj_t *battery_terminal;
   lv_obj_t *battery_segments[BATTERY_SEGMENTS];
@@ -94,12 +98,13 @@ static void make_bike(lv_obj_t *screen)
   static const lv_point_precise_t frame[] = {
     {12, 16}, {19, 8}, {26, 16}, {12, 16}, {17, 10}, {23, 10}, {26, 16}, {34, 16}
   };
-  (void)box(screen, 7, 11, 10, 10, COLOR_PANEL, COLOR_BIKE_LOGO, LV_RADIUS_CIRCLE);
-  (void)box(screen, 29, 11, 10, 10, COLOR_PANEL, COLOR_BIKE_LOGO, LV_RADIUS_CIRCLE);
+  ui.bike_wheel_left = box(screen, 7, 11, 10, 10, COLOR_PANEL, COLOR_BIKE_LOCKED, LV_RADIUS_CIRCLE);
+  ui.bike_wheel_right = box(screen, 29, 11, 10, 10, COLOR_PANEL, COLOR_BIKE_LOCKED, LV_RADIUS_CIRCLE);
   lv_obj_t *line = lv_line_create(screen);
   if (line == NULL) { create_failed = true; return; }
+  ui.bike_frame = line;
   lv_obj_set_pos(line, 0, 0);
-  lv_obj_set_style_line_color(line, lv_color_hex(COLOR_BIKE_LOGO), 0);
+  lv_obj_set_style_line_color(line, lv_color_hex(COLOR_BIKE_LOCKED), 0);
   lv_obj_set_style_line_width(line, 2, 0);
   lv_line_set_points(line, frame, sizeof(frame) / sizeof(frame[0]));
 }
@@ -203,7 +208,8 @@ bool Dashboard_Create(lv_obj_t *screen)
   bool battery_ready = true;
   for (unsigned i = 0; i < BATTERY_SEGMENTS; ++i)
     battery_ready = battery_ready && ui.battery_segments[i] != NULL;
-  return !create_failed && ui.speed && ui.gauge && ui.battery_body &&
+  return !create_failed && ui.speed && ui.gauge && ui.bike_wheel_left &&
+         ui.bike_wheel_right && ui.bike_frame && ui.battery_body &&
          ui.battery_terminal && battery_ready && ui.controller_temperature &&
          ui.voltage && ui.current && ui.power &&
          ui.brake_text && ui.brake_fill && ui.throttle_text && ui.throttle_fill &&
@@ -234,6 +240,12 @@ static void set_brake_bar(lv_obj_t *fill, uint8_t value)
 void Dashboard_Refresh(const DashboardData *data)
 {
   if (data == NULL || create_failed) return;
+  if (!previous_valid || data->vehicle_locked != previous.vehicle_locked) {
+    lv_color_t color = lv_color_hex(data->vehicle_locked ? COLOR_BIKE_LOCKED : COLOR_BIKE_UNLOCKED);
+    lv_obj_set_style_border_color(ui.bike_wheel_left, color, 0);
+    lv_obj_set_style_border_color(ui.bike_wheel_right, color, 0);
+    lv_obj_set_style_line_color(ui.bike_frame, color, 0);
+  }
   if (!previous_valid || data->current_speed_kmh != previous.current_speed_kmh) {
     int32_t speed = data->current_speed_kmh;
     uint32_t magnitude = (uint32_t)(speed < 0 ? -speed : speed);
@@ -286,13 +298,20 @@ void Dashboard_Refresh(const DashboardData *data)
       set_bar(ui.throttle_fill, 0, 67);
     }
   }
-  if (!previous_valid || data->ppm_throttle_percent != previous.ppm_throttle_percent) {
+  if (!previous_valid || data->ppm_throttle_percent != previous.ppm_throttle_percent ||
+      data->ppm_valid != previous.ppm_valid) {
     int32_t value = data->ppm_throttle_percent;
     if (value < -100) value = -100;
     if (value > 100) value = 100;
-    lv_label_set_text_fmt(ui.ppm_text, "%d%%", (int)value);
-    set_brake_bar(ui.ppm_brake_fill, value < 0 ? (uint8_t)-value : 0U);
-    set_bar(ui.ppm_drive_fill, value > 0 ? (uint8_t)value : 0U, 67);
+    if (data->ppm_valid) {
+      lv_label_set_text_fmt(ui.ppm_text, "%d%%", (int)value);
+      set_brake_bar(ui.ppm_brake_fill, value < 0 ? (uint8_t)-value : 0U);
+      set_bar(ui.ppm_drive_fill, value > 0 ? (uint8_t)value : 0U, 67);
+    } else {
+      lv_label_set_text(ui.ppm_text, "--");
+      set_brake_bar(ui.ppm_brake_fill, 0);
+      set_bar(ui.ppm_drive_fill, 0, 67);
+    }
   }
   previous = *data;
   previous_valid = true;
