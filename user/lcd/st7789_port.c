@@ -145,10 +145,10 @@ ST7789_Status ST7789_PortWriteDMA(const uint32_t *data, size_t length)
   if (length == 0 || length > SPI_PHASE_BYTE_CNT_MAX || ((uintptr_t)data & 3U)) {
     return ST7789_INVALID_ARGUMENT;
   }
-  if (length <= 4U) {
-    return ST7789_PortWrite((const uint8_t *)data, length);
-  }
   SPI_SetPhaseCtrl(LCD_SPI, SPI_PHASE_0, SPI_PHASE_ACTION_TX, SPI_PHASE_MODE_SINGLE, length);
+  // Trial: seed the phase register with the first DMA word before starting
+  // SPI. This tests whether stale RAMWR data affects the first pixel.
+  SPI_SetPhaseData(LCD_SPI, SPI_PHASE_0, *data);
   DMAC_Config(LCD_DMA_CHANNEL, (uint32_t)data, (uint32_t)&LCD_SPI->PHASE_DATA[0],
                 DMAC_ADDR_INCR_ON, DMAC_ADDR_INCR_OFF,
                 DMAC_WIDTH_32_BIT, DMAC_WIDTH_32_BIT, DMAC_BURST_1, DMAC_BURST_1,

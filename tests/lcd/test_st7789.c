@@ -44,7 +44,9 @@ ST7789_Status ST7789_PortWrite(const uint8_t *data, size_t length)
         fprintf(init_log, "%02x", data[i]);
       }
     }
-    if (current_command == 0x36) {
+    if (current_command == 0x2c) {
+      assert(!"Pixel data must be sent using DMA");
+    } else if (current_command == 0x36) {
       simulated_madctl = data[0];
     } else if (current_command == 0x2a) {
       assert(length == sizeof(column));
@@ -105,7 +107,8 @@ int main(int argc, char **argv)
     init_log = NULL;
   }
   assert(!selected);
-  assert(ST7789_Width() == 240 && ST7789_Height() == 320);
+  assert(ST7789_Width() == 320 && ST7789_Height() == 240);
+  assert(simulated_madctl == 0x60);
   assert(payload_length == 240U * 320U * 2U);
   for (size_t i = 0; i < payload_length; ++i) {
     assert(payload[i] == 0);
@@ -115,15 +118,15 @@ int main(int argc, char **argv)
   for (size_t i = 0; i < payload_length; i += 2) {
     assert(payload[i] == 0xf8 && payload[i + 1] == 0);
   }
-  const uint8_t last_column[4] = {0, 0, 0, 239};
-  const uint8_t last_row[4] = {0, 0, 1, 63};
+  const uint8_t last_column[4] = {0, 0, 1, 63};
+  const uint8_t last_row[4] = {0, 0, 0, 239};
   assert(memcmp(column, last_column, 4) == 0);
   assert(memcmp(row, last_row, 4) == 0);
 
   // A single last pixel must not be dropped or extended to two pixels by DMA.
-  assert(ST7789_FillRect(239, 319, 1, 1, ST7789_BLUE) == ST7789_OK);
+  assert(ST7789_FillRect(319, 239, 1, 1, ST7789_BLUE) == ST7789_OK);
   assert(payload_length == 2 && payload[0] == 0 && payload[1] == 0x1f);
-  assert(ST7789_FillRect(239, 319, 2, 1, 0) == ST7789_INVALID_ARGUMENT);
+  assert(ST7789_FillRect(319, 239, 2, 1, 0) == ST7789_INVALID_ARGUMENT);
   assert(ST7789_FillRect(0, 0, 0, 10, 0) == ST7789_INVALID_ARGUMENT);
   assert(ST7789_FillRect(0, 0, 65535, 65535, 0) == ST7789_INVALID_ARGUMENT);
   assert(ST7789_DrawRGB565(0, 0, 1, 1, NULL) == ST7789_INVALID_ARGUMENT);
@@ -132,6 +135,11 @@ int main(int argc, char **argv)
   for (size_t i = 0; i < 513; ++i) {
     image[i] = (uint16_t)(i * 97U);
   }
+  const uint16_t small_image[] = {ST7789_RED, ST7789_BLUE};
+  assert(ST7789_DrawRGB565(0, 0, 1, 1, small_image) == ST7789_OK);
+  assert(payload_length == 2 && payload[0] == 0xf8 && payload[1] == 0x00);
+  assert(ST7789_DrawRGB565(0, 0, 2, 1, small_image) == ST7789_OK);
+  assert(payload_length == 4 && payload[2] == 0x00 && payload[3] == 0x1f);
   assert(ST7789_DrawRGB565(0, 0, 171, 3, image) == ST7789_OK);
   assert(payload_length == sizeof(image));
   for (size_t i = 0; i < 513; ++i) {

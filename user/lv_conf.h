@@ -6,6 +6,10 @@
 #define LV_COLOR_FORMAT_DEFAULT LV_COLOR_FORMAT_RGB565
 #define LV_MEM_SIZE (32U * 1024U)
 #define LV_DEF_REFR_PERIOD 33
+/* Use one larger built-in font to avoid retaining two font tables. */
+#define LV_FONT_MONTSERRAT_14 0
+#define LV_FONT_MONTSERRAT_18 1
+#define LV_FONT_DEFAULT LV_FONT_DEFAULT_MONTSERRAT_18
 
 /* The firmware shares 256 KiB flash with a 100 KiB FPGA image. */
 #define LV_USE_THEME_DEFAULT 0
@@ -39,7 +43,7 @@
 #define LV_USE_IMAGE 0
 #define LV_USE_IMAGEBUTTON 0
 #define LV_USE_KEYBOARD 0
-#define LV_USE_LED 0
+#define LV_USE_LED 1
 #define LV_USE_LINE 0
 #define LV_USE_LIST 0
 #define LV_USE_MENU 0

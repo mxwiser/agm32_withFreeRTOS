@@ -8,7 +8,7 @@
 #include "lvgl.h"
 
 /* RGB565, ten lines; uint32_t provides suitable alignment for the renderer. */
-static uint32_t draw_buffer[ST7789_NATIVE_WIDTH * 10U * 2U / sizeof(uint32_t)];
+static uint32_t draw_buffer[ST7789_NATIVE_HEIGHT * 10U * 2U / sizeof(uint32_t)];
 volatile ST7789_Status lvgl_lcd_status = ST7789_NOT_INITIALIZED;
 volatile uint32_t lvgl_flush_errors;
 
@@ -48,9 +48,12 @@ void LVGL_Task(void *argument)
   lv_display_set_buffers(display, draw_buffer, NULL, sizeof(draw_buffer),
                          LV_DISPLAY_RENDER_MODE_PARTIAL);
 
+  lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0xCCCCCC), 0);
+  lv_obj_set_style_bg_opa(lv_screen_active(), LV_OPA_COVER, 0);
   lv_obj_t *label = lv_label_create(lv_screen_active());
   if (label != NULL) {
-    lv_label_set_text(label, "LVGL + FreeRTOS");
+    lv_label_set_text(label, "LVGL + FreeRTOS + Hello world");
+    lv_obj_set_style_text_color(label, lv_color_hex(0xff0000), 0);
     lv_obj_center(label);
   }
 

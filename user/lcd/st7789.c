@@ -9,10 +9,12 @@ typedef struct {
   uint8_t data[14];
 } InitCommand;
 
+#define DEFAULT_MADCTL 0x60U // rotation 1: landscape, RGB
+
 static const InitCommand panel_init[] = {
   {0x3a, 1, {0x05}}, // RGB565, as in the vendor example
   {0xc5, 1, {0x1a}},
-  {0x36, 1, {0x00}}, // portrait, RGB
+  {0x36, 1, {DEFAULT_MADCTL}},
   {0xb2, 5, {0x05, 0x05, 0x00, 0x33, 0x33}},
   {0xb7, 1, {0x05}},
   {0xbb, 1, {0x3f}},
@@ -34,9 +36,9 @@ static const InitCommand panel_init[] = {
 #define MAX_SCANLINE    511U
 
 static uint32_t pixel_buffer[TRANSFER_PIXELS / 2U]; // 1024 bytes, DMA aligned
-static uint16_t screen_width = ST7789_NATIVE_WIDTH;
-static uint16_t screen_height = ST7789_NATIVE_HEIGHT;
-static uint8_t madctl;
+static uint16_t screen_width = ST7789_NATIVE_HEIGHT;
+static uint16_t screen_height = ST7789_NATIVE_WIDTH;
+static uint8_t madctl = DEFAULT_MADCTL;
 static bool initialized;
 static bool readback_ready;
 
@@ -117,9 +119,9 @@ ST7789_Status ST7789_Init(void)
     return result;
   }
   ST7789_PortDelayMs(120);
-  screen_width = ST7789_NATIVE_WIDTH;
-  screen_height = ST7789_NATIVE_HEIGHT;
-  madctl = 0;
+  screen_width = ST7789_NATIVE_HEIGHT;
+  screen_height = ST7789_NATIVE_WIDTH;
+  madctl = DEFAULT_MADCTL;
   initialized = true;
   // Clear random GRAM before enabling the display/backlight.
   result = ST7789_FillScreen(ST7789_BLACK);
@@ -136,7 +138,7 @@ ST7789_Status ST7789_Init(void)
 
 ST7789_Status ST7789_SetRotation(uint8_t rotation)
 {
-  static const uint8_t directions[4] = {0x00, 0x60, 0xc0, 0xa0};
+  static const uint8_t directions[4] = {0x00, DEFAULT_MADCTL, 0xc0, 0xa0};
   if (!initialized) {
     return ST7789_NOT_INITIALIZED;
   }

@@ -37,6 +37,7 @@ static inline uint16_t ST7789_RGB565(uint8_t red, uint8_t green, uint8_t blue)
 }
 
 // Call after board_init(), from task context or before starting the scheduler.
+// Initial orientation is rotation 1: 320 x 240 landscape.
 // All calls are blocking: the SPI/DMA transfer is complete when they return.
 // Use one LCD task, or protect ALL calls with the same external mutex.
 ST7789_Status ST7789_Init(void);
