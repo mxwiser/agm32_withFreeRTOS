@@ -11,14 +11,12 @@ typedef struct {
   bool vehicle_locked;
 } PpmValues;
 
-/* 0：等待中位；1：测试中；2：已结束；3：跳过或中止。 */
-extern volatile uint8_t ppm_startup_test_state;
-extern volatile int32_t ppm_startup_test_peak_erpm; /* 本次测试的最大绝对电气转速。 */
-extern volatile uint32_t ppm_startup_test_duration_ticks; /* 本次测试实际持续节拍数。 */
+/* 0：等待安全中位；1：输出已启用；2：故障锁存，须排查并复位。 */
+extern volatile uint8_t ppm_control_state;
 
 void Ppm_Task(void *argument);
 void Ppm_GetSnapshot(PpmValues *values);
-/* Starts locked; lock forces the published PPM to zero immediately. */
+/* Bench starts unlocked; lock publishes zero and schedules neutral next frame. */
 void VehicleLock_SetLocked(bool locked);
 
 #endif

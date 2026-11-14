@@ -14,9 +14,12 @@ void Input_GetSnapshot(InputValues *values)
   values->adc.adc2_raw = input_values.adc.adc2_raw;
   values->adc.adc1_filtered = input_values.adc.adc1_filtered;
   values->adc.adc2_filtered = input_values.adc.adc2_filtered;
+  values->adc.adc1_sequence = input_values.adc.adc1_sequence;
+  values->adc.adc2_sequence = input_values.adc.adc2_sequence;
   values->adc.adc1_percent = input_values.adc.adc1_percent;
   values->adc.adc2_percent = input_values.adc.adc2_percent;
   values->adc.valid_mask = input_values.adc.valid_mask;
+  values->update_tick = input_values.update_tick;
   taskEXIT_CRITICAL();
 }
 
@@ -34,9 +37,12 @@ void Input_Task(void *argument)
     input_values.adc.adc2_raw = adc.adc2_raw;
     input_values.adc.adc1_filtered = adc.adc1_filtered;
     input_values.adc.adc2_filtered = adc.adc2_filtered;
+    input_values.adc.adc1_sequence = adc.adc1_sequence;
+    input_values.adc.adc2_sequence = adc.adc2_sequence;
     input_values.adc.adc1_percent = adc.adc1_percent;
     input_values.adc.adc2_percent = adc.adc2_percent;
     input_values.adc.valid_mask = adc.valid_mask;
+    input_values.update_tick = xTaskGetTickCount();
     taskEXIT_CRITICAL();
     vTaskDelayUntil(&last_wake, pdMS_TO_TICKS(INPUT_POLL_PERIOD_MS));
   }

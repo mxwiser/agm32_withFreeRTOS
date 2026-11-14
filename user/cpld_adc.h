@@ -27,6 +27,8 @@ typedef struct {
   uint16_t adc2_raw;
   uint16_t adc1_filtered;
   uint16_t adc2_filtered;
+  uint16_t adc1_sequence;
+  uint16_t adc2_sequence;
   uint8_t adc1_percent;
   uint8_t adc2_percent;
   uint8_t valid_mask; /* bit 0: ADC1, bit 1: ADC2 */

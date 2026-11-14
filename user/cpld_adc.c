@@ -17,7 +17,10 @@ void CpldAdc_Poll(void)
     Kalman1D_Init(&adc2_filter, ADC2_KALMAN_Q, ADC2_KALMAN_R);
     filters_initialized = true;
   }
-  uint32_t valid = CPLD_ADC_REG(0) & 3U;
+  uint32_t status = CPLD_ADC_REG(0);
+  uint32_t valid = status & 3U;
+  cpld_adc_values.adc1_sequence = (uint16_t)((status >> 2) & 0x7fffU);
+  cpld_adc_values.adc2_sequence = (uint16_t)((status >> 17) & 0x7fffU);
   if (valid & 1U) {
     uint32_t raw = CPLD_ADC_REG(1) & CPLD_ADC_RAW_MAX;
     uint16_t filtered = Kalman1D_Update(&adc1_filter, (uint16_t)raw);
@@ -43,6 +46,8 @@ void CpldAdc_GetSnapshot(CpldAdcValues *values)
   values->adc2_raw = cpld_adc_values.adc2_raw;
   values->adc1_filtered = cpld_adc_values.adc1_filtered;
   values->adc2_filtered = cpld_adc_values.adc2_filtered;
+  values->adc1_sequence = cpld_adc_values.adc1_sequence;
+  values->adc2_sequence = cpld_adc_values.adc2_sequence;
   values->adc1_percent = cpld_adc_values.adc1_percent;
   values->adc2_percent = cpld_adc_values.adc2_percent;
   values->valid_mask = cpld_adc_values.valid_mask;

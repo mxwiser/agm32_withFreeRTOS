@@ -35,7 +35,7 @@ LVGL 的显示分辨率并确认绘图缓冲大小。
 ## 演示数据及后续对接
 
 ADC 每 1 ms 读取，ADC 和 VESC 数据每 100 ms 更新界面。
-车 Logo 的锁定状态与 PPM 采用同一数据源：锁定红色、解锁黑色；启动默认锁定，状态接口见 `user/CPLD_ADC.md`。
+车 Logo 的锁定状态与 PPM 采用同一数据源：锁定红色、解锁黑色；本次台架测试默认解锁，状态接口见 `user/CPLD_ADC.md`。
 速度直接读取 VESC 串口返回的车速，电机磁极数、传动比及车轮直径需在 VESC Tool 中配置；VESC 离线或车速数据过期时显示 `--`。电压和电流取 VESC 输入端遥测，功率根据同一帧的输入电压和电流计算；VESC 离线时显示 `--`。左侧进度条分别显示 CPLD 的 ADC1 刹车及 ADC2 油门，右侧显示 `ppm_task.c` 中独立任务根据两路 ADC 计算的 PPM 值；
 ADC 尚无有效结果时显示 `--`。接口及寄存器说明见 `user/CPLD_ADC.md`。
 `DashboardData` 字段定义在 `dashboard.h`：速度单位 km/h、电池和占空比单位为百分比；

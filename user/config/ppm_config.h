@@ -10,16 +10,15 @@
 #define PPM_PULSE_MIN_US 1000U    /* 最小脉宽 1.0 ms。 */
 #define PPM_PULSE_CENTER_US 1500U /* 中位脉宽 1.5 ms。 */
 #define PPM_PULSE_MAX_US 2000U    /* 最大脉宽 2.0 ms。 */
-/* 台架测试：上电后先输出中位，再输出固定 25%，持续 10 秒后锁车。 */
-#define PPM_TEST_ENABLE 1U          /* 1 开机自动测试；0 禁用测试，仅输出中位。 */
-#define PPM_TEST_PERCENT 25U        /* 以中位为零的正向指令百分比。 */
-#define PPM_TEST_NEUTRAL_MS 2000U   /* 启动时保持中位，等待 VESC 安全启动。 */
-#define PPM_TEST_DURATION_MS 10000U /* 正向测试持续时间，单位毫秒。 */
-#define PPM_TEST_WATCHDOG_MS 250U   /* 看门狗单周期；两次超时后复位。 */
+#define PPM_NEUTRAL_ARM_MS 1000U    /* 油门和刹车均松开且输入正常，保持 1 秒后允许输出。 */
+#define PPM_NEUTRAL_PERCENT 5U      /* 判定松开的最大百分比；同时检查原始值。 */
+#define PPM_INPUT_TIMEOUT_MS 20U    /* 采样任务超时后禁止输出。 */
+#define PPM_ADC_TIMEOUT_MS 50U      /* 任一路 ADC 转换计数停止后禁止输出。 */
+#define PPM_WATCHDOG_MS 250U        /* PPM 任务持续喂狗；超时复位后禁止自动恢复。 */
 #define PPM_FRAME_PERIOD_US 20000U  /* PPM 脉冲周期，单位微秒（50 Hz）。 */
 
-#if PPM_TEST_PERCENT > 100 || PPM_PULSE_MIN_US >= PPM_PULSE_CENTER_US || \
+#if PPM_NEUTRAL_PERCENT > 100 || PPM_PULSE_MIN_US >= PPM_PULSE_CENTER_US || \
     PPM_PULSE_CENTER_US >= PPM_PULSE_MAX_US || PPM_PULSE_MAX_US >= PPM_FRAME_PERIOD_US
-#error "Invalid PPM pulse or test percent configuration"
+#error "Invalid PPM pulse or neutral percent configuration"
 #endif
 #endif

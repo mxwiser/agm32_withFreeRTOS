@@ -77,6 +77,8 @@ wire adc1_eoc, adc2_eoc;
 reg adc1_eoc_d, adc2_eoc_d;
 reg [11:0] adc1_latest, adc2_latest;
 reg adc1_valid, adc2_valid;
+// Independent conversion counters allow firmware to detect a stopped ADC.
+reg [14:0] adc1_sequence, adc2_sequence;
 alta_adc adc1_inst (.enb(!resetn), .sclk(adc_sclk), .insel(5'd10),
                     .stop(stop), .db(adc1_data), .eoc(adc1_eoc));
 alta_adc adc2_inst (.enb(!resetn), .sclk(adc_sclk), .insel(5'd9),
@@ -90,6 +92,8 @@ always @(posedge bus_clock or negedge resetn) begin
     adc2_latest <= 0;
     adc1_valid <= 1'b0;
     adc2_valid <= 1'b0;
+    adc1_sequence <= 0;
+    adc2_sequence <= 0;
   end else begin
     // EOC is active low; sample after its falling edge as in the AGM example.
     adc1_eoc_d <= !adc1_eoc;
@@ -97,10 +101,12 @@ always @(posedge bus_clock or negedge resetn) begin
     if (!adc1_eoc && !adc1_eoc_d) begin
       adc1_latest <= adc1_data;
       adc1_valid <= 1'b1;
+      adc1_sequence <= adc1_sequence + 1'b1;
     end
     if (!adc2_eoc && !adc2_eoc_d) begin
       adc2_latest <= adc2_data;
       adc2_valid <= 1'b1;
+      adc2_sequence <= adc2_sequence + 1'b1;
     end
   end
 end
@@ -110,7 +116,7 @@ always @(posedge bus_clock or negedge resetn) begin
   if (!resetn) apb_prdata <= 0;
   else if (apb_psel && !apb_penable && !apb_pwrite) begin
     case (apb_paddr)
-      4'h0: apb_prdata <= {30'b0, adc2_valid, adc1_valid};
+      4'h0: apb_prdata <= {adc2_sequence, adc1_sequence, adc2_valid, adc1_valid};
       4'h4: apb_prdata <= {20'b0, adc1_latest};
       4'h8: apb_prdata <= {20'b0, adc2_latest};
       default:  apb_prdata <= 0;

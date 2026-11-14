@@ -8,5 +8,6 @@
 float Ppm_NormalizeAdc(uint16_t sample, uint16_t min, uint16_t max);
 /* Positive throttle and negative brake contributions; result is in [-1, 1]. */
 float Ppm_MixNormalized(float throttle, float brake);
+uint16_t Ppm_PulseWidthUs(float normalized);
 
 #endif

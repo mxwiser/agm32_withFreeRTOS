@@ -1,15 +1,14 @@
 #include "ppm_output.h"
+#include "ppm_mix.h"
 #include "config/ppm_config.h"
 #include "board.h"
 
-static bool startup_test_allowed;
 volatile bool ppm_watchdog_reset_detected;
 
 bool PpmOutput_Init(void)
 {
   /* 看门狗复位后不再自动重试，避免故障时反复启动电机。 */
   ppm_watchdog_reset_detected = SYS_IsActiveResetFlag_WDOG();
-  startup_test_allowed = !ppm_watchdog_reset_detected;
   SYS_ClearResetFlags();
   SYS_EnableAPBClock(APB_MASK_GPIO1 | APB_MASK_GPTIMER0 | APB_MASK_WATCHDOG0);
   PpmOutput_WatchdogStop();
@@ -32,30 +31,24 @@ bool PpmOutput_Init(void)
   channel.OCMode = GPTIMER_OCMODE_PWM1;
   channel.CompareValue = PPM_PULSE_CENTER_US;
   GPTIMER_OC_Init(GPTIMER0, GPTIMER_CHANNEL_CH0, &channel);
-  GPTIMER_OC_DisablePreload(GPTIMER0, GPTIMER_CHANNEL_CH0);
+  /* Commit changes on the next 20 ms frame to avoid a second pulse mid-frame. */
+  GPTIMER_OC_EnablePreload(GPTIMER0, GPTIMER_CHANNEL_CH0);
+  GPTIMER_GenerateEventUpdate(GPTIMER0);
   GPTIMER_EnableAllOutputs(GPTIMER0);
   GPTIMER_EnableCounter(GPTIMER0);
   GPIO_AF_ENABLE(GPTIMER0_CH0);
   return true;
 }
 
-bool PpmOutput_TestAllowed(void)
+void PpmOutput_SetNormalized(float normalized)
 {
-  return PPM_TEST_ENABLE && startup_test_allowed;
-}
-
-void PpmOutput_SetTestActive(bool active)
-{
-  uint32_t width = PPM_PULSE_CENTER_US;
-  if (active)
-    width += (PPM_PULSE_MAX_US - PPM_PULSE_CENTER_US) * PPM_TEST_PERCENT / 100U;
-  GPTIMER_OC_SetCompare(GPTIMER0, GPTIMER_CHANNEL_CH0, width);
+  GPTIMER_OC_SetCompare(GPTIMER0, GPTIMER_CHANNEL_CH0, Ppm_PulseWidthUs(normalized));
 }
 
 void PpmOutput_WatchdogStart(void)
 {
   SYS_DisableAPBClkStop(APB_MASK_WATCHDOG0);
-  WDOG_InitMS(PPM_TEST_WATCHDOG_MS);
+  WDOG_InitMS(PPM_WATCHDOG_MS);
 }
 
 void PpmOutput_WatchdogFeed(void)
