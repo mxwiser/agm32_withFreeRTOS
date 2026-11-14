@@ -41,10 +41,12 @@ void Vesc_GetSnapshot(VescStatus *result)
   result->telemetry.input_voltage_tenths_v = vesc_status.telemetry.input_voltage_tenths_v;
   result->packets_ok = vesc_status.packets_ok;
   result->last_update_tick = vesc_status.last_update_tick;
-  result->battery_packets_ok = vesc_status.battery_packets_ok;
-  result->battery_last_update_tick = vesc_status.battery_last_update_tick;
+  result->setup_packets_ok = vesc_status.setup_packets_ok;
+  result->setup_last_update_tick = vesc_status.setup_last_update_tick;
+  result->speed_mm_per_second = vesc_status.speed_mm_per_second;
   result->battery_level_thousandths = vesc_status.battery_level_thousandths;
   result->battery_percent = vesc_status.battery_percent;
+  result->speed_valid = vesc_status.speed_valid;
   result->battery_valid = vesc_status.battery_valid;
   result->online = vesc_status.online;
   taskEXIT_CRITICAL();
@@ -56,13 +58,13 @@ static void vesc_task_main(void *argument)
   VescParser parser;
   VescProtocol_Reset(&parser);
   uint8_t request[VESC_REQUEST_BYTES];
-  uint8_t battery_request[VESC_REQUEST_BYTES];
+  uint8_t setup_request[VESC_REQUEST_BYTES];
   VescProtocol_Request(request);
-  VescProtocol_RequestBattery(battery_request);
+  VescProtocol_RequestSetup(setup_request);
   TickType_t wake = xTaskGetTickCount();
   TickType_t last_request = wake - pdMS_TO_TICKS(VESC_REQUEST_PERIOD_MS);
   TickType_t last_byte = wake;
-  TickType_t last_battery_request = wake - pdMS_TO_TICKS(VESC_BATTERY_REQUEST_PERIOD_MS);
+  TickType_t last_setup_request = wake - pdMS_TO_TICKS(VESC_SETUP_REQUEST_PERIOD_MS);
   uint32_t last_errors = 0, last_overflows = 0;
   for (;;) {
     TickType_t now = xTaskGetTickCount();
@@ -72,11 +74,11 @@ static void vesc_task_main(void *argument)
     }
     TickType_t since_request = now - last_request;
     if (vesc_status.online && parser.state == 0U && rx_head == rx_tail &&
-        since_request >= pdMS_TO_TICKS(VESC_BATTERY_REQUEST_GAP_MS) &&
-        since_request < pdMS_TO_TICKS(VESC_REQUEST_PERIOD_MS - VESC_BATTERY_REQUEST_GAP_MS) &&
-        (TickType_t)(now - last_battery_request) >= pdMS_TO_TICKS(VESC_BATTERY_REQUEST_PERIOD_MS)) {
-      UART_Send(UART0, battery_request, sizeof(battery_request));
-      last_battery_request = now;
+        since_request >= pdMS_TO_TICKS(VESC_SETUP_REQUEST_GAP_MS) &&
+        since_request < pdMS_TO_TICKS(VESC_REQUEST_PERIOD_MS - VESC_SETUP_REQUEST_GAP_MS) &&
+        (TickType_t)(now - last_setup_request) >= pdMS_TO_TICKS(VESC_SETUP_REQUEST_PERIOD_MS)) {
+      UART_Send(UART0, setup_request, sizeof(setup_request));
+      last_setup_request = now;
     }
     if (last_errors != vesc_uart_rx_errors || last_overflows != vesc_uart_rx_overflows) {
       taskENTER_CRITICAL();
@@ -104,13 +106,15 @@ static void vesc_task_main(void *argument)
         vesc_status.last_update_tick = now;
         vesc_status.online = true;
         taskEXIT_CRITICAL();
-      } else if (event == VESC_EVENT_BATTERY) {
+      } else if (event == VESC_EVENT_SETUP) {
         int16_t level = result.battery_level_thousandths;
         taskENTER_CRITICAL();
+        vesc_status.speed_mm_per_second = result.speed_mm_per_second;
+        vesc_status.speed_valid = true;
         vesc_status.battery_level_thousandths = level;
         vesc_status.battery_percent = VescProtocol_BatteryPercent(level);
-        ++vesc_status.battery_packets_ok;
-        vesc_status.battery_last_update_tick = now;
+        ++vesc_status.setup_packets_ok;
+        vesc_status.setup_last_update_tick = now;
         vesc_status.battery_valid = true;
         taskEXIT_CRITICAL();
       }
@@ -119,11 +123,18 @@ static void vesc_task_main(void *argument)
         (TickType_t)(now - vesc_status.last_update_tick) > pdMS_TO_TICKS(VESC_OFFLINE_TIMEOUT_MS)) {
       taskENTER_CRITICAL();
       vesc_status.online = false;
+      vesc_status.speed_valid = false;
       vesc_status.battery_valid = false;
       taskEXIT_CRITICAL();
     }
+    if (vesc_status.speed_valid &&
+        (TickType_t)(now - vesc_status.setup_last_update_tick) > pdMS_TO_TICKS(VESC_SPEED_VALIDITY_MS)) {
+      taskENTER_CRITICAL();
+      vesc_status.speed_valid = false;
+      taskEXIT_CRITICAL();
+    }
     if (vesc_status.battery_valid &&
-        (TickType_t)(now - vesc_status.battery_last_update_tick) > pdMS_TO_TICKS(VESC_BATTERY_VALIDITY_MS)) {
+        (TickType_t)(now - vesc_status.setup_last_update_tick) > pdMS_TO_TICKS(VESC_BATTERY_VALIDITY_MS)) {
       taskENTER_CRITICAL();
       vesc_status.battery_valid = false;
       taskEXIT_CRITICAL();

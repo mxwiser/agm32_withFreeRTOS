@@ -39,12 +39,9 @@ static void dashboard_update_inputs(void)
   Input_GetSnapshot(&sample);
   Ppm_GetSnapshot(&ppm);
   Vesc_GetSnapshot(&vesc);
-  int16_t speed;
-  dashboard_data.speed_valid = vesc.online &&
-      VescSpeed_FromErpm(vesc.telemetry.electrical_rpm,
-                         VESC_MOTOR_POLE_PAIRS, VESC_WHEEL_CIRCUMFERENCE_MM,
-                         VESC_GEAR_MOTOR_TURNS, VESC_GEAR_WHEEL_TURNS, &speed);
-  dashboard_data.current_speed_kmh = dashboard_data.speed_valid ? speed : 0;
+  dashboard_data.speed_valid = vesc.online && vesc.speed_valid;
+  dashboard_data.current_speed_kmh = dashboard_data.speed_valid ?
+      VescSpeed_FromMmPerSecond(vesc.speed_mm_per_second) : 0;
   dashboard_data.electrical_valid = vesc.online;
   dashboard_data.battery_valid = vesc.online && vesc.battery_valid;
   dashboard_data.battery_percent = dashboard_data.battery_valid ? vesc.battery_percent : 0U;

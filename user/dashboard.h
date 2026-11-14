@@ -9,7 +9,7 @@
  * V/A. Positive current/power means discharge; negative means charging/regen. */
 typedef struct {
   int16_t current_speed_kmh;
-  bool speed_valid; /* false: VESC 离线或车速换算参数未配置。 */
+  bool speed_valid; /* false: VESC 离线或车速数据已过期。 */
   uint8_t battery_percent;
   bool battery_valid; /* VESC 在线且电量数据未过期。 */
   bool electrical_valid; /* false：电压、电流和功率无有效数据。 */

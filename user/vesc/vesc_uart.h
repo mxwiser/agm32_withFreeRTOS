@@ -8,10 +8,12 @@ typedef struct {
   VescTelemetry telemetry;
   uint32_t packets_ok;
   uint32_t last_update_tick;
-  uint32_t battery_packets_ok;
-  uint32_t battery_last_update_tick;
+  uint32_t setup_packets_ok;
+  uint32_t setup_last_update_tick;
+  int32_t speed_mm_per_second; /* VESC 计算的速度，单位 mm/s。 */
   int16_t battery_level_thousandths; /* VESC 电量比例 × 1000，保留原始值供调试。 */
   uint8_t battery_percent;
+  bool speed_valid;
   bool battery_valid;
   bool online;
 } VescStatus;

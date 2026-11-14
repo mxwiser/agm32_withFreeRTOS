@@ -8,8 +8,8 @@
 #define VESC_VALUES_MASK 0x00000189UL
 #define VESC_REQUEST_BYTES 10U
 #define VESC_RESPONSE_PAYLOAD_BYTES 17U
-#define VESC_BATTERY_MASK 0x00000100UL
-#define VESC_BATTERY_RESPONSE_BYTES 7U
+#define VESC_SETUP_MASK 0x00000140UL /* speed (bit 6) and battery (bit 8) */
+#define VESC_SETUP_RESPONSE_BYTES 11U
 
 typedef struct {
   int16_t fet_temp_tenths_c;
@@ -29,17 +29,18 @@ typedef struct {
 
 typedef struct {
   VescTelemetry telemetry;
+  int32_t speed_mm_per_second;
   int16_t battery_level_thousandths;
 } VescResult;
 
 typedef enum {
   VESC_EVENT_NONE,
   VESC_EVENT_TELEMETRY,
-  VESC_EVENT_BATTERY
+  VESC_EVENT_SETUP
 } VescEvent;
 
 void VescProtocol_Request(uint8_t frame[VESC_REQUEST_BYTES]);
-void VescProtocol_RequestBattery(uint8_t frame[VESC_REQUEST_BYTES]);
+void VescProtocol_RequestSetup(uint8_t frame[VESC_REQUEST_BYTES]);
 uint8_t VescProtocol_BatteryPercent(int16_t level_thousandths);
 void VescProtocol_Reset(VescParser *parser);
 VescEvent VescProtocol_Feed(VescParser *parser, uint8_t byte, VescResult *result);

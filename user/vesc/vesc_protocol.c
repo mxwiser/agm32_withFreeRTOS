@@ -47,9 +47,9 @@ void VescProtocol_Request(uint8_t frame[VESC_REQUEST_BYTES])
   request_selective(frame, VESC_COMM_GET_VALUES_SELECTIVE, VESC_VALUES_MASK);
 }
 
-void VescProtocol_RequestBattery(uint8_t frame[VESC_REQUEST_BYTES])
+void VescProtocol_RequestSetup(uint8_t frame[VESC_REQUEST_BYTES])
 {
-  request_selective(frame, VESC_COMM_GET_VALUES_SETUP_SELECTIVE, VESC_BATTERY_MASK);
+  request_selective(frame, VESC_COMM_GET_VALUES_SETUP_SELECTIVE, VESC_SETUP_MASK);
 }
 
 uint8_t VescProtocol_BatteryPercent(int16_t level_thousandths)
@@ -99,11 +99,12 @@ VescEvent VescProtocol_Feed(VescParser *p, uint8_t byte, VescResult *result)
         result->telemetry.electrical_rpm = (int32_t)be32(&p->payload[11]);
         result->telemetry.input_voltage_tenths_v = be16(&p->payload[15]);
         event = VESC_EVENT_TELEMETRY;
-      } else if (p->length == VESC_BATTERY_RESPONSE_BYTES &&
+      } else if (p->length == VESC_SETUP_RESPONSE_BYTES &&
                  p->payload[0] == VESC_COMM_GET_VALUES_SETUP_SELECTIVE &&
-                 be32(&p->payload[1]) == VESC_BATTERY_MASK) {
-        result->battery_level_thousandths = (int16_t)be16(&p->payload[5]);
-        event = VESC_EVENT_BATTERY;
+                 be32(&p->payload[1]) == VESC_SETUP_MASK) {
+        result->speed_mm_per_second = (int32_t)be32(&p->payload[5]);
+        result->battery_level_thousandths = (int16_t)be16(&p->payload[9]);
+        event = VESC_EVENT_SETUP;
       }
     }
     VescProtocol_Reset(p);
