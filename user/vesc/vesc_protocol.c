@@ -1,19 +1,9 @@
 #include "vesc_protocol.h"
 #include <stddef.h>
 
-#define VESC_COMM_GET_MCCONF 14U
 #define VESC_COMM_GET_VALUES_SELECTIVE 50U
+#define VESC_COMM_GET_VALUES_SETUP_SELECTIVE 51U
 #define VESC_MAX_PAYLOAD_BYTES 1024U
-
-/* 官方 5.02、5.03、6.00 和 7.01 的配置签名及串数偏移。偏移包含命令字节。 */
-#define VESC_SIG_502 2211848314UL
-#define VESC_SIG_503 2525666056UL
-#define VESC_SIG_600 776184161UL
-#define VESC_SIG_701 471314414UL
-#define VESC_CELLS_OFFSET_502 444U
-#define VESC_CELLS_OFFSET_503 466U
-#define VESC_CELLS_OFFSET_600 462U
-#define VESC_CELLS_OFFSET_701 467U
 
 static uint16_t crc16_byte(uint16_t crc, uint8_t byte)
 {
@@ -41,29 +31,37 @@ static uint32_t be32(const uint8_t *p)
          ((uint32_t)p[2] << 8) | p[3];
 }
 
-void VescProtocol_Request(uint8_t frame[VESC_REQUEST_BYTES])
+static void request_selective(uint8_t frame[VESC_REQUEST_BYTES], uint8_t command, uint32_t mask)
 {
-  frame[0] = 2; frame[1] = 5; frame[2] = VESC_COMM_GET_VALUES_SELECTIVE;
-  frame[3] = (uint8_t)(VESC_VALUES_MASK >> 24);
-  frame[4] = (uint8_t)(VESC_VALUES_MASK >> 16);
-  frame[5] = (uint8_t)(VESC_VALUES_MASK >> 8);
-  frame[6] = (uint8_t)(VESC_VALUES_MASK & 0xffU);
+  frame[0] = 2; frame[1] = 5; frame[2] = command;
+  frame[3] = (uint8_t)(mask >> 24);
+  frame[4] = (uint8_t)(mask >> 16);
+  frame[5] = (uint8_t)(mask >> 8);
+  frame[6] = (uint8_t)mask;
   uint16_t crc = crc16(&frame[2], 5);
   frame[7] = (uint8_t)(crc >> 8); frame[8] = (uint8_t)crc; frame[9] = 3;
 }
 
-void VescProtocol_RequestConfig(uint8_t frame[VESC_CONFIG_REQUEST_BYTES])
+void VescProtocol_Request(uint8_t frame[VESC_REQUEST_BYTES])
 {
-  frame[0] = 2; frame[1] = 1; frame[2] = VESC_COMM_GET_MCCONF;
-  uint16_t crc = crc16(&frame[2], 1);
-  frame[3] = (uint8_t)(crc >> 8); frame[4] = (uint8_t)crc; frame[5] = 3;
+  request_selective(frame, VESC_COMM_GET_VALUES_SELECTIVE, VESC_VALUES_MASK);
+}
+
+void VescProtocol_RequestBattery(uint8_t frame[VESC_REQUEST_BYTES])
+{
+  request_selective(frame, VESC_COMM_GET_VALUES_SETUP_SELECTIVE, VESC_BATTERY_MASK);
+}
+
+uint8_t VescProtocol_BatteryPercent(int16_t level_thousandths)
+{
+  if (level_thousandths <= 0) return 0U;
+  if (level_thousandths >= 1000) return 100U;
+  return (uint8_t)(level_thousandths / 10);
 }
 
 void VescProtocol_Reset(VescParser *p)
 {
   p->state = 0; p->length = 0; p->index = 0; p->crc = 0; p->received_crc = 0;
-  p->cells_502 = 0; p->cells_503 = 0; p->cells_600 = 0; p->cells_701 = 0;
-  p->type_502 = 0; p->type_503 = 0; p->type_600 = 0; p->type_701 = 0;
 }
 
 VescEvent VescProtocol_Feed(VescParser *p, uint8_t byte, VescResult *result)
@@ -85,14 +83,6 @@ VescEvent VescProtocol_Feed(VescParser *p, uint8_t byte, VescResult *result)
     break;
   case 4:
     if (p->index < sizeof(p->payload)) p->payload[p->index] = byte;
-    if (p->index == VESC_CELLS_OFFSET_502 - 1U) p->type_502 = byte;
-    if (p->index == VESC_CELLS_OFFSET_503 - 1U) p->type_503 = byte;
-    if (p->index == VESC_CELLS_OFFSET_600 - 1U) p->type_600 = byte;
-    if (p->index == VESC_CELLS_OFFSET_701 - 1U) p->type_701 = byte;
-    if (p->index == VESC_CELLS_OFFSET_502) p->cells_502 = byte;
-    if (p->index == VESC_CELLS_OFFSET_503) p->cells_503 = byte;
-    if (p->index == VESC_CELLS_OFFSET_600) p->cells_600 = byte;
-    if (p->index == VESC_CELLS_OFFSET_701) p->cells_701 = byte;
     p->crc = crc16_byte(p->crc, byte);
     if (++p->index == p->length) p->state = 5;
     break;
@@ -109,27 +99,11 @@ VescEvent VescProtocol_Feed(VescParser *p, uint8_t byte, VescResult *result)
         result->telemetry.electrical_rpm = (int32_t)be32(&p->payload[11]);
         result->telemetry.input_voltage_tenths_v = be16(&p->payload[15]);
         event = VESC_EVENT_TELEMETRY;
-      } else if (p->length >= 5U && p->payload[0] == VESC_COMM_GET_MCCONF) {
-        result->config_signature = be32(&p->payload[1]);
-        result->config_supported = true;
-        if (result->config_signature == VESC_SIG_502 && p->length == 458U) {
-          result->battery_cells = p->cells_502;
-          result->battery_type = p->type_502;
-        } else if (result->config_signature == VESC_SIG_503 && p->length == 485U) {
-          result->battery_cells = p->cells_503;
-          result->battery_type = p->type_503;
-        } else if (result->config_signature == VESC_SIG_600 && p->length == 482U) {
-          result->battery_cells = p->cells_600;
-          result->battery_type = p->type_600;
-        } else if (result->config_signature == VESC_SIG_701 && p->length == 493U) {
-          result->battery_cells = p->cells_701;
-          result->battery_type = p->type_701;
-        } else {
-          result->config_supported = false;
-          result->battery_cells = 0;
-          result->battery_type = 0xffU;
-        }
-        event = VESC_EVENT_CONFIG;
+      } else if (p->length == VESC_BATTERY_RESPONSE_BYTES &&
+                 p->payload[0] == VESC_COMM_GET_VALUES_SETUP_SELECTIVE &&
+                 be32(&p->payload[1]) == VESC_BATTERY_MASK) {
+        result->battery_level_thousandths = (int16_t)be16(&p->payload[5]);
+        event = VESC_EVENT_BATTERY;
       }
     }
     VescProtocol_Reset(p);

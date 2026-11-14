@@ -8,9 +8,9 @@ VESC 任务周期性发送选择性状态读取请求，并校验应答帧和 CR
 
 电压和电流取 VESC 输入端遥测；电流为有符号数，界面保留一位小数。功率使用同一帧电压和完整精度电流相乘，四舍五入为整数瓦。顶部温度取 VESC 报文的 MOS 温度，四舍五入到整数摄氏度。VESC 离线时这些数值显示 `--`，电池图标变灰。
 
-电池图标读取 VESC 电机配置的电池类型和串数，并用输入电压估算电量；必须先在 VESC Tool 中正确配置，换电池后也要更新 VESC 配置。当前支持 VESC 配置类型 0 锂离子、1 磷酸铁锂和 2 铅酸，串数 1～32；配置格式仅支持已识别签名的 5.02、5.03、6.00 和 7.01。正常每 10 秒刷新配置，失败后重试；配置无效、过期、类型不支持或 VESC 离线时图标变灰。可通过 SWD 检查 `vesc_status.config_signature`、`config_packets_ok`、`battery_type`、`battery_cells` 和 `battery_config_valid`。配置有效性不是对实物电池的识别或校验。
+电池图标通过 `COMM_GET_VALUES_SETUP_SELECTIVE` 读取 VESC 的电量比例，正常每 500 ms 请求一次；报文中比例按 1000 倍传输，例如 750 表示 75%。显示百分比舍去小数并限制在 0～100。若电量应答超过 1500 ms 未更新，或 VESC 遥测离线，图标变灰；可通过 SWD 检查 `vesc_status.battery_level_thousandths`、`battery_percent`、`battery_packets_ok`、`battery_last_update_tick` 和 `battery_valid`。周期和超时见 `user/config/vesc_config.h`。协议格式已做软件测试，实际 VESC 的兼容性仍需现场验证。
 
-锂离子使用原有近似分段曲线；磷酸铁锂和铅酸使用 `user/config/battery_config.h` 中的单节电压范围线性估算。尤其磷酸铁锂电压平台平坦，负载、温度及电芯差异会造成较大误差；这些值不是 BMS 实测 SOC，也不是保护阈值。
+VESC 电量一般依据其设置及电压估算，不等于 BMS 实测 SOC，也不是保护阈值。必须在 VESC Tool 中正确配置电池类型、串数和容量，换电池后同步更新；负载压降、温度和电芯差异会影响显示。
 
 PPM 代码位于 `user/ppm/`。ADC3 / PIN_17 使用 GPTIMER0 输出脉冲，参数位于 `user/config/ppm_config.h`。当前配置在每次正常启动时先等待 2 秒中位、确认 VESC 串口在线，再输出 25% 持续 10 秒，然后回中位并锁车；离线或锁车会中止测试。测试期间启用看门狗，看门狗复位后跳过自动测试。将 `PPM_TEST_ENABLE` 设为 0 并重新烧录可关闭开机测试。
 

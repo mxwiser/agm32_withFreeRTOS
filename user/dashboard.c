@@ -1,5 +1,5 @@
 #include "dashboard.h"
-#include "battery.h"
+#include "config/battery_config.h"
 #include "config/dashboard_config.h"
 
 LV_FONT_DECLARE(font_speed_58);

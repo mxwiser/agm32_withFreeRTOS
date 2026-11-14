@@ -11,7 +11,7 @@ typedef struct {
   int16_t current_speed_kmh;
   bool speed_valid; /* false: VESC 离线或车速换算参数未配置。 */
   uint8_t battery_percent;
-  bool battery_valid; /* 电压及 VESC 电池配置均有效。 */
+  bool battery_valid; /* VESC 在线且电量数据未过期。 */
   bool electrical_valid; /* false：电压、电流和功率无有效数据。 */
   uint16_t voltage_tenths_v;
   int16_t current_tenths_a;
