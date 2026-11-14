@@ -63,6 +63,7 @@ void VescProtocol_Reset(VescParser *p)
 {
   p->state = 0; p->length = 0; p->index = 0; p->crc = 0; p->received_crc = 0;
   p->cells_502 = 0; p->cells_503 = 0; p->cells_600 = 0; p->cells_701 = 0;
+  p->type_502 = 0; p->type_503 = 0; p->type_600 = 0; p->type_701 = 0;
 }
 
 VescEvent VescProtocol_Feed(VescParser *p, uint8_t byte, VescResult *result)
@@ -84,6 +85,10 @@ VescEvent VescProtocol_Feed(VescParser *p, uint8_t byte, VescResult *result)
     break;
   case 4:
     if (p->index < sizeof(p->payload)) p->payload[p->index] = byte;
+    if (p->index == VESC_CELLS_OFFSET_502 - 1U) p->type_502 = byte;
+    if (p->index == VESC_CELLS_OFFSET_503 - 1U) p->type_503 = byte;
+    if (p->index == VESC_CELLS_OFFSET_600 - 1U) p->type_600 = byte;
+    if (p->index == VESC_CELLS_OFFSET_701 - 1U) p->type_701 = byte;
     if (p->index == VESC_CELLS_OFFSET_502) p->cells_502 = byte;
     if (p->index == VESC_CELLS_OFFSET_503) p->cells_503 = byte;
     if (p->index == VESC_CELLS_OFFSET_600) p->cells_600 = byte;
@@ -107,17 +112,22 @@ VescEvent VescProtocol_Feed(VescParser *p, uint8_t byte, VescResult *result)
       } else if (p->length >= 5U && p->payload[0] == VESC_COMM_GET_MCCONF) {
         result->config_signature = be32(&p->payload[1]);
         result->config_supported = true;
-        if (result->config_signature == VESC_SIG_502 && p->length == 458U)
+        if (result->config_signature == VESC_SIG_502 && p->length == 458U) {
           result->battery_cells = p->cells_502;
-        else if (result->config_signature == VESC_SIG_503 && p->length == 485U)
+          result->battery_type = p->type_502;
+        } else if (result->config_signature == VESC_SIG_503 && p->length == 485U) {
           result->battery_cells = p->cells_503;
-        else if (result->config_signature == VESC_SIG_600 && p->length == 482U)
+          result->battery_type = p->type_503;
+        } else if (result->config_signature == VESC_SIG_600 && p->length == 482U) {
           result->battery_cells = p->cells_600;
-        else if (result->config_signature == VESC_SIG_701 && p->length == 493U)
+          result->battery_type = p->type_600;
+        } else if (result->config_signature == VESC_SIG_701 && p->length == 493U) {
           result->battery_cells = p->cells_701;
-        else {
+          result->battery_type = p->type_701;
+        } else {
           result->config_supported = false;
           result->battery_cells = 0;
+          result->battery_type = 0xffU;
         }
         event = VESC_EVENT_CONFIG;
       }

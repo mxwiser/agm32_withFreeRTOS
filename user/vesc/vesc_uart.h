@@ -11,6 +11,7 @@ typedef struct {
   uint32_t config_signature; /* VESC 电机配置版本签名，便于排查兼容性。 */
   uint32_t config_packets_ok;
   uint8_t battery_cells;
+  uint8_t battery_type;
   bool battery_config_valid;
   bool online;
 } VescStatus;

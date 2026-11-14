@@ -56,7 +56,8 @@ static void dashboard_update_inputs(void)
     dashboard_data.current_tenths_a = values.current_tenths_a;
     dashboard_data.power_w = values.power_w;
     if (dashboard_data.battery_valid)
-      dashboard_data.battery_percent = Battery_EstimatePercent(values.voltage_tenths_v, vesc.battery_cells);
+      dashboard_data.battery_percent = Battery_EstimatePercent(values.voltage_tenths_v,
+                                                               vesc.battery_cells, vesc.battery_type);
     dashboard_data.controller_temperature_c =
         VescTemperature_WholeCelsius(vesc.telemetry.fet_temp_tenths_c);
   }

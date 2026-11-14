@@ -3,6 +3,7 @@
 #include "task.h"
 #include "board.h"
 #include "config/battery_config.h"
+#include "battery.h"
 
 static uint8_t rx_buffer[VESC_RX_BUFFER_SIZE];
 static volatile uint8_t rx_head, rx_tail;
@@ -45,6 +46,7 @@ void Vesc_GetSnapshot(VescStatus *result)
   result->config_signature = vesc_status.config_signature;
   result->config_packets_ok = vesc_status.config_packets_ok;
   result->battery_cells = vesc_status.battery_cells;
+  result->battery_type = vesc_status.battery_type;
   result->battery_config_valid = vesc_status.battery_config_valid;
   result->online = vesc_status.online;
   taskEXIT_CRITICAL();
@@ -117,8 +119,10 @@ static void vesc_task_main(void *argument)
         vesc_status.config_signature = result.config_signature;
         ++vesc_status.config_packets_ok;
         vesc_status.battery_config_valid = result.config_supported && result.battery_cells > 0U &&
-                                           result.battery_cells <= BATTERY_MAX_SERIES_CELLS;
+                                           result.battery_cells <= BATTERY_MAX_SERIES_CELLS &&
+                                           Battery_IsTypeSupported(result.battery_type);
         vesc_status.battery_cells = vesc_status.battery_config_valid ? result.battery_cells : 0U;
+        vesc_status.battery_type = result.battery_type;
         taskEXIT_CRITICAL();
         if (vesc_status.battery_config_valid) last_config_success = now;
       }

@@ -55,13 +55,11 @@ ADC 尚无有效结果时显示 `--`。接口及寄存器说明见 `user/CPLD_AD
 颜色在 `user/config/dashboard_config.h` 中独立配置：`COLOR_VOLTAGE` 用于电压卡片，
 `COLOR_THROTTLE` 用于油门进度条，`COLOR_BATTERY` 用于正常电量格子，
 `COLOR_BATTERY_LOW` 用于低电量提示，修改其中一项不会影响其他项。
-`user/battery.h` 按已确认的 48 V、13 串 LiPo、满电 54.6 V 配置。
-满电参考为 13×4.2 V=54.6 V；单节 3.7 V 标称、4.2 V 满电的背景说明见
-[Adafruit LiPo 电压说明](https://learn.adafruit.com/li-ion-and-lipoly-batteries/voltages)。
-`Battery_EstimatePercent()` 使用 `battery.c` 中的分段曲线估算显示电量，
-该曲线是待校准的 UI 近似，不是实测容量曲线，也不参与任何充放电保护。
-当前示例曲线在 48.1 V 显示 20%，低于该值进入红色区域；负载压降、温度等会影响估算。
-电量根据 VESC 输入电压估算；串口离线时电池图标变灰，避免将过期数据误认为有效电量。
+电池串数及类型从 VESC 电机配置读取，必须与实际电池一致；输入电压来自 VESC 遥测。
+锂离子采用分段曲线，磷酸铁锂和铅酸采用线性电压估算，范围见 `user/config/battery_config.h`。
+这些都是待校准的显示近似，不是实测容量曲线，也不参与充放电保护；负载压降、温度等会影响估算。
+例如配置为 13 串锂离子时，48.1 V 显示 20%，低于该值进入红色区域。
+VESC 离线、配置过期或配置不受支持时电池图标变灰。支持的配置格式及诊断见 `user/vesc/README.md`。
 实际数据接入后优先使用 BMS 提供的 SOC，或按电芯厂家曲线校准显示估算。
 
 接入其他实际数据时，在 LVGL 任务中读取线程安全的消息或数据快照，填充 `DashboardData`

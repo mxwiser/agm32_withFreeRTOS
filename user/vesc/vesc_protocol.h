@@ -28,12 +28,14 @@ typedef struct {
   uint8_t cells_503;
   uint8_t cells_600;
   uint8_t cells_701;
+  uint8_t type_502, type_503, type_600, type_701;
 } VescParser;
 
 typedef struct {
   VescTelemetry telemetry;
   uint32_t config_signature;
   uint8_t battery_cells;
+  uint8_t battery_type;
   bool config_supported;
 } VescResult;
 
